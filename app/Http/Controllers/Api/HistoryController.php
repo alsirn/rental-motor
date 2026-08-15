@@ -38,4 +38,15 @@ class HistoryController extends Controller
 
         return response()->json($rentals);
     }
+
+    public function destroyPayment(Request $request, Payment $payment): JsonResponse
+    {
+        if ($request->user()->role !== 'admin') {
+            return response()->json(['message' => 'Hanya admin yang dapat menghapus histori pembayaran.'], 403);
+        }
+
+        $payment->delete();
+
+        return response()->json(['message' => 'Histori pembayaran berhasil dihapus']);
+    }
 }

@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\DB;
 
 class RentalController extends Controller
 {
+    public function myRentals(Request $request): JsonResponse
+    {
+        return response()->json(
+            $request->user()
+                ->rentals()
+                ->with(['motor.brand', 'payment'])
+                ->latest()
+                ->get()
+        );
+    }
+
     public function store(Request $request, MidtransSnapService $midtrans): JsonResponse
     {
         $data = $request->validate([
@@ -79,5 +90,28 @@ class RentalController extends Controller
             ]);
 
         return response()->json($rentals);
+    }
+
+    public function complete(Request $request, Rental $rental): JsonResponse
+    {
+        $rental->update(['status' => 'completed']);
+        $rental->motor->update(['status' => true]);
+
+        return response()->json(['message' => 'Sewa ditandai selesai', 'rental' => $rental->load(['user', 'motor'])]);
+    }
+
+    public function destroy(Request $request, Rental $rental): JsonResponse
+    {
+        if ($request->user()->role !== 'admin') {
+            return response()->json(['message' => 'Hanya admin yang dapat menghapus histori sewa.'], 403);
+        }
+
+        if (in_array($rental->status, ['pending', 'active'], true)) {
+            return response()->json(['message' => 'Histori aktif tidak dapat dihapus sebelum sewa selesai/dibatalkan.'], 422);
+        }
+
+        $rental->delete();
+
+        return response()->json(['message' => 'Histori sewa berhasil dihapus']);
     }
 }

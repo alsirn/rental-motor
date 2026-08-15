@@ -18,6 +18,9 @@ Route::get('/checkout/{motor}', function (Motor $motor) {
     return view('checkout', ['motor' => $motor->load('brand')]);
 });
 
+Route::view('/login', 'auth.login');
+Route::view('/register', 'auth.register');
+Route::view('/akun', 'account');
 Route::get('/verifikasi', fn () => view('verify'));
 
 Route::get('/backend', function () {
@@ -35,3 +38,9 @@ Route::get('/backend', function () {
         'brands' => Brand::latest()->get(),
     ]);
 });
+
+Route::view('/backend/motor', 'backend.motors');
+Route::view('/backend/brand', 'backend.brands');
+Route::view('/backend/transaksi', 'backend.transactions');
+Route::view('/backend/pembayaran', 'backend.payments');
+Route::view('/backend/verifikasi', 'backend.verifications');
