@@ -6,9 +6,10 @@
                 <h1 class="max-w-3xl text-4xl font-black leading-tight text-zinc-950 sm:text-5xl">Pilih motor, verifikasi akun, checkout, lalu bayar dengan Midtrans.</h1>
                 <p class="mt-5 max-w-2xl text-base leading-7 text-zinc-600">Alur aplikasi mengikuti PRD: user menyewa dari katalog, admin mengelola seluruh data, dan tukang rental membantu operasional tanpa akses hapus histori.</p>
                 <div class="mt-7 flex flex-wrap gap-3">
-                    <a href="/register" class="btn-primary">Daftar Penyewa</a>
-                    <a href="/login" class="btn-dark">Masuk</a>
-                    <a href="/backend" class="btn-muted">Backend</a>
+                    <a href="/register" class="auth-guest btn-primary">Daftar Penyewa</a>
+                    <a href="/login" class="auth-guest btn-dark">Masuk</a>
+                    <a href="/akun" class="auth-user hidden btn-primary">Lihat Akun</a>
+                    <a href="/backend" class="auth-backend hidden btn-dark">Buka Backend</a>
                 </div>
             </div>
             <div class="grid min-h-80 place-items-center rounded bg-zinc-950 p-6 text-white">
