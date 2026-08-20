@@ -25,8 +25,11 @@
             const payments = await fetch(url, { headers: window.rentalApp.authHeaders() }).then((res) => res.json());
             document.getElementById('payment-table').innerHTML = payments.length ? payments.map((payment) => `<tr><td class="py-3 font-medium">${payment.order_id}</td><td>${payment.rental?.user?.name || '-'}</td><td>${payment.rental?.motor?.nama || '-'}</td><td>${window.rentalApp.money(payment.gross_amount)}</td><td>${payment.transaction_status}</td><td><button class="text-sm font-semibold text-red-700" data-delete="${payment.id}">Hapus</button></td></tr>`).join('') : '<tr><td colspan="6" class="py-3 text-zinc-500">Tidak ada pembayaran.</td></tr>';
             document.querySelectorAll('[data-delete]').forEach((button) => button.addEventListener('click', async () => {
-                await fetch(`/api/payments/${button.dataset.delete}`, { method: 'DELETE', headers: window.rentalApp.authHeaders() });
-                loadPayments(status);
+                if (!confirm('Hapus histori pembayaran ini?')) return;
+                const response = await fetch(`/api/payments/${button.dataset.delete}`, { method: 'DELETE', headers: window.rentalApp.authHeaders() });
+                const json = await response.json();
+                window.rentalApp.notifyResponse(response, json, 'Histori pembayaran berhasil dihapus.');
+                if (response.ok) loadPayments(status);
             }));
         }
         document.querySelectorAll('.payment-filter').forEach((button) => button.addEventListener('click', () => loadPayments(button.dataset.status)));

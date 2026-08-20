@@ -24,7 +24,6 @@
                 </div>
                 <button class="btn-primary" type="submit">Buat Transaksi</button>
             </form>
-            <pre id="checkout-result" class="mt-5 hidden overflow-auto rounded bg-zinc-950 p-4 text-sm text-red-100"></pre>
         </div>
     </section>
 
@@ -43,7 +42,7 @@
                 }),
             });
             const json = await response.json();
-            window.rentalApp.showJson(document.getElementById('checkout-result'), json);
+            window.rentalApp.notifyResponse(response, json, 'Transaksi berhasil dibuat. Lanjutkan pembayaran.');
             if (json.snap_token && window.snap && !json.snap_token.startsWith('demo-')) {
                 window.snap.pay(json.snap_token);
             }

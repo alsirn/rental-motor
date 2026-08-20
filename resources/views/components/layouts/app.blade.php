@@ -20,6 +20,15 @@
         .field:focus { border-color: #dc2626; box-shadow: 0 0 0 3px rgb(254 202 202 / .7); }
         .panel { border: 1px solid #e4e4e7; border-radius: .25rem; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / .04); }
         .status-pill { display: inline-flex; align-items: center; border-radius: .25rem; padding: .25rem .5rem; font-size: .75rem; font-weight: 700; }
+        .toast-stack { position: fixed; top: 1rem; right: 1rem; z-index: 60; display: grid; gap: .75rem; width: min(24rem, calc(100vw - 2rem)); }
+        .toast { border: 1px solid #e4e4e7; border-left-width: 4px; border-radius: .375rem; background: #fff; padding: 1rem; box-shadow: 0 18px 45px rgb(0 0 0 / .16); animation: toast-in .18s ease-out; }
+        .toast-success { border-left-color: #16a34a; }
+        .toast-error { border-left-color: #dc2626; }
+        .toast-info { border-left-color: #52525b; }
+        .toast-title { font-weight: 800; color: #09090b; }
+        .toast-message { margin-top: .25rem; font-size: .875rem; line-height: 1.45; color: #52525b; }
+        .toast-close { position: absolute; top: .55rem; right: .65rem; color: #71717a; font-weight: 800; }
+        @keyframes toast-in { from { opacity: 0; transform: translateY(-.35rem); } to { opacity: 1; transform: translateY(0); } }
         .hidden { display: none !important; }
     </style>
 </head>
@@ -48,6 +57,8 @@
         {{ $slot }}
     </main>
 
+    <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
+
     <footer class="border-t border-zinc-200 bg-white">
         <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
             <p>Rental Motor berbasis Laravel 13, Sanctum, Tailwind CSS, dan Midtrans Snap.</p>
@@ -73,9 +84,50 @@
                 'Authorization': `Bearer ${localStorage.getItem('api_token') || ''}`,
             }),
             money: (value) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(value || 0),
+            messageFrom: (data, fallback = 'Permintaan selesai diproses.') => {
+                if (!data) return fallback;
+                if (typeof data === 'string') return data;
+                if (data.message) return data.message;
+                if (data.error) return data.error;
+                if (data.errors) return Object.values(data.errors).flat().join(' ');
+                return fallback;
+            },
+            notify: ({ type = 'info', title = 'Informasi', message = '' }) => {
+                const stack = document.getElementById('toast-stack');
+                if (!stack) return window.alert(`${title}\n${message}`);
+
+                const toast = document.createElement('div');
+                toast.className = `toast toast-${type} relative`;
+                const close = document.createElement('button');
+                const toastTitle = document.createElement('p');
+                const toastMessage = document.createElement('p');
+                close.className = 'toast-close';
+                close.type = 'button';
+                close.setAttribute('aria-label', 'Tutup');
+                close.textContent = 'x';
+                toastTitle.className = 'toast-title';
+                toastTitle.textContent = title;
+                toastMessage.className = 'toast-message';
+                toastMessage.textContent = message;
+                close.addEventListener('click', () => toast.remove());
+                toast.append(close, toastTitle, toastMessage);
+                stack.appendChild(toast);
+                window.setTimeout(() => toast.remove(), 4200);
+            },
+            notifyResponse: (response, data, successMessage = 'Data berhasil diproses.') => {
+                const ok = response && response.ok;
+                window.rentalApp.notify({
+                    type: ok ? 'success' : 'error',
+                    title: ok ? 'Berhasil' : 'Gagal',
+                    message: window.rentalApp.messageFrom(data, ok ? successMessage : 'Permintaan gagal diproses.'),
+                });
+            },
             showJson: (target, data) => {
-                target.classList.remove('hidden');
-                target.textContent = typeof data === 'string' ? data : JSON.stringify(data, null, 2);
+                window.rentalApp.notify({
+                    type: data?.error || data?.errors ? 'error' : 'success',
+                    title: data?.error || data?.errors ? 'Gagal' : 'Berhasil',
+                    message: window.rentalApp.messageFrom(data),
+                });
             },
         };
 

@@ -10,7 +10,6 @@
             <label class="grid gap-2 text-sm font-semibold">Foto KK <input class="field" type="file" name="foto_kk" accept="image/*" required></label>
             <label class="grid gap-2 text-sm font-semibold">Foto SIM <input class="field" type="file" name="foto_sim" accept="image/*" required></label>
             <button class="btn-primary" type="submit">Kirim Verifikasi</button>
-            <pre id="verify-result" class="hidden overflow-auto rounded bg-zinc-950 p-4 text-sm text-red-100"></pre>
         </form>
     </section>
     <script>
@@ -21,7 +20,7 @@
                 headers: { 'Accept': 'application/json', 'Authorization': `Bearer ${window.rentalApp.token()}` },
                 body: new FormData(event.currentTarget),
             });
-            window.rentalApp.showJson(document.getElementById('verify-result'), await response.json());
+            window.rentalApp.notifyResponse(response, await response.json(), 'Dokumen berhasil dikirim dan menunggu verifikasi.');
         });
     </script>
 </x-layouts.app>

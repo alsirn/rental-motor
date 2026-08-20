@@ -18,8 +18,10 @@
             const users = await fetch('/api/verifications', { headers: window.rentalApp.authHeaders() }).then((res) => res.json());
             document.getElementById('verification-table').innerHTML = users.map((user) => `<tr><td class="py-3 font-medium">${user.name}</td><td>${user.email}</td><td>${user.no_hp || '-'}</td><td>${user.verification_status}</td><td class="flex gap-2 py-3"><button class="text-sm font-semibold text-red-700" data-id="${user.id}" data-status="verified">Setujui</button><button class="text-sm font-semibold text-zinc-700" data-id="${user.id}" data-status="rejected">Tolak</button></td></tr>`).join('');
             document.querySelectorAll('[data-status]').forEach((button) => button.addEventListener('click', async () => {
-                await fetch(`/api/verifications/${button.dataset.id}`, { method: 'PATCH', headers: window.rentalApp.authHeaders(), body: JSON.stringify({ verification_status: button.dataset.status }) });
-                loadVerifications();
+                const response = await fetch(`/api/verifications/${button.dataset.id}`, { method: 'PATCH', headers: window.rentalApp.authHeaders(), body: JSON.stringify({ verification_status: button.dataset.status }) });
+                const json = await response.json();
+                window.rentalApp.notifyResponse(response, json, 'Status verifikasi berhasil diperbarui.');
+                if (response.ok) loadVerifications();
             }));
         }
         loadVerifications();

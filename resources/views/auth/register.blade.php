@@ -13,7 +13,6 @@
                 <label class="grid gap-2 text-sm font-semibold">Konfirmasi Password <input class="field" name="password_confirmation" type="password" required></label>
             </div>
             <button class="btn-primary" type="submit">Daftar</button>
-            <pre id="register-result" class="hidden overflow-auto rounded bg-zinc-950 p-4 text-sm text-red-100"></pre>
         </form>
     </section>
     <script>
@@ -25,7 +24,7 @@
                 body: JSON.stringify(Object.fromEntries(new FormData(event.currentTarget))),
             });
             const json = await response.json();
-            window.rentalApp.showJson(document.getElementById('register-result'), json);
+            window.rentalApp.notifyResponse(response, json, 'Akun berhasil dibuat. Silakan lanjut verifikasi.');
             if (response.ok) {
                 window.rentalApp.setSession(json);
                 window.location.href = '/verifikasi';

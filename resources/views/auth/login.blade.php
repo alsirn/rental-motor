@@ -9,7 +9,6 @@
             <label class="grid gap-2 text-sm font-semibold">Email <input class="field" name="email" type="email" required></label>
             <label class="grid gap-2 text-sm font-semibold">Password <input class="field" name="password" type="password" required></label>
             <button class="btn-primary" type="submit">Masuk</button>
-            <pre id="login-result" class="hidden overflow-auto rounded bg-zinc-950 p-4 text-sm text-red-100"></pre>
         </form>
     </section>
     <script>
@@ -22,7 +21,9 @@
                 body: JSON.stringify({ email: form.get('email'), password: form.get('password') }),
             });
             const json = await response.json();
-            window.rentalApp.showJson(document.getElementById('login-result'), json);
+            if (!response.ok) {
+                window.rentalApp.notifyResponse(response, json, 'Login berhasil.');
+            }
             if (response.ok) {
                 window.rentalApp.setSession(json);
                 window.location.href = json.user.role === 'user' ? '/akun' : '/backend';

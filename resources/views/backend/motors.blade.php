@@ -14,7 +14,6 @@
                 <textarea class="field" name="catatan" placeholder="Catatan"></textarea>
                 <input class="field" type="file" name="image_motor" accept="image/*">
                 <button class="btn-primary" type="submit">Simpan Motor</button>
-                <pre id="motor-result" class="hidden overflow-auto rounded bg-zinc-950 p-4 text-sm text-red-100"></pre>
             </form>
             <section class="panel p-5">
                 <h2 class="font-bold">Daftar Motor</h2>
@@ -36,8 +35,11 @@
             document.getElementById('brand-options').innerHTML = brands.map((brand) => `<option value="${brand.id}">${brand.nama_brand}</option>`).join('');
             document.getElementById('motor-table').innerHTML = motors.map((motor) => `<tr><td class="py-3 font-medium">${motor.nama}</td><td>${motor.kategori}</td><td>${window.rentalApp.money(motor.harga)}</td><td>${motor.status ? 'Tersedia' : 'Disewa'}</td><td><button class="text-sm font-semibold text-red-700" data-delete="${motor.id}">Hapus</button></td></tr>`).join('');
             document.querySelectorAll('[data-delete]').forEach((button) => button.addEventListener('click', async () => {
-                await fetch(`/api/motors/${button.dataset.delete}`, { method: 'DELETE', headers: window.rentalApp.authHeaders() });
-                loadMotorsPage();
+                if (!confirm('Hapus motor ini?')) return;
+                const response = await fetch(`/api/motors/${button.dataset.delete}`, { method: 'DELETE', headers: window.rentalApp.authHeaders() });
+                const json = await response.json();
+                window.rentalApp.notifyResponse(response, json, 'Motor berhasil dihapus.');
+                if (response.ok) loadMotorsPage();
             }));
         }
         document.getElementById('motor-form').addEventListener('submit', async (event) => {
@@ -47,7 +49,7 @@
                 headers: { 'Accept': 'application/json', 'Authorization': `Bearer ${window.rentalApp.token()}` },
                 body: new FormData(event.currentTarget),
             });
-            window.rentalApp.showJson(document.getElementById('motor-result'), await response.json());
+            window.rentalApp.notifyResponse(response, await response.json(), 'Motor berhasil ditambahkan.');
             if (response.ok) {
                 event.currentTarget.reset();
                 loadMotorsPage();
