@@ -3,7 +3,7 @@
         <div class="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-14">
             <div class="flex flex-col justify-center">
                 <p class="mb-3 text-sm font-bold uppercase tracking-wide text-red-700">Rental motor online</p>
-                <h1 class="max-w-3xl text-4xl font-black leading-tight text-zinc-950 sm:text-5xl">Pilih motor, verifikasi akun, checkout, lalu bayar dengan Midtrans.</h1>
+                <h1 class="max-w-3xl text-4xl font-black leading-tight text-zinc-950 sm:text-5xl">Website rental motor by zahran yang ganteng ini kaya cwo anime anime real no fek fek</h1>
                 <p class="mt-5 max-w-2xl text-base leading-7 text-zinc-600">Alur aplikasi mengikuti PRD: user menyewa dari katalog, admin mengelola seluruh data, dan tukang rental membantu operasional tanpa akses hapus histori.</p>
                 <div class="mt-7 flex flex-wrap gap-3">
                     <a href="/register" class="auth-guest btn-primary">Daftar Penyewa</a>
@@ -12,28 +12,7 @@
                     <a href="/backend" class="auth-backend hidden btn-dark">Buka Backend</a>
                 </div>
             </div>
-            <div class="grid min-h-80 place-items-center rounded bg-zinc-950 p-6 text-white">
-                <div class="w-full max-w-md rounded border border-white/10 bg-white/10 p-5 shadow-2xl">
-                    <div class="mb-5 flex items-center justify-between">
-                        <span class="rounded bg-red-600 px-3 py-1 text-sm font-bold">Snap Ready</span>
-                        <span class="text-sm text-zinc-300">REST API + Sanctum</span>
-                    </div>
-                    <div class="grid gap-3">
-                        <div class="rounded bg-white p-4 text-zinc-950">
-                            <p class="font-bold">1. Login / registrasi</p>
-                            <p class="text-sm text-zinc-500">Token disimpan untuk checkout dan upload dokumen.</p>
-                        </div>
-                        <div class="rounded bg-white p-4 text-zinc-950">
-                            <p class="font-bold">2. Verifikasi e-KTP, KK, SIM</p>
-                            <p class="text-sm text-zinc-500">Admin menyetujui akun sebelum penyewaan.</p>
-                        </div>
-                        <div class="rounded bg-white p-4 text-zinc-950">
-                            <p class="font-bold">3. Checkout & pembayaran</p>
-                            <p class="text-sm text-zinc-500">Backend membuat order_id dan snap_token.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           
         </div>
     </section>
 
