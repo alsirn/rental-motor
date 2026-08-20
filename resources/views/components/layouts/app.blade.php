@@ -84,11 +84,10 @@
                 <a class="auth-user hidden rounded px-3 py-2 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950" href="/verifikasi">Verifikasi</a>
                 <a class="auth-backend hidden rounded px-3 py-2 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950" href="/backend">Backend</a>
                 <a class="auth-guest btn-muted" href="/login">Masuk</a>
+                <button id="logout-button" class="auth-user hidden rounded bg-zinc-950 px-3 py-2 text-white hover:bg-zinc-800" type="button">Keluar</button>
                 <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema">
-                    <span>Tema:</span>
                     <span id="theme-label">Dark</span>
                 </button>
-                <button id="logout-button" class="auth-user hidden rounded bg-zinc-950 px-3 py-2 text-white hover:bg-zinc-800" type="button">Keluar</button>
             </div>
         </nav>
     </header>
