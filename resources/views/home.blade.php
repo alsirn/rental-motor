@@ -1,5 +1,5 @@
 <x-layouts.app title="Rental Motor">
-    <section class="border-b border-zinc-200 bg-white">
+    <section class="reveal-up border-b border-zinc-200 bg-white">
         <div class="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-14">
             <div class="flex flex-col justify-center">
                 <p class="mb-3 text-sm font-bold uppercase tracking-wide text-red-700">Rental motor online</p>
@@ -20,20 +20,34 @@
         <div class="mb-6 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
             <div>
                 <h2 class="text-2xl font-black text-zinc-950">Katalog Motor</h2>
-                <p class="mt-1 text-sm text-zinc-500">Filter berdasarkan brand dan status ketersediaan.</p>
+                <p class="mt-1 text-sm text-zinc-500">Filter berdasarkan brand, status ketersediaan, atau kata kunci.</p>
             </div>
-            <div class="flex flex-wrap gap-2">
-                <button class="brand-filter rounded bg-zinc-950 px-3 py-2 text-sm font-semibold text-white" data-brand="all" type="button">Semua</button>
+            <div class="flex flex-wrap justify-start gap-2 lg:justify-end">
+                <button class="brand-filter rounded bg-zinc-950 px-3 py-2 text-sm font-semibold text-white" data-brand="all" type="button">Semua Brand</button>
                 @foreach ($brands as $brand)
                     <button class="brand-filter rounded border border-zinc-300 bg-white px-3 py-2 text-sm font-semibold text-zinc-700 hover:border-red-300 hover:text-red-700" data-brand="{{ $brand->nama_brand }}" type="button">{{ $brand->nama_brand }}</button>
                 @endforeach
             </div>
         </div>
 
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3" id="motor-grid">
+        <div class="panel mb-6 grid gap-3 p-4 md:grid-cols-[1fr_auto] md:items-center">
+            <label class="grid gap-2 text-sm font-semibold">
+                Cari motor
+                <input id="motor-search" class="field" type="search" placeholder="Cari nama motor, plat nomor, brand, atau catatan...">
+            </label>
+            <div class="flex flex-wrap gap-2 self-end">
+                <button class="status-filter btn-dark" data-status="all" type="button">Semua Status</button>
+                <button class="status-filter btn-muted" data-status="tersedia" type="button">Tersedia</button>
+                <button class="status-filter btn-muted" data-status="disewa" type="button">Disewa</button>
+            </div>
+        </div>
+
+        <p id="filter-empty" class="panel mb-4 hidden p-4 text-sm font-semibold text-zinc-600">Tidak ada motor yang sesuai filter.</p>
+
+        <div class="relative grid gap-4 md:grid-cols-2 xl:grid-cols-3" id="motor-grid">
             @foreach ($motors as $motor)
-                <article class="motor-card panel overflow-hidden" data-brand="{{ $motor->brand->nama_brand }}">
-                    <div class="grid h-40 place-items-center bg-gradient-to-br from-zinc-950 via-zinc-800 to-red-800 text-white">
+                <article class="motor-card card-hover reveal-up panel overflow-hidden" data-brand="{{ $motor->brand->nama_brand }}" data-status="{{ $motor->status ? 'tersedia' : 'disewa' }}" data-keywords="{{ strtolower($motor->nama.' '.$motor->brand->nama_brand.' '.$motor->no_polisi.' '.$motor->catatan) }}" style="animation-delay: {{ $loop->index * 45 }}ms">
+                    <div class="grid h-40 place-items-center bg-gradient-to-br from-zinc-950 via-zinc-800 to-red-800 text-white transition duration-300">
                         <div class="text-center">
                             <p class="text-xs font-bold uppercase tracking-wide text-red-100">{{ $motor->brand->nama_brand }}</p>
                             <p class="mt-1 text-2xl font-black">{{ $motor->nama }}</p>
@@ -45,11 +59,11 @@
                                 <h3 class="text-lg font-bold text-zinc-950">{{ $motor->nama }}</h3>
                                 <p class="mt-1 text-sm text-zinc-500">{{ $motor->no_polisi }} · {{ $motor->catatan }}</p>
                             </div>
-                            <span class="status-pill {{ $motor->status ? 'bg-red-50 text-red-700' : 'bg-zinc-200 text-zinc-600' }}">{{ $motor->status ? 'Tersedia' : 'Disewa' }}</span>
+                            <span class="status-pill {{ $motor->status ? 'bg-red-50 text-red-700' : 'bg-zinc-200 text-zinc-600 grayscale' }}">{{ $motor->status ? 'Tersedia' : 'Disewa' }}</span>
                         </div>
                         <div class="mt-5 flex items-center justify-between">
                             <p class="font-black text-zinc-950">Rp{{ number_format($motor->harga, 0, ',', '.') }}<span class="text-sm font-medium text-zinc-500"> / hari</span></p>
-                            <a href="/checkout/{{ $motor->id }}" class="{{ $motor->status ? 'btn-primary' : 'btn-muted pointer-events-none opacity-50' }}">Sewa</a>
+                            <a href="/checkout/{{ $motor->id }}" class="{{ $motor->status ? 'btn-primary' : 'btn-muted pointer-events-none opacity-50 grayscale' }}">Sewa</a>
                         </div>
                     </div>
                 </article>
@@ -58,17 +72,66 @@
     </section>
 
     <script>
+        const filterState = { brand: 'all', status: 'all', query: '' };
+        const emptyState = document.getElementById('filter-empty');
+
+        function applyMotorFilters() {
+            let visibleCount = 0;
+            document.querySelectorAll('.motor-card').forEach((card) => {
+                const matchesBrand = filterState.brand === 'all' || card.dataset.brand === filterState.brand;
+                const matchesStatus = filterState.status === 'all' || card.dataset.status === filterState.status;
+                const matchesQuery = !filterState.query || card.dataset.keywords.includes(filterState.query);
+                const isVisible = matchesBrand && matchesStatus && matchesQuery;
+
+                card.classList.toggle('hidden', !isVisible);
+                card.classList.toggle('is-filtered-out', !isVisible);
+
+                if (isVisible) {
+                    visibleCount++;
+                    card.animate([
+                        { opacity: 0, transform: 'translateY(10px) scale(.98)', filter: 'blur(4px)' },
+                        { opacity: 1, transform: 'translateY(0) scale(1)', filter: 'blur(0)' },
+                    ], { duration: 220, easing: 'ease-out' });
+                }
+            });
+
+            emptyState.classList.toggle('hidden', visibleCount !== 0);
+        }
+
+        function setActiveButton(buttons, activeButton, activeClass, inactiveClass) {
+            buttons.forEach((item) => item.className = inactiveClass);
+            activeButton.className = activeClass;
+        }
+
         document.querySelectorAll('.brand-filter').forEach((button) => {
             button.addEventListener('click', () => {
-                const brand = button.dataset.brand;
-                document.querySelectorAll('.motor-card').forEach((card) => {
-                    card.classList.toggle('hidden', brand !== 'all' && card.dataset.brand !== brand);
-                });
-                document.querySelectorAll('.brand-filter').forEach((item) => {
-                    item.className = 'brand-filter rounded border border-zinc-300 bg-white px-3 py-2 text-sm font-semibold text-zinc-700 hover:border-red-300 hover:text-red-700';
-                });
-                button.className = 'brand-filter rounded bg-zinc-950 px-3 py-2 text-sm font-semibold text-white';
+                filterState.brand = button.dataset.brand;
+                setActiveButton(
+                    document.querySelectorAll('.brand-filter'),
+                    button,
+                    'brand-filter rounded bg-zinc-950 px-3 py-2 text-sm font-semibold text-white',
+                    'brand-filter rounded border border-zinc-300 bg-white px-3 py-2 text-sm font-semibold text-zinc-700 hover:border-red-300 hover:text-red-700'
+                );
+                applyMotorFilters();
             });
+        });
+
+        document.querySelectorAll('.status-filter').forEach((button) => {
+            button.addEventListener('click', () => {
+                filterState.status = button.dataset.status;
+                setActiveButton(
+                    document.querySelectorAll('.status-filter'),
+                    button,
+                    'status-filter btn-dark',
+                    'status-filter btn-muted'
+                );
+                applyMotorFilters();
+            });
+        });
+
+        document.getElementById('motor-search').addEventListener('input', (event) => {
+            filterState.query = event.target.value.trim().toLowerCase();
+            applyMotorFilters();
         });
     </script>
 </x-layouts.app>

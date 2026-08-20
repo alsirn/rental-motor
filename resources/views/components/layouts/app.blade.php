@@ -5,30 +5,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $title ?? 'Rental Motor' }}</title>
+    <script>
+        (() => {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.classList.toggle('dark', savedTheme === 'dark' || (!savedTheme && prefersDark));
+        })();
+    </script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
+        html { color-scheme: light; scroll-behavior: smooth; }
+        html.dark { color-scheme: dark; }
+        * { transition-property: background-color, border-color, color, box-shadow, opacity, transform, filter; transition-duration: 180ms; transition-timing-function: ease-out; }
         body {
             background: radial-gradient(circle at top left, rgb(254 226 226 / .9), transparent 34rem), linear-gradient(180deg, #fff 0%, #f4f4f5 42%, #fff 100%);
         }
-        .btn-primary { display: inline-flex; align-items: center; justify-content: center; border-radius: .25rem; background: #b91c1c; padding: .5rem 1rem; font-size: .875rem; font-weight: 700; color: #fff; }
-        .btn-primary:hover { background: #991b1b; }
+        html.dark body { background: radial-gradient(circle at top left, rgb(127 29 29 / .42), transparent 34rem), linear-gradient(180deg, #09090b 0%, #18181b 44%, #09090b 100%); color: #f4f4f5; }
+        main { animation: page-rise .32s ease-out; }
+        .btn-primary { display: inline-flex; align-items: center; justify-content: center; border-radius: .25rem; background: #b91c1c; padding: .5rem 1rem; font-size: .875rem; font-weight: 700; color: #fff; box-shadow: 0 1px 2px rgb(127 29 29 / .1); }
+        .btn-primary:hover { background: #991b1b; transform: translateY(-2px); box-shadow: 0 14px 28px rgb(127 29 29 / .18); }
         .btn-dark { display: inline-flex; align-items: center; justify-content: center; border-radius: .25rem; background: #09090b; padding: .5rem 1rem; font-size: .875rem; font-weight: 700; color: #fff; }
-        .btn-dark:hover { background: #27272a; }
+        .btn-dark:hover { background: #27272a; transform: translateY(-2px); box-shadow: 0 14px 28px rgb(0 0 0 / .18); }
         .btn-muted { display: inline-flex; align-items: center; justify-content: center; border: 1px solid #d4d4d8; border-radius: .25rem; background: #fff; padding: .5rem 1rem; font-size: .875rem; font-weight: 700; color: #27272a; }
-        .btn-muted:hover { border-color: #a1a1aa; background: #fafafa; }
+        .btn-muted:hover { border-color: #a1a1aa; background: #fafafa; transform: translateY(-2px); }
         .field { width: 100%; border: 1px solid #d4d4d8; border-radius: .25rem; background: #fff; padding: .5rem .75rem; font-size: .875rem; color: #09090b; outline: none; }
         .field:focus { border-color: #dc2626; box-shadow: 0 0 0 3px rgb(254 202 202 / .7); }
-        .panel { border: 1px solid #e4e4e7; border-radius: .25rem; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / .04); }
+        .panel { border: 1px solid #e4e4e7; border-radius: .25rem; background: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / .04); animation: reveal-up .38s ease-out both; }
+        .panel:hover { box-shadow: 0 16px 42px rgb(0 0 0 / .08); }
+        html.dark .panel, html.dark .toast { border-color: #27272a; background: #18181b; color: #f4f4f5; box-shadow: 0 18px 45px rgb(0 0 0 / .36); }
+        html.dark header, html.dark footer, html.dark section.bg-white { border-color: #27272a; background-color: rgb(9 9 11 / .94); }
+        html.dark .field, html.dark .btn-muted { border-color: #3f3f46; background: #09090b; color: #f4f4f5; }
+        html.dark .btn-muted:hover { border-color: #991b1b; background: #18181b; }
+        html.dark .btn-dark { background: #f4f4f5; color: #09090b; }
+        html.dark .btn-dark:hover { background: #d4d4d8; }
+        html.dark .text-zinc-950, html.dark .text-zinc-800, html.dark .text-zinc-700, html.dark .text-zinc-600 { color: #f4f4f5; }
+        html.dark .text-zinc-500 { color: #a1a1aa; }
+        html.dark .border-zinc-200, html.dark .border-zinc-300 { border-color: #27272a; }
+        html.dark .bg-white { background-color: #18181b; }
+        html.dark .bg-zinc-50, html.dark .bg-zinc-100 { background-color: #27272a; }
+        html.dark .bg-red-50 { background-color: rgb(127 29 29 / .3); }
         .status-pill { display: inline-flex; align-items: center; border-radius: .25rem; padding: .25rem .5rem; font-size: .75rem; font-weight: 700; }
         .toast-stack { position: fixed; top: 1rem; right: 1rem; z-index: 60; display: grid; gap: .75rem; width: min(24rem, calc(100vw - 2rem)); }
-        .toast { border: 1px solid #e4e4e7; border-left-width: 4px; border-radius: .375rem; background: #fff; padding: 1rem; box-shadow: 0 18px 45px rgb(0 0 0 / .16); animation: toast-in .18s ease-out; }
+        .toast { border: 1px solid #e4e4e7; border-left-width: 4px; border-radius: .375rem; background: #fff; padding: 1rem; box-shadow: 0 18px 45px rgb(0 0 0 / .16); animation: toast-in .18s ease-out; backdrop-filter: blur(12px) saturate(1.2); }
         .toast-success { border-left-color: #16a34a; }
         .toast-error { border-left-color: #dc2626; }
         .toast-info { border-left-color: #52525b; }
         .toast-title { font-weight: 800; color: #09090b; }
         .toast-message { margin-top: .25rem; font-size: .875rem; line-height: 1.45; color: #52525b; }
+        html.dark .toast-title { color: #fff; }
+        html.dark .toast-message, html.dark .toast-close { color: #d4d4d8; }
         .toast-close { position: absolute; top: .55rem; right: .65rem; color: #71717a; font-weight: 800; }
+        .theme-toggle { display: inline-flex; align-items: center; gap: .45rem; border: 1px solid #d4d4d8; border-radius: 999px; background: rgb(255 255 255 / .82); padding: .45rem .75rem; font-size: .875rem; font-weight: 800; color: #27272a; backdrop-filter: blur(10px) saturate(1.15); }
+        .theme-toggle:hover { border-color: #dc2626; color: #b91c1c; transform: translateY(-2px); }
+        html.dark .theme-toggle { border-color: #3f3f46; background: rgb(24 24 27 / .82); color: #f4f4f5; }
+        .reveal-up { animation: reveal-up .45s ease-out both; }
+        .card-hover:hover { transform: translateY(-6px) scale(1.01); filter: saturate(1.08) contrast(1.02); }
+        .is-filtered-out { opacity: 0; transform: scale(.96); filter: grayscale(1) blur(2px); pointer-events: none; position: absolute; }
         @keyframes toast-in { from { opacity: 0; transform: translateY(-.35rem); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes page-rise { from { opacity: .86; transform: translateY(.35rem); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes reveal-up { from { opacity: 0; transform: translateY(1rem); filter: blur(6px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+        @media (prefers-reduced-motion: reduce) { *, main, .reveal-up, .toast { animation: none !important; transition-duration: 1ms !important; } }
         .hidden { display: none !important; }
     </style>
 </head>
@@ -48,6 +84,10 @@
                 <a class="auth-user hidden rounded px-3 py-2 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950" href="/verifikasi">Verifikasi</a>
                 <a class="auth-backend hidden rounded px-3 py-2 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950" href="/backend">Backend</a>
                 <a class="auth-guest btn-muted" href="/login">Masuk</a>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema">
+                    <span>Tema:</span>
+                    <span id="theme-label">Dark</span>
+                </button>
                 <button id="logout-button" class="auth-user hidden rounded bg-zinc-950 px-3 py-2 text-white hover:bg-zinc-800" type="button">Keluar</button>
             </div>
         </nav>
@@ -134,7 +174,25 @@
         const authUser = window.rentalApp.user();
         const badge = document.getElementById('auth-badge');
         const logout = document.getElementById('logout-button');
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeLabel = document.getElementById('theme-label');
         const isBackendUser = authUser && ['admin', 'tukang'].includes(authUser.role);
+
+        const syncThemeButton = () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            if (themeLabel) themeLabel.textContent = isDark ? 'Light' : 'Dark';
+        };
+
+        syncThemeButton();
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const isDark = !document.documentElement.classList.contains('dark');
+                document.documentElement.classList.toggle('dark', isDark);
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                syncThemeButton();
+            });
+        }
 
         if (authUser && badge) {
             badge.textContent = `${authUser.name} · ${authUser.role}`;

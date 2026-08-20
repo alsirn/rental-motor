@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -16,27 +17,33 @@
             radial-gradient(circle at top left, rgb(254 226 226 / 0.9), transparent 34rem),
             linear-gradient(180deg, #ffffff 0%, #f4f4f5 42%, #ffffff 100%);
     }
+
+    .dark body {
+        background:
+            radial-gradient(circle at top left, rgb(127 29 29 / 0.42), transparent 34rem),
+            linear-gradient(180deg, #09090b 0%, #18181b 44%, #09090b 100%);
+    }
 }
 
 @layer components {
     .btn-primary {
-        @apply inline-flex items-center justify-center rounded bg-red-700 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-red-900/10 transition hover:bg-red-800 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2;
+        @apply inline-flex items-center justify-center rounded bg-red-700 px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-red-900/10 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-lg hover:shadow-red-900/20 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2;
     }
 
     .btn-dark {
-        @apply inline-flex items-center justify-center rounded bg-zinc-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800;
+        @apply inline-flex items-center justify-center rounded bg-zinc-950 px-4 py-2 text-sm font-semibold text-white transition-all duration-200 ease-out hover:-translate-y-0.5 hover:bg-zinc-800 hover:shadow-lg dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200;
     }
 
     .btn-muted {
-        @apply inline-flex items-center justify-center rounded border border-zinc-300 bg-white px-4 py-2 text-sm font-semibold text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-50;
+        @apply inline-flex items-center justify-center rounded border border-zinc-300 bg-white px-4 py-2 text-sm font-semibold text-zinc-800 transition-all duration-200 ease-out hover:-translate-y-0.5 hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:border-red-700 dark:hover:bg-zinc-800;
     }
 
     .field {
-        @apply w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-950 outline-none transition placeholder:text-zinc-400 focus:border-red-600 focus:ring-2 focus:ring-red-100;
+        @apply w-full rounded border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-950 outline-none transition-all duration-200 placeholder:text-zinc-400 focus:border-red-600 focus:ring-2 focus:ring-red-100 dark:border-zinc-700 dark:bg-zinc-950 dark:text-zinc-100 dark:placeholder:text-zinc-500 dark:focus:ring-red-950;
     }
 
     .panel {
-        @apply rounded border border-zinc-200 bg-white shadow-sm;
+        @apply rounded border border-zinc-200 bg-white shadow-sm transition-all duration-300 ease-out dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 dark:shadow-black/20;
     }
 
     .status-pill {
