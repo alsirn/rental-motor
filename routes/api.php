@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\MidtransNotificationController;
 use App\Http\Controllers\Api\MotorController;
 use App\Http\Controllers\Api\RentalController;
+use App\Http\Controllers\Api\SiteSettingController;
 use App\Http\Controllers\Api\VerificationController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,5 +44,6 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/rented', [RentalController::class, 'rented']);
         Route::get('/verifications', [VerificationController::class, 'index']);
         Route::patch('/verifications/{user}', [VerificationController::class, 'updateStatus']);
+        Route::post('/site-settings/hero-banner', [SiteSettingController::class, 'updateHeroBanner']);
     });
 });

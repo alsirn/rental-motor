@@ -20,7 +20,16 @@
                 headers: { 'Accept': 'application/json', 'Authorization': `Bearer ${window.rentalApp.token()}` },
                 body: new FormData(event.currentTarget),
             });
-            window.rentalApp.notifyResponse(response, await response.json(), 'Dokumen berhasil dikirim dan menunggu verifikasi.');
+            const json = await response.json();
+            window.rentalApp.notifyResponse(response, json, 'Dokumen berhasil dikirim dan menunggu verifikasi.');
+            if (response.ok) {
+                event.currentTarget.reset();
+                const currentUser = window.rentalApp.user();
+                if (currentUser) {
+                    currentUser.verification_status = 'pending';
+                    localStorage.setItem('auth_user', JSON.stringify(currentUser));
+                }
+            }
         });
     </script>
 </x-layouts.app>

@@ -4,6 +4,7 @@ use App\Models\Brand;
 use App\Models\Motor;
 use App\Models\Payment;
 use App\Models\Rental;
+use App\Models\SiteSetting;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,7 @@ Route::get('/', function () {
     return view('home', [
         'motors' => Motor::with('brand')->latest()->get(),
         'brands' => Brand::withCount('motors')->latest()->get(),
+        'heroBanner' => SiteSetting::getValue('hero_banner'),
     ]);
 });
 
@@ -36,6 +38,7 @@ Route::get('/backend', function () {
         'rentals' => Rental::with(['user', 'motor'])->latest()->take(8)->get(),
         'payments' => Payment::with(['rental.user', 'rental.motor'])->latest()->take(8)->get(),
         'brands' => Brand::latest()->get(),
+        'heroBanner' => SiteSetting::getValue('hero_banner'),
     ]);
 });
 

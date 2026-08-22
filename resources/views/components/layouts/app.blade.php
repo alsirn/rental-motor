@@ -75,7 +75,7 @@
         .hidden { display: none !important; }
     </style>
 </head>
-<body class="min-h-screen text-zinc-950 antialiased">
+<body class="flex min-h-screen flex-col text-zinc-950 antialiased">
     <header class="sticky top-0 z-30 border-b border-zinc-200/80 bg-white/95 backdrop-blur">
         <nav class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
             <a href="/" class="flex items-center gap-3">
@@ -99,7 +99,7 @@
         </nav>
     </header>
 
-    <main>
+    <main class="flex-1">
         {{ $slot }}
     </main>
 

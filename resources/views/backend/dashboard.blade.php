@@ -24,6 +24,30 @@
         </div>
 
         <div class="mt-8 grid gap-6 lg:grid-cols-2">
+            <section class="panel p-5 lg:col-span-2">
+                <div class="grid gap-5 lg:grid-cols-[1fr_1.1fr] lg:items-center">
+                    <div>
+                        <p class="text-sm font-bold uppercase tracking-wide text-red-700">Tampilan Frontend</p>
+                        <h2 class="mt-2 text-2xl font-black text-zinc-950">Banner Homepage</h2>
+                        <p class="mt-2 text-sm leading-6 text-zinc-500">Ganti gambar banner yang tampil di samping judul utama halaman katalog.</p>
+                        <form id="hero-banner-form" class="mt-4 grid gap-3">
+                            <input class="field" type="file" name="hero_banner" accept="image/*" required>
+                            <button class="btn-primary" type="submit">Simpan Banner</button>
+                        </form>
+                    </div>
+                    <div class="relative min-h-56 overflow-hidden rounded border border-zinc-200 bg-zinc-950">
+                        @if ($heroBanner)
+                            <img class="absolute inset-0 h-full w-full object-cover" src="{{ asset('storage/'.$heroBanner) }}" alt="Preview banner homepage">
+                        @else
+                            <div class="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-800 to-red-800"></div>
+                            <div class="absolute inset-0 grid place-items-center px-6 text-center text-white">
+                                <p class="font-black">Belum ada banner. Upload gambar motor di form ini.</p>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </section>
+
             <section class="panel p-5">
                 <h2 class="font-bold">Motor Terbaru</h2>
                 <div class="mt-4 overflow-x-auto">
@@ -55,4 +79,17 @@
             </section>
         </div>
     </section>
+    <script>
+        document.getElementById('hero-banner-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const response = await fetch('/api/site-settings/hero-banner', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json', 'Authorization': `Bearer ${window.rentalApp.token()}` },
+                body: new FormData(event.currentTarget),
+            });
+            const json = await response.json();
+            window.rentalApp.notifyResponse(response, json, 'Banner berhasil diperbarui.');
+            if (response.ok) window.setTimeout(() => window.location.reload(), 650);
+        });
+    </script>
 </x-layouts.app>

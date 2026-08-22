@@ -1,6 +1,6 @@
 <x-layouts.app title="Rental Motor">
     <section class="reveal-up border-b border-zinc-200 bg-white">
-        <div class="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-14">
+        <div class="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8 lg:py-14">
             <div class="flex flex-col justify-center">
                 <p class="mb-3 text-sm font-bold uppercase tracking-wide text-red-700">Rental motor online</p>
                 <h1 class="max-w-3xl text-4xl font-black leading-tight text-zinc-950 sm:text-5xl">Website rental motor by zahran yang ganteng ini kaya cwo anime anime real no fek fek</h1>
@@ -12,7 +12,23 @@
                     <a href="/backend" class="auth-backend hidden btn-dark">Buka Backend</a>
                 </div>
             </div>
-           
+            <div class="relative min-h-72 overflow-hidden rounded border border-zinc-200 bg-zinc-950 shadow-2xl">
+                @if ($heroBanner)
+                    <img class="absolute inset-0 h-full w-full object-cover" src="{{ asset('storage/'.$heroBanner) }}" alt="Banner motor rental">
+                @else
+                    <div class="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-800 to-red-800"></div>
+                    <div class="absolute inset-0 grid place-items-center px-8 text-center text-white">
+                        <div>
+                            <p class="text-sm font-bold uppercase tracking-wide text-red-100">Banner Motor</p>
+                            <p class="mt-2 text-3xl font-black">Upload gambar dari Backend</p>
+                        </div>
+                    </div>
+                @endif
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-5 text-white ">
+                    <p class="text-sm font-bold uppercase tracking-wide text-red-100">Rental Motor</p>
+                    <p class="mt-1 text-2xl font-black">Sewa cepat, tampilan makin keren.</p>
+                </div>
+            </div>
         </div>
     </section>
 
