@@ -1,9 +1,9 @@
 <x-layouts.app title="Masuk">
     <section class="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
         <div>
-            <p class="text-sm font-bold uppercase tracking-wide text-red-700">Autentikasi Sanctum</p>
+            <p class="text-sm font-bold uppercase tracking-wide text-red-700">Autentikasi Login</p>
             <h1 class="mt-2 text-3xl font-black">Masuk ke akun rental motor.</h1>
-            <p class="mt-3 text-sm leading-6 text-zinc-600">Akun demo: admin@rental.test, tukang@rental.test, atau user@rental.test dengan password <strong>password</strong>.</p>
+            <p class="mt-3 text-sm leading-6 text-zinc-600">Agar dapat melakukan transaksi alangkah baiknya harus login ke akun Anda dengan menggunakan <strong>Gmail dan password</strong>.</p>
         </div>
         <form id="login-form" class="panel grid gap-4 p-6">
             <label class="grid gap-2 text-sm font-semibold">Email <input class="field" name="email" type="email" required></label>

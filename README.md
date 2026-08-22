@@ -1,10 +1,7 @@
 Ini adalah website rental motor 
 
-untuk akunnya
+Jadi website ini di buat oleh ahmad zahran yang jago ngepromt ini
 
-(
-    admin@rental.test / password
-    tukang@rental.test / password
-    user@rental.test / password
-)
+jangan lupa follow akun ini untuk mendapatkan source code dari project punya zahran
+
 
