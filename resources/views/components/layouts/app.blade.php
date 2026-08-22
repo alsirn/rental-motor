@@ -99,30 +99,6 @@
         </nav>
     </header>
 
-    <main class="flex-1">
-        {{ $slot }}
-    </main>
-
-    <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
-
-    <footer class="border-t border-zinc-200 bg-white">
-        <div class="mx-auto grid max-w-7xl gap-6 px-4 py-8 text-sm text-zinc-500 sm:px-6 lg:grid-cols-[1.2fr_1fr_auto] lg:items-start lg:px-8">
-            <div>
-                <p class="font-semibold text-zinc-700">Rental Motor</p>
-                <p class="mt-2 max-w-xl">Rental Motor berbasis Laravel 13, Sanctum, Tailwind CSS, dan Midtrans Snap.</p>
-            </div>
-            <nav class="grid gap-2 sm:grid-cols-2">
-                <a class="hover:text-red-700" href="/">Katalog</a>
-                <a class="auth-user hidden hover:text-red-700" href="/akun">Akun Saya</a>
-                <a class="auth-user hidden hover:text-red-700" href="/verifikasi">Verifikasi</a>
-                <a class="auth-backend hidden hover:text-red-700" href="/backend">Dashboard Backend</a>
-                <a class="auth-backend hidden hover:text-red-700" href="/backend/motor">Kelola Motor</a>
-                <a class="auth-backend hidden hover:text-red-700" href="/backend/pembayaran">Pembayaran</a>
-            </nav>
-            <p><span id="auth-badge" class="rounded bg-zinc-100 px-2 py-1">Belum login</span></p>
-        </div>
-    </footer>
-
     <script>
         window.rentalApp = {
             token: () => localStorage.getItem('api_token') || '',
@@ -187,7 +163,33 @@
                 });
             },
         };
+    </script>
 
+    <main class="flex-1">
+        {{ $slot }}
+    </main>
+
+    <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
+
+    <footer class="border-t border-zinc-200 bg-white">
+        <div class="mx-auto grid max-w-7xl gap-6 px-4 py-8 text-sm text-zinc-500 sm:px-6 lg:grid-cols-[1.2fr_1fr_auto] lg:items-start lg:px-8">
+            <div>
+                <p class="font-semibold text-zinc-700">Rental Motor</p>
+                <p class="mt-2 max-w-xl">Rental Motor berbasis Laravel 13, Sanctum, Tailwind CSS, dan Midtrans Snap.</p>
+            </div>
+            <nav class="grid gap-2 sm:grid-cols-2">
+                <a class="hover:text-red-700" href="/">Katalog</a>
+                <a class="auth-user hidden hover:text-red-700" href="/akun">Akun Saya</a>
+                <a class="auth-user hidden hover:text-red-700" href="/verifikasi">Verifikasi</a>
+                <a class="auth-backend hidden hover:text-red-700" href="/backend">Dashboard Backend</a>
+                <a class="auth-backend hidden hover:text-red-700" href="/backend/motor">Kelola Motor</a>
+                <a class="auth-backend hidden hover:text-red-700" href="/backend/pembayaran">Pembayaran</a>
+            </nav>
+            <p><span id="auth-badge" class="rounded bg-zinc-100 px-2 py-1">Belum login</span></p>
+        </div>
+    </footer>
+
+    <script>
         const authUser = window.rentalApp.user();
         const badge = document.getElementById('auth-badge');
         const logout = document.getElementById('logout-button');
