@@ -58,6 +58,13 @@
         .theme-toggle { display: inline-flex; align-items: center; gap: .45rem; border: 1px solid #d4d4d8; border-radius: 999px; background: rgb(255 255 255 / .82); padding: .45rem .75rem; font-size: .875rem; font-weight: 800; color: #27272a; backdrop-filter: blur(10px) saturate(1.15); }
         .theme-toggle:hover { border-color: #dc2626; color: #b91c1c; transform: translateY(-2px); }
         html.dark .theme-toggle { border-color: #3f3f46; background: rgb(24 24 27 / .82); color: #f4f4f5; }
+        .motor-visual { position: relative; overflow: hidden; }
+        .motor-visual-gradient, .motor-visual-image { position: absolute; inset: 0; }
+        .motor-visual-gradient { z-index: 1; }
+        .motor-visual-image { z-index: 2; opacity: 0; transform: scale(1.06); filter: saturate(1.05) contrast(1.03); object-fit: cover; width: 100%; height: 100%; }
+        .motor-visual.has-image:hover .motor-visual-image { opacity: 1; transform: scale(1); }
+        .motor-visual.has-image:hover .motor-visual-gradient { opacity: 0; transform: scale(.98); filter: blur(5px); }
+        .motor-visual.has-image:hover::after { content: ''; position: absolute; inset: 0; z-index: 3; background: linear-gradient(180deg, transparent 34%, rgb(0 0 0 / .58)); pointer-events: none; }
         .reveal-up { animation: reveal-up .45s ease-out both; }
         .card-hover:hover { transform: translateY(-6px) scale(1.01); filter: saturate(1.08) contrast(1.02); }
         .is-filtered-out { opacity: 0; transform: scale(.96); filter: grayscale(1) blur(2px); pointer-events: none; position: absolute; }
@@ -99,8 +106,19 @@
     <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
 
     <footer class="border-t border-zinc-200 bg-white">
-        <div class="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-6 text-sm text-zinc-500 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
-            <p>Rental Motor berbasis Laravel 13, Sanctum, Tailwind CSS, dan Midtrans Snap.</p>
+        <div class="mx-auto grid max-w-7xl gap-6 px-4 py-8 text-sm text-zinc-500 sm:px-6 lg:grid-cols-[1.2fr_1fr_auto] lg:items-start lg:px-8">
+            <div>
+                <p class="font-semibold text-zinc-700">Rental Motor</p>
+                <p class="mt-2 max-w-xl">Rental Motor berbasis Laravel 13, Sanctum, Tailwind CSS, dan Midtrans Snap.</p>
+            </div>
+            <nav class="grid gap-2 sm:grid-cols-2">
+                <a class="hover:text-red-700" href="/">Katalog</a>
+                <a class="auth-user hidden hover:text-red-700" href="/akun">Akun Saya</a>
+                <a class="auth-user hidden hover:text-red-700" href="/verifikasi">Verifikasi</a>
+                <a class="auth-backend hidden hover:text-red-700" href="/backend">Dashboard Backend</a>
+                <a class="auth-backend hidden hover:text-red-700" href="/backend/motor">Kelola Motor</a>
+                <a class="auth-backend hidden hover:text-red-700" href="/backend/pembayaran">Pembayaran</a>
+            </nav>
             <p><span id="auth-badge" class="rounded bg-zinc-100 px-2 py-1">Belum login</span></p>
         </div>
     </footer>

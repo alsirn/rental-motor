@@ -26,6 +26,7 @@ class MotorController extends Controller
             'harga' => ['required', 'integer', 'min:1000'],
             'no_polisi' => ['required', 'string', 'max:20', 'unique:motors,no_polisi'],
             'catatan' => ['nullable', 'string'],
+            'status' => ['sometimes', 'boolean'],
             'image_motor' => ['nullable', 'image', 'max:2048'],
         ]);
 

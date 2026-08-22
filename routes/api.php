@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('role:admin,tukang')->group(function () {
         Route::get('/dashboard', DashboardController::class);
         Route::post('/motors', [MotorController::class, 'store']);
+        Route::post('/motors/{motor}', [MotorController::class, 'update']);
         Route::put('/motors/{motor}', [MotorController::class, 'update']);
         Route::delete('/motors/{motor}', [MotorController::class, 'destroy']);
         Route::post('/brands', [BrandController::class, 'store']);
