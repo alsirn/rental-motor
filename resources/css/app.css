@@ -49,4 +49,26 @@
     .status-pill {
         @apply inline-flex items-center rounded px-2 py-1 text-xs font-semibold;
     }
+
+    .motor-card {
+        @apply transition-all duration-300 ease-out;
+    }
+
+    .motor-card:hover {
+        @apply -translate-y-2 bg-red-700 shadow-xl;
+    }
+
+    .motor-card:hover h3,
+    .motor-card:hover p {
+        @apply text-white;
+    }
+
+    .motor-hero {
+        display: block;
+        width: 500px;
+        height: 390px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+        will-change: transform;
+    }
 }

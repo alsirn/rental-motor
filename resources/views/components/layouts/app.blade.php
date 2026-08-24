@@ -86,15 +86,13 @@
                 </span>
             </a>
             <div class="flex flex-wrap items-center gap-2 text-sm font-medium">
-                <a class="rounded px-3 py-2 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950" href="/">Katalog</a>
-                <a class="auth-user hidden rounded px-3 py-2 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950" href="/akun">Akun</a>
-                <a class="auth-user hidden rounded px-3 py-2 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950" href="/verifikasi">Verifikasi</a>
-                <a class="auth-backend hidden rounded px-3 py-2 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-950" href="/backend">Backend</a>
+                <a href="/" class="rounded px-3 py-2 transition-colors duration-200 {{ request()->is('/') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Katalog</a>
+                <a href="/akun" class="auth-user hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('akun') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Akun</a>
+                <a href="/verifikasi" class="auth-user hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('verifikasi') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Verifikasi</a>
+                <a href="/backend" class="auth-backend hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('backend') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Backend</a>
                 <a class="auth-guest btn-muted" href="/login">Masuk</a>
                 <button id="logout-button" class="auth-user hidden rounded bg-zinc-950 px-3 py-2 text-white hover:bg-zinc-800" type="button">Keluar</button>
-                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema">
-                    <span id="theme-label">Dark</span>
-                </button>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema"><span id="theme-label">Dark</span></button>
             </div>
         </nav>
     </header>
@@ -170,24 +168,63 @@
     </main>
 
     <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
-
-    <footer class="border-t border-zinc-200 bg-white">
-        <div class="mx-auto grid max-w-7xl gap-6 px-4 py-8 text-sm text-zinc-500 sm:px-6 lg:grid-cols-[1.2fr_1fr_auto] lg:items-start lg:px-8">
-            <div>
-                <p class="font-semibold text-zinc-700">Rental Motor</p>
-                <p class="mt-2 max-w-xl">Rental Motor berbasis Laravel 13, Sanctum, Tailwind CSS, dan Midtrans Snap.</p>
+        <footer class="border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+            <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+                <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+                    <div class="lg:col-span-1">
+                        <a href="/" class="group inline-flex items-center gap-3">
+                            <span class="grid size-10 place-items-center rounded bg-red-700 text-lg font-black text-white">RM</span>
+                            <span>
+                                <span class="block text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Rental Motor</span>
+                                <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">Sewa cepat, data rapih</span>
+                            </span>
+                        </a>
+                        <p class="mt-5 max-w-sm text-sm leading-6 text-zinc-500 dark:text-zinc-400">Platform rental motor yang membantu kamu menemukan motor pilihan, melakukan booking, dan mengelola perjalanan dengan mudah.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Navigasi</h3>
+                        <nav class="mt-5 grid gap-3">
+                            <a href="/" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Katalog Motor</a>
+                            <a href="/akun" class="auth-user hidden w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Akun Saya</a>
+                            <a href="/verifikasi" class="auth-user hidden w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Verifikasi</a>
+                        </nav>
+                    </div>
+                    <div class="auth-backend hidden">
+                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Management</h3>
+                        <nav class="mt-5 grid gap-3">
+                            <a href="/backend" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Dashboard</a>
+                            <a href="/backend/motor" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Kelola Motor</a>
+                            <a href="/backend/pembayaran" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Pembayaran</a>
+                        </nav>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Status Akun</h3>
+                        <div class="mt-5 rounded-2xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
+                            <div class="flex items-center gap-3">
+                                <span class="grid size-10 shrink-0 place-items-center rounded-full bg-red-100 text-red-700 dark:bg-red-950/50 dark:text-red-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-5">
+                                        <path d="M20 21a8 8 0 0 0-16 0"/>
+                                        <circle cx="12" cy="7" r="4"/>
+                                    </svg>
+                                </span>
+                                <div class="min-w-0">
+                                    <p class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Login sebagai</p>
+                                    <span id="auth-badge" class="mt-1 block truncate text-sm font-black text-zinc-900 dark:text-white">Belum login</span>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-xs leading-5 text-zinc-500 dark:text-zinc-400">Status akun dan hak akses sistem kamu akan ditampilkan di sini.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-10 flex flex-col gap-4 border-t border-zinc-200 pt-6 text-xs text-zinc-400 sm:flex-row sm:items-center sm:justify-between dark:border-zinc-800">
+                    <p>© {{ date('Y') }} Rental Motor. All rights reserved.</p>
+                    <div class="flex flex-wrap items-center gap-3">
+                        <span>Rental Motor System</span>
+                        <span class="size-1 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
+                    </div>
+                </div>
             </div>
-            <nav class="grid gap-2 sm:grid-cols-2">
-                <a class="hover:text-red-700" href="/">Katalog</a>
-                <a class="auth-user hidden hover:text-red-700" href="/akun">Akun Saya</a>
-                <a class="auth-user hidden hover:text-red-700" href="/verifikasi">Verifikasi</a>
-                <a class="auth-backend hidden hover:text-red-700" href="/backend">Dashboard Backend</a>
-                <a class="auth-backend hidden hover:text-red-700" href="/backend/motor">Kelola Motor</a>
-                <a class="auth-backend hidden hover:text-red-700" href="/backend/pembayaran">Pembayaran</a>
-            </nav>
-            <p><span id="auth-badge" class="rounded bg-zinc-100 px-2 py-1">Belum login</span></p>
-        </div>
-    </footer>
+        </footer>
 
     <script>
         const authUser = window.rentalApp.user();
