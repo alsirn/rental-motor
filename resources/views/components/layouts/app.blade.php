@@ -210,8 +210,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-10 flex flex-col gap-4 border-t border-zinc-200 pt-6 text-xs text-zinc-400 sm:flex-row sm:items-center sm:justify-between dark:border-zinc-800">
-                    <p>© {{ date('Y') }} Rental Motor. All rights reserved.</p>
+                <div class="mt-10 flex flex-col gap-4 pt-6 text-xs text-zinc-400 sm:flex-row sm:items-center sm:justify-between">                    <p>© {{ date('Y') }} Rental Motor. All rights reserved.</p>
                     <div class="flex flex-wrap items-center gap-3">
                         <span>Rental Motor System</span>
                         <span class="size-1 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
