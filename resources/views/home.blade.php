@@ -63,17 +63,7 @@
         <div class="relative grid gap-4 md:grid-cols-2 xl:grid-cols-3" id="motor-grid">
             @foreach ($motors as $motor)
                 <article class="motor-card card-hover reveal-up panel overflow-hidden" data-brand="{{ $motor->brand->nama_brand }}" data-status="{{ $motor->status ? 'tersedia' : 'disewa' }}" data-keywords="{{ strtolower($motor->nama.' '.$motor->brand->nama_brand.' '.$motor->no_polisi.' '.$motor->catatan) }}" style="animation-delay: {{ $loop->index * 45 }}ms">
-                    <div class="motor-visual grid h-40 place-items-center text-white transition duration-300 {{ $motor->image_motor ? 'has-image' : '' }}">
-                        @if ($motor->image_motor)
-                            <img class="motor-visual-image" src="{{ asset('storage/'.$motor->image_motor) }}" alt="{{ $motor->nama }}">
-                        @endif
-                        <div class="motor-visual-gradient grid place-items-center bg-gradient-to-br from-zinc-950 via-zinc-800 to-red-800">
-                            <div class="text-center">
-                                <p class="text-xs font-bold uppercase tracking-wide text-red-100">{{ $motor->brand->nama_brand }}</p>
-                                <p class="mt-1 text-2xl font-black">{{ $motor->nama }}</p>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="relative grid h-40 place-items-center overflow-hidden bg-gradient-to-br from-zinc-950 via-zinc-800 to-red-800"> @if ($motor->image_motor) <img src="{{ asset('storage/'.$motor->image_motor) }}" alt="{{ $motor->nama }}" class="relative z-10 h-28 w-auto object-contain drop-shadow-2xl"> @else <div class="relative z-10 text-center text-white"> <p class="text-xs font-bold uppercase tracking-wide text-red-100">{{ $motor->brand->nama_brand }}</p> <p class="mt-1 text-2xl font-black">{{ $motor->nama }}</p> </div> @endif </div>
                     <div class="p-5">
                         <div class="flex items-start justify-between gap-4">
                             <div>

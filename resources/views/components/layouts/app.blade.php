@@ -172,13 +172,7 @@
             <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
                 <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
                     <div class="lg:col-span-1">
-                        <a href="/" class="group inline-flex items-center gap-3">
-                            <span class="grid size-10 place-items-center rounded bg-red-700 text-lg font-black text-white">RM</span>
-                            <span>
-                                <span class="block text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Rental Motor</span>
-                                <span class="mt-0.5 block text-xs text-zinc-500 dark:text-zinc-400">Sewa cepat, data rapih</span>
-                            </span>
-                        </a>
+                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Rental Motor</h3>
                         <p class="mt-5 max-w-sm text-sm leading-6 text-zinc-500 dark:text-zinc-400">Platform rental motor yang membantu kamu menemukan motor pilihan, melakukan booking, dan mengelola perjalanan dengan mudah.</p>
                     </div>
                     <div>
