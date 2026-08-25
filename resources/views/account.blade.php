@@ -1,17 +1,11 @@
-<x-layouts.app title="Akun Saya">
-    <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-        <div class="mb-6">
-            <p class="text-sm font-bold uppercase tracking-wide text-red-700">Area penyewa</p>
-            <h1 class="mt-2 text-3xl font-black">Akun & Riwayat Sewa</h1>
-        </div>
+<x-layouts.app title="Akun Saya"> 
+    <section class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8"> 
+        <div class="mb-6"><p class="text-sm font-bold uppercase tracking-wide text-red-700">Area penyewa</p><h1 class="mt-2 text-3xl font-black">Akun & Riwayat Sewa</h1> </div> 
         <div class="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
             <section class="panel p-5">
                 <h2 class="font-bold">Profil</h2>
-                <div id="profile-box" class="mt-4 text-sm text-zinc-600">Memuat profil...</div>
-                <div class="mt-5 flex gap-2">
-                    <a href="/verifikasi" class="btn-primary">Verifikasi Akun</a>
-                    <a href="/" class="btn-muted">Cari Motor</a>
-                </div>
+                    <div id="profile-box" class="mt-4 text-sm text-zinc-600">Memuat profil...</div>
+                    <div class="mt-5 flex gap-2"><a id="verify-button" href="/verifikasi" class="btn-primary">Verifikasi Akun</a><a href="/" class="btn-muted">Cari Motor</a></div>
             </section>
             <section class="panel p-5">
                 <h2 class="font-bold">Riwayat Penyewaan</h2>
@@ -24,19 +18,67 @@
             </section>
         </div>
     </section>
+
     <script>
         (async () => {
             const profileBox = document.getElementById('profile-box');
             const table = document.getElementById('rental-history');
+            const verifyButton = document.getElementById('verify-button');
             if (!window.rentalApp.token()) {
                 profileBox.textContent = 'Silakan login terlebih dahulu.';
-                table.innerHTML = '<tr><td colspan="4" class="py-3 text-zinc-500">Belum login.</td></tr>';
+                table.innerHTML = `
+                    <tr><td colspan="4" class="py-3 text-zinc-500">Belum login.</td></tr> `;
                 return;
             }
-            const me = await fetch('/api/me', { headers: window.rentalApp.authHeaders() }).then((res) => res.json());
-            profileBox.innerHTML = `<p class="font-semibold text-zinc-950">${me.user.name}</p><p>${me.user.email}</p><p>${me.user.no_hp || '-'}</p><p class="mt-3"><span class="status-pill bg-red-50 text-red-700">${me.user.verification_status}</span></p>`;
-            const rentals = await fetch('/api/my-rentals', { headers: window.rentalApp.authHeaders() }).then((res) => res.json());
-            table.innerHTML = rentals.length ? rentals.map((rental) => `<tr><td class="py-3 font-medium">${rental.motor.nama}</td><td>${rental.tanggal_mulai} - ${rental.tanggal_selesai}</td><td>${window.rentalApp.money(rental.total_biaya)}</td><td>${rental.status}</td></tr>`).join('') : '<tr><td colspan="4" class="py-3 text-zinc-500">Belum ada transaksi.</td></tr>';
+            try {
+                const meResponse = await fetch('/api/me', {
+                    headers: window.rentalApp.authHeaders()
+                });
+                const me = await meResponse.json();
+                const user = me.user;
+                const verificationStatus = user.verification_status || 'unverified';
+                let statusLabel = 'Belum Diverifikasi';
+                let statusDescription = 'Silakan upload dokumen untuk melakukan verifikasi.';
+                let showVerifyButton = true;
+                if (verificationStatus === 'pending') {
+                    statusLabel = 'Menunggu Verifikasi';
+                    statusDescription = 'Dokumen kamu sedang diperiksa oleh admin.';
+                }
+                if (
+                    verificationStatus === 'verified' ||
+                    verificationStatus === 'terverifikasi'
+                ) {
+                    statusLabel = 'Terverifikasi';
+                    statusDescription = 'Akun kamu sudah berhasil diverifikasi.';
+                    showVerifyButton = false;
+                }
+                profileBox.innerHTML = `
+                    <p class="font-semibold text-zinc-950">${user.name}</p>
+                    <p>${user.email}</p>
+                    <p>${user.no_hp || '-'}</p>
+                    <div class="mt-4">
+                        <p class="text-xs font-semibold text-zinc-500">Status Verifikasi</p>
+                        <span class="status-pill mt-1 bg-red-50 text-red-700">${statusLabel}</span>
+                        <p class="mt-2 text-xs leading-5 text-zinc-500">${statusDescription}</p>
+                    </div>`;
+                verifyButton.classList.toggle('hidden', !showVerifyButton);
+                const rentalsResponse = await fetch('/api/my-rentals', {
+                    headers: window.rentalApp.authHeaders()
+                });
+                const rentals = await rentalsResponse.json();
+                table.innerHTML = rentals.length
+                    ? rentals.map((rental) => `
+                        <tr>
+                            <td class="py-3 font-medium">${rental.motor.nama}</td>
+                            <td>${rental.tanggal_mulai} - ${rental.tanggal_selesai}</td>
+                            <td>${window.rentalApp.money(rental.total_biaya)}</td>
+                            <td>${rental.status}</td>
+                        </tr>
+                    `).join('') : `<tr><td colspan="4" class="py-3 text-zinc-500">Belum ada transaksi.</td></tr> `;
+            } catch (error) {
+                profileBox.textContent = 'Gagal memuat data akun.';
+                table.innerHTML = `<tr><td colspan="4" class="py-3 text-zinc-500">Gagal memuat riwayat penyewaan.</td></tr>`;
+            }
         })();
     </script>
 </x-layouts.app>
