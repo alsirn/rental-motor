@@ -35,6 +35,11 @@ class MidtransSnapService
                     'quantity' => max(1, (int) $rental->tanggal_mulai->diffInDays($rental->tanggal_selesai)),
                     'name' => Str::limit($rental->motor->nama, 50, ''),
                 ]],
+                'callbacks' => [
+                    'finish' => url('/payment/finish'),
+                    'error' => url('/akun'),
+                    'pending' => url('/akun'),
+                ],
             ])
             ->throw()
             ->json();

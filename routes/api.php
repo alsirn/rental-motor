@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\MidtransNotificationController;
 use App\Http\Controllers\Api\MotorController;
+use App\Http\Controllers\Api\PaymentSyncController;
 use App\Http\Controllers\Api\RentalController;
 use App\Http\Controllers\Api\SiteSettingController;
 use App\Http\Controllers\Api\VerificationController;
@@ -26,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/my-rentals', [RentalController::class, 'myRentals'])->middleware('role:user');
     Route::post('/rentals', [RentalController::class, 'store'])->middleware('role:user');
     Route::post('/verify-account', [VerificationController::class, 'store'])->middleware('role:user');
+    Route::post('/payments/sync', PaymentSyncController::class);
 
     Route::middleware('role:admin,tukang')->group(function () {
         Route::get('/dashboard', DashboardController::class);

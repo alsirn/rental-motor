@@ -17,6 +17,7 @@ class MidtransNotificationController extends Controller
 
         $payment = Payment::where('order_id', $orderId)->firstOrFail();
         $isPaid = in_array($status, ['capture', 'settlement'], true);
+        $isCancelled = in_array($status, ['cancel', 'expire', 'deny', 'failure'], true);
 
         $payment->update([
             'payment_type' => $payload['payment_type'] ?? null,
@@ -28,10 +29,10 @@ class MidtransNotificationController extends Controller
 
         $payment->rental->update([
             'status_bayar' => $isPaid,
-            'status' => $isPaid ? 'active' : ($status === 'cancel' ? 'cancel' : 'pending'),
+            'status' => $isPaid ? 'active' : ($isCancelled ? 'cancel' : 'pending'),
         ]);
 
-        if ($status === 'cancel') {
+        if ($isCancelled) {
             $payment->rental->motor->update(['status' => true]);
         }
 

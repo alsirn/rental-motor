@@ -11,7 +11,7 @@
                 <h2 class="font-bold">Riwayat Penyewaan</h2>
                 <div class="mt-4 overflow-x-auto">
                     <table class="w-full text-left text-sm">
-                        <thead class="border-b text-xs uppercase text-zinc-500"><tr><th class="py-2">Motor</th><th>Tanggal</th><th>Total</th><th>Status</th></tr></thead>
+                        <thead class="border-b text-xs uppercase text-zinc-500"><tr><th class="py-2">Motor</th><th>Tanggal</th><th>Total</th><th>Status</th><th>Aksi</th></tr></thead>
                         <tbody id="rental-history" class="divide-y divide-zinc-100"></tbody>
                     </table>
                 </div>
@@ -73,8 +73,20 @@
                             <td>${rental.tanggal_mulai} - ${rental.tanggal_selesai}</td>
                             <td>${window.rentalApp.money(rental.total_biaya)}</td>
                             <td>${rental.status}</td>
+                            <td>${rental.status === 'pending' ? `<button class="text-sm font-semibold text-red-700" data-sync-payment="${rental.order_id}">Sinkronkan</button>` : '-'}</td>
                         </tr>
-                    `).join('') : `<tr><td colspan="4" class="py-3 text-zinc-500">Belum ada transaksi.</td></tr> `;
+                    `).join('') : `<tr><td colspan="5" class="py-3 text-zinc-500">Belum ada transaksi.</td></tr> `;
+
+                document.querySelectorAll('[data-sync-payment]').forEach((button) => button.addEventListener('click', async () => {
+                    const response = await fetch('/api/payments/sync', {
+                        method: 'POST',
+                        headers: window.rentalApp.authHeaders(),
+                        body: JSON.stringify({ order_id: button.dataset.syncPayment }),
+                    });
+                    const json = await response.json();
+                    window.rentalApp.notifyResponse(response, json, 'Status pembayaran berhasil diperbarui.');
+                    if (response.ok) window.setTimeout(() => window.location.reload(), 800);
+                }));
             } catch (error) {
                 profileBox.textContent = 'Gagal memuat data akun.';
                 table.innerHTML = `<tr><td colspan="4" class="py-3 text-zinc-500">Gagal memuat riwayat penyewaan.</td></tr>`;

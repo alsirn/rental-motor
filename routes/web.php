@@ -24,6 +24,7 @@ Route::view('/login', 'auth.login');
 Route::view('/register', 'auth.register');
 Route::view('/akun', 'account');
 Route::get('/verifikasi', fn () => view('verify'));
+Route::view('/payment/finish', 'payment-finish');
 
 Route::get('/backend', function () {
     return view('backend.dashboard', [

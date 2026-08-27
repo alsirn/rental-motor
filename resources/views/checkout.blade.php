@@ -166,8 +166,42 @@
                     window.snap &&
                     !json.snap_token.startsWith('demo-')
                 ) {
+                    const syncPayment = async (result = {}) => {
+                        const syncResponse = await fetch('/api/payments/sync', {
+                            method: 'POST',
+                            headers: window.rentalApp.authHeaders(),
+                            body: JSON.stringify({
+                                order_id: result.order_id || json.order_id,
+                                transaction_status: result.transaction_status,
+                                payment_type: result.payment_type,
+                            }),
+                        });
+                        const syncJson = await syncResponse.json();
+                        window.rentalApp.notifyResponse(syncResponse, syncJson, 'Status pembayaran berhasil diperbarui.');
+                        if (syncResponse.ok) {
+                            window.setTimeout(() => window.location.href = '/akun', 900);
+                        }
+                    };
                     window.snap.pay(
-                        json.snap_token
+                        json.snap_token,
+                        {
+                            onSuccess: syncPayment,
+                            onPending: syncPayment,
+                            onError: (result) => {
+                                window.rentalApp.notify({
+                                    type: 'error',
+                                    title: 'Pembayaran gagal',
+                                    message: result?.status_message || 'Pembayaran belum berhasil diproses.',
+                                });
+                            },
+                            onClose: () => {
+                                window.rentalApp.notify({
+                                    type: 'info',
+                                    title: 'Pembayaran belum selesai',
+                                    message: 'Kamu bisa cek atau sinkronkan status pembayaran dari halaman akun.',
+                                });
+                            },
+                        }
                     );
                 }
             }

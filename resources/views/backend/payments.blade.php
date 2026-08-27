@@ -22,8 +22,24 @@
     <script>
         async function loadPayments(status = '') {
             const url = status ? `/api/payments?status=${status}` : '/api/payments';
-            const payments = await fetch(url, { headers: window.rentalApp.authHeaders() }).then((res) => res.json());
-            document.getElementById('payment-table').innerHTML = payments.length ? payments.map((payment) => `<tr><td class="py-3 font-medium">${payment.order_id}</td><td>${payment.rental?.user?.name || '-'}</td><td>${payment.rental?.motor?.nama || '-'}</td><td>${window.rentalApp.money(payment.gross_amount)}</td><td>${payment.transaction_status}</td><td><button class="text-sm font-semibold text-red-700" data-delete="${payment.id}">Hapus</button></td></tr>`).join('') : '<tr><td colspan="6" class="py-3 text-zinc-500">Tidak ada pembayaran.</td></tr>';
+            const response = await fetch(url, { headers: window.rentalApp.authHeaders() });
+            const payments = await response.json();
+            if (!response.ok) {
+                window.rentalApp.notifyResponse(response, payments, 'Data pembayaran gagal dimuat.');
+                return;
+            }
+
+            document.getElementById('payment-table').innerHTML = payments.length ? payments.map((payment) => `<tr><td class="py-3 font-medium">${payment.order_id}</td><td>${payment.rental?.user?.name || '-'}</td><td>${payment.rental?.motor?.nama || '-'}</td><td>${window.rentalApp.money(payment.gross_amount)}</td><td>${payment.transaction_status}</td><td><div class="flex flex-wrap gap-3">${payment.transaction_status === 'pending' ? `<button class="text-sm font-semibold text-red-700" data-sync-payment="${payment.order_id}">Sinkronkan</button>` : ''}<button class="text-sm font-semibold text-red-700" data-delete="${payment.id}">Hapus</button></div></td></tr>`).join('') : '<tr><td colspan="6" class="py-3 text-zinc-500">Tidak ada pembayaran.</td></tr>';
+            document.querySelectorAll('[data-sync-payment]').forEach((button) => button.addEventListener('click', async () => {
+                const response = await fetch('/api/payments/sync', {
+                    method: 'POST',
+                    headers: window.rentalApp.authHeaders(),
+                    body: JSON.stringify({ order_id: button.dataset.syncPayment }),
+                });
+                const json = await response.json();
+                window.rentalApp.notifyResponse(response, json, 'Status pembayaran berhasil diperbarui.');
+                if (response.ok) loadPayments(status);
+            }));
             document.querySelectorAll('[data-delete]').forEach((button) => button.addEventListener('click', async () => {
                 if (!confirm('Hapus histori pembayaran ini?')) return;
                 const response = await fetch(`/api/payments/${button.dataset.delete}`, { method: 'DELETE', headers: window.rentalApp.authHeaders() });
