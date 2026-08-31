@@ -55,15 +55,15 @@
                             <span class="text-xs font-normal text-zinc-500">Hari terakhir rental</span>
                         </label>
                     </div>
-                    <div class="rounded-lg border border-zinc-200 bg-zinc-50 p-5">
-                        <h3 class="font-black text-zinc-950">Ringkasan Rental</h3>
+                    <div class="rounded-lg border border-zinc-200 bg-zinc-50 p-5 dark:border-zinc-800 dark:bg-zinc-900">
+                        <h3 class="font-black text-zinc-950 dark:text-zinc-100">Ringkasan Rental</h3>
                         <div class="mt-4 grid gap-3 text-sm">
-                            <div class="flex items-center justify-between gap-4"><span class="text-zinc-500">Harga per hari</span><span class="font-semibold text-zinc-900">Rp{{ number_format($motor->harga, 0, ',', '.') }}</span></div>
-                            <div class="flex items-center justify-between gap-4"><span class="text-zinc-500">Lama rental</span><span id="rental-days" class="font-semibold text-zinc-900">-</span></div>
-                            <div class="flex items-center justify-between gap-4"><span class="text-zinc-500">Tanggal</span><span id="rental-date" class="text-right font-semibold text-zinc-900">Belum dipilih</span></div>
+                            <div class="flex items-center justify-between gap-4"><span class="text-zinc-500 dark:text-zinc-400">Harga per hari</span><span class="font-semibold text-zinc-900 dark:text-zinc-100">Rp{{ number_format($motor->harga, 0, ',', '.') }}</span></div>
+                            <div class="flex items-center justify-between gap-4"><span class="text-zinc-500 dark:text-zinc-400">Lama rental</span><span id="rental-days" class="font-semibold text-zinc-900 dark:text-zinc-100">-</span></div>
+                            <div class="flex items-center justify-between gap-4"><span class="text-zinc-500 dark:text-zinc-400">Tanggal</span><span id="rental-date" class="text-right font-semibold text-zinc-900 dark:text-zinc-100">Belum dipilih</span></div>
                         </div>
-                        <div class="my-4 border-t border-zinc-200"></div>
-                        <div class="flex items-center justify-between"><span class="font-black text-zinc-950">Total pembayaran</span><span id="rental-total" class="text-2xl font-black text-red-700">Rp0</span></div>
+                        <div class="my-4 border-t border-zinc-200 dark:border-zinc-800"></div>
+                        <div class="flex items-center justify-between"><span class="font-black text-zinc-950 dark:text-zinc-100">Total pembayaran</span><span id="rental-total" class="text-2xl font-black text-red-700">Rp0</span></div>
                     </div>
                     <div class="flex gap-3 rounded-lg bg-red-50 p-4">
                         <div class="mt-0.5 shrink-0 text-red-700"><i class="fa-solid fa-circle-info"></i></div>
@@ -103,7 +103,7 @@
                 Math.floor(
                     (end - start) /
                     (1000 * 60 * 60 * 24)
-                ) + 1;
+                );
             if (difference <= 0) {
                 rentalDays.textContent = '-';
                 rentalDate.textContent =
