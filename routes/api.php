@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\MidtransNotificationController;
 use App\Http\Controllers\Api\MotorController;
+use App\Http\Controllers\Api\OfflineTransactionController;
 use App\Http\Controllers\Api\PaymentSyncController;
 use App\Http\Controllers\Api\RentalController;
 use App\Http\Controllers\Api\SiteSettingController;
@@ -47,5 +48,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/verifications', [VerificationController::class, 'index']);
         Route::patch('/verifications/{user}', [VerificationController::class, 'updateStatus']);
         Route::post('/site-settings/hero-banner', [SiteSettingController::class, 'updateHeroBanner']);
+    });
+
+    Route::middleware('role:admin')->group(function () {
+        Route::get('/offline-transactions', [OfflineTransactionController::class, 'index']);
+        Route::post('/offline-transactions', [OfflineTransactionController::class, 'store']);
+        Route::delete('/offline-transactions/{offlineTransaction}', [OfflineTransactionController::class, 'destroy']);
     });
 });

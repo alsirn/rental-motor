@@ -86,9 +86,9 @@
                 </span>
             </a>
             <div class="flex flex-wrap items-center gap-2 text-sm font-medium">
-                <a href="/" class="rounded px-3 py-2 transition-colors duration-200 {{ request()->is('/') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Katalog</a>
+                <a href="/katalog" class="rounded px-3 py-2 transition-colors duration-200 {{ request()->is('katalog') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Katalog</a>
                 <a href="/akun" class="auth-user hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('akun') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Akun</a>
-                <a href="/verifikasi" class="auth-user hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('verifikasi') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Verifikasi</a>
+                <a href="/verifikasi" class="auth-verification hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('verifikasi') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Verifikasi</a>
                 <a href="/backend" class="auth-backend hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('backend') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Backend</a>
                 <a class="auth-guest btn-muted" href="/login">Masuk</a>
                 <button id="logout-button" class="auth-user hidden rounded bg-zinc-950 px-3 py-2 text-white hover:bg-zinc-800" type="button">Keluar</button>
@@ -178,9 +178,9 @@
                     <div>
                         <h3 class="text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Navigasi</h3>
                         <nav class="mt-5 grid gap-3">
-                            <a href="/" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Katalog Motor</a>
+                            <a href="/katalog" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Katalog Motor</a>
                             <a href="/akun" class="auth-user hidden w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Akun Saya</a>
-                            <a href="/verifikasi" class="auth-user hidden w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Verifikasi</a>
+                            <a href="/verifikasi" class="auth-verification hidden w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Verifikasi</a>
                         </nav>
                     </div>
                     <div class="auth-backend hidden">
@@ -188,6 +188,7 @@
                         <nav class="mt-5 grid gap-3">
                             <a href="/backend" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Dashboard</a>
                             <a href="/backend/motor" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Kelola Motor</a>
+                            <a href="/backend/transaksi-offline" class="auth-admin hidden w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Transaksi Offline</a>
                             <a href="/backend/pembayaran" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Pembayaran</a>
                         </nav>
                     </div>
@@ -226,6 +227,8 @@
         const themeToggle = document.getElementById('theme-toggle');
         const themeLabel = document.getElementById('theme-label');
         const isBackendUser = authUser && ['admin', 'tukang'].includes(authUser.role);
+        const isAdminUser = authUser && authUser.role === 'admin';
+        const needsVerification = authUser && authUser.role === 'user' && !['verified', 'terverifikasi'].includes(authUser.verification_status);
 
         const syncThemeButton = () => {
             const isDark = document.documentElement.classList.contains('dark');
@@ -260,6 +263,14 @@
             item.classList.toggle('hidden', !isBackendUser);
         });
 
+        document.querySelectorAll('.auth-admin').forEach((item) => {
+            item.classList.toggle('hidden', !isAdminUser);
+        });
+
+        document.querySelectorAll('.auth-verification').forEach((item) => {
+            item.classList.toggle('hidden', !needsVerification);
+        });
+
         if (logout) {
             logout.addEventListener('click', async () => {
                 try {
@@ -273,6 +284,10 @@
 
         if (window.location.pathname.startsWith('/backend') && !isBackendUser) {
             window.location.href = '/login';
+        }
+
+        if (window.location.pathname.startsWith('/backend/transaksi-offline') && !isAdminUser) {
+            window.location.href = '/backend';
         }
     </script>
 </body>

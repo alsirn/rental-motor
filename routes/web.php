@@ -10,9 +10,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home', [
+        'heroBanner' => SiteSetting::getValue('hero_banner'),
+    ]);
+});
+
+Route::get('/katalog', function () {
+    return view('catalog', [
         'motors' => Motor::with('brand')->latest()->get(),
         'brands' => Brand::withCount('motors')->latest()->get(),
-        'heroBanner' => SiteSetting::getValue('hero_banner'),
     ]);
 });
 
@@ -46,5 +51,6 @@ Route::get('/backend', function () {
 Route::view('/backend/motor', 'backend.motors');
 Route::view('/backend/brand', 'backend.brands');
 Route::view('/backend/transaksi', 'backend.transactions');
+Route::view('/backend/transaksi-offline', 'backend.offline-transactions');
 Route::view('/backend/pembayaran', 'backend.payments');
 Route::view('/backend/verifikasi', 'backend.verifications');
