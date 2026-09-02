@@ -31,7 +31,9 @@
         <div class="relative grid gap-4 md:grid-cols-2 xl:grid-cols-3" id="motor-grid">
             @foreach ($motors as $motor)
                 <article class="motor-card card-hover reveal-up panel overflow-hidden" data-brand="{{ $motor->brand->nama_brand }}" data-status="{{ $motor->status ? 'tersedia' : 'disewa' }}" data-keywords="{{ strtolower($motor->nama.' '.$motor->brand->nama_brand.' '.$motor->no_polisi.' '.$motor->catatan) }}" style="animation-delay: {{ $loop->index * 45 }}ms">
-                    <div class="motor-visual grid h-40 place-items-center text-white transition duration-300 {{ $motor->image_motor ? 'has-image' : '' }}">
+                    
+                    <!-- h-40 diganti menjadi aspect-video agar mengikuti ukuran 16:9, struktur class lainnya dibiarkan sama persis -->
+                    <div class="motor-visual aspect-video w-full grid place-items-center text-white transition duration-300 {{ $motor->image_motor ? 'has-image' : '' }}">
                         @if ($motor->image_motor)
                             <img class="motor-visual-image" src="{{ asset('storage/'.$motor->image_motor) }}" alt="{{ $motor->nama }}">
                         @endif
@@ -42,6 +44,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="p-5">
                         <div class="flex items-start justify-between gap-4">
                             <div>
