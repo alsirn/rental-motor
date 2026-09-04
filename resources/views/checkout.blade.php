@@ -5,15 +5,18 @@
             <h1 class="mt-1 text-3xl font-black text-zinc-950 sm:text-4xl">Selesaikan Pesananmu</h1>
             <p class="mt-2 text-sm text-zinc-500">Tentukan tanggal rental dan cek total biaya sebelum melanjutkan pembayaran.</p>
         </div>
-        <div class="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+        <div class="grid items-start gap-6 lg:grid-cols-[0.8fr_1.2fr]">
             <aside class="panel overflow-hidden">
-                <div class="relative grid h-48 place-items-center overflow-hidden bg-gradient-to-br from-zinc-950 via-zinc-800 to-red-800">
+                <div class="relative h-48 overflow-hidden bg-gradient-to-br from-zinc-950 via-zinc-800 to-red-800">
                     @if ($motor->image_motor)
-                        <img src="{{ asset('storage/'.$motor->image_motor) }}" alt="{{ $motor->nama }}" class="relative z-10 h-40 w-3/5 object-contain drop-shadow-2xl mix-blend-multiply">
-                        <div class="relative z-10 text-center text-white">
-                            <p class="text-xs font-bold uppercase tracking-wide text-red-100">{{ $motor->brand->nama_brand }}</p>
-                            <p class="mt-1 text-3xl font-black">{{ $motor->nama }}</p>
+                        <img src="{{ asset('storage/'.$motor->image_motor) }}" alt="{{ $motor->nama }}" class="absolute inset-0 z-10 mx-auto h-full w-full object-contain px-6 drop-shadow-[0_15px_20px_rgba(0,0,0,0.6)]">
+                        <div class="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6 z-30 text-white">
+                            <p class="text-xs font-bold uppercase tracking-wide text-red-200">{{ $motor->brand->nama_brand }}</p>
+                            <p class="mt-1 text-2xl font-black">{{ $motor->nama }}</p>
                         </div>
+                    @else
+                        <div class="grid h-full place-items-center text-center text-white"><p class="text-sm text-zinc-300">Gambar motor belum tersedia</p></div>
                     @endif
                 </div>
                 <div class="p-6">
@@ -38,7 +41,9 @@
             </aside>
             <div class="panel p-6 sm:p-8">
                 <div class="mb-7 flex items-start gap-4">
-                    <div class="grid size-12 shrink-0 place-items-center rounded-xl bg-red-50 text-red-700"><i class="fa-regular fa-calendar text-xl"></i></div>
+                    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-50 text-red-700">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    </div>
                     <div>
                         <h2 class="text-xl font-black text-zinc-950">Atur Jadwal Rental</h2>
                         <p class="mt-1 text-sm text-zinc-500">Pilih kapan kamu mulai dan selesai menggunakan motor.</p>
