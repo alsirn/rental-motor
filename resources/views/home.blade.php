@@ -1,7 +1,7 @@
 <x-layouts.app title="Rental Motor">
    <style>@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }</style>
     <section class="relative w-full overflow-hidden border-b border-zinc-800 bg-[radial-gradient(circle_at_75%_50%,#b91c1c_0%,#7f1d1d_35%,#450a0a_65%,#09090b_100%)] px-6 py-14 sm:py-18">
-        <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-10">
+        <div class="mx-auto flex max-w-7xl flex-col lg:flex-row items-center justify-between gap-10">
             <div class="flex w-full max-w-2xl flex-1 flex-col gap-5">
                 <div><span class="inline-block rounded-md border border-red-400/50 bg-red-500/25 px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-widest text-red-200">Rental Motor</span></div>
                 <h1 class="text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">Sewa Motor<br><span class="text-red-500 drop-shadow-[0_0_20px_rgba(239,68,68,0.4)]">Mudah, Cepat</span><br>& Terpercaya</h1>
@@ -39,7 +39,7 @@
                 <div class="absolute inset-4 rotate-[-4deg] rounded-2xl border-2 border-red-500/70 shadow-[0_0_20px_rgba(239,68,68,0.3)] transition duration-500 hover:rotate-0 hover:shadow-[0_0_45px_rgba(239,68,68,0.6)]"></div>
                 <div class="relative z-10 w-full animate-[float_4s_ease-in-out_infinite] text-center">
                     @if ($heroBanner)
-                        <img src="{{ asset('storage/'.$heroBanner) }}" alt="Banner motor rental" class="mx-auto max-h-[4200px] max-w-full object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.7)] transition duration-500 hover:scale-105">
+                        <img src="{{ asset('storage/'.$heroBanner) }}" alt="Banner motor rental" class="mx-auto max-h-[420px] max-w-full object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.7)] transition duration-500 hover:scale-105">
                     @else
                         <div class="p-5 text-center"><p class="text-xs font-bold uppercase text-red-300">Banner Motor</p><p class="text-lg font-black text-white">Upload PNG via Backend</p></div>
                     @endif
