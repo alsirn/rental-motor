@@ -16,7 +16,7 @@
     <style>
         html { color-scheme: light; scroll-behavior: smooth; }
         html.dark { color-scheme: dark; }
-        * { transition-property: background-color, border-color, color, box-shadow, opacity, transform, filter; transition-duration: 180ms; transition-timing-function: ease-out; }
+        /* * { transition-property: background-color, border-color, color, box-shadow, opacity, transform, filter; transition-duration: 180ms; ; } */
         body {
             background: radial-gradient(circle at top left, rgb(254 226 226 / .9), transparent 34rem), linear-gradient(180deg, #fff 0%, #f4f4f5 42%, #fff 100%);
         }
