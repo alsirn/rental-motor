@@ -62,13 +62,4 @@
     .motor-card:hover p {
         @apply text-white;
     }
-
-    .motor-hero {
-        display: block;
-        width: 500px;
-        height: 390px;
-        object-fit: contain;
-        transition: transform 0.3s ease;
-        will-change: transform;
-    }
 }
