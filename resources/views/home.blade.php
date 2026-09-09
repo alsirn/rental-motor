@@ -218,6 +218,10 @@
             </div>
         </div>
     </section>
+    <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20menanyakan%20rental%20motor" target="_blank" rel="noopener noreferrer" aria-label="Chat WhatsApp" class="wa-float fixed bottom-6 right-6 z-[999] flex h-16 w-16 items-center justify-center rounded-full border-4 border-white bg-[#25D366] shadow-2xl transition duration-300 hover:scale-110 hover:bg-[#20bd5a] dark:border-zinc-900 sm:bottom-8 sm:right-8">
+        <img src="{{ asset('storage/motors/wa.png') }}" alt="WhatsApp" class="h-9 w-9 object-contain">
+        <span class="absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/30"></span>
+    </a>
     <script>
         function initRentalAnimations() {
             const elements = document.querySelectorAll('.scroll-animate');

@@ -87,6 +87,7 @@
             </a>
             <div class="flex flex-wrap items-center gap-2 text-sm font-medium">
                 <a href="/katalog" class="rounded px-3 py-2 transition-colors duration-200 {{ request()->is('katalog') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Katalog</a>
+                <a href="/about-us" class="rounded px-3 py-2 transition-colors duration-200 {{ request()->is('about-us') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Tentang Kami</a>
                 <a href="/akun" class="auth-user hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('akun') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Akun</a>
                 <a href="/verifikasi" class="auth-verification hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('verifikasi') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Verifikasi</a>
                 <a href="/backend" class="auth-backend hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('backend') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Backend</a>

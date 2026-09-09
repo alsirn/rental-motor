@@ -1,11 +1,12 @@
 <x-layouts.app title="Kelola Motor">
     <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div class="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div class="mb-8 flex items-start justify-between gap-4">
             <div>
                 <p class="text-sm font-black uppercase tracking-[0.18em] text-red-600 dark:text-red-400">Backend</p>
                 <h1 class="mt-2 text-3xl font-black tracking-tight text-zinc-900 dark:text-white">Kelola Motor</h1>
                 <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400">Kelola data motor, harga, status, dan informasi kendaraan rental.</p>
             </div>
+            <button type="button" onclick="history.back()" class="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-bold text-zinc-700 shadow-sm transition hover:border-red-200 hover:bg-red-50 hover:text-red-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-red-950/30 dark:hover:text-red-400">Kembali</button>        
         </div>
         <div class="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
             <div onclick="setStatusFilter('all')" class="cursor-pointer rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-md dark:border-zinc-800 dark:bg-zinc-900">

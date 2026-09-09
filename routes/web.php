@@ -30,6 +30,7 @@ Route::view('/register', 'auth.register');
 Route::view('/akun', 'account');
 Route::get('/verifikasi', fn () => view('verify'));
 Route::view('/payment/finish', 'payment-finish');
+Route::view('/about-us', 'about-us')->name('about-us');
 
 Route::get('/backend', function () {
     return view('backend.dashboard', [

@@ -11,8 +11,8 @@
         </div>
         <div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
             <div class="mb-6">
-                <div class="flex items-center gap-3"><p class="text-xs font-extrabold uppercase tracking-[0.2em] text-red-600 dark:text-red-500">Backend</p></div>
-                <h1 class="mt-2 text-2xl font-black tracking-tight text-zinc-950 dark:text-white sm:text-3xl">Kelola Brand / Tipe</h1>
+                <div class="mb-4 flex items-center justify-between gap-4"><p class="text-sm font-black uppercase tracking-[0.18em] text-red-600 dark:text-red-400">Backend</p><button type="button" onclick="history.back()" class="inline-flex items-center gap-2 rounded-xl border border-zinc-200 bg-white px-4 py-2 text-sm font-bold text-zinc-700 shadow-sm transition hover:border-red-200 hover:bg-red-50 hover:text-red-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-red-950/30 dark:hover:text-red-400">Kembali</button></div>
+                <h1 class="text-2xl font-black tracking-tight text-zinc-950 dark:text-white sm:text-3xl">Kelola Brand / Tipe</h1>
                 <p class="mt-1.5 max-w-xl text-sm leading-6 text-zinc-500 dark:text-zinc-400">Kelola data brand motor dengan mudah dan terstruktur.</p>
             </div>
             <div class="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
