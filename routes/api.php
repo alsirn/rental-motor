@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\MotorController;
 use App\Http\Controllers\Api\OfflineTransactionController;
 use App\Http\Controllers\Api\PaymentSyncController;
 use App\Http\Controllers\Api\RentalController;
+use App\Http\Controllers\Api\ReturnController;
 use App\Http\Controllers\Api\SiteSettingController;
 use App\Http\Controllers\Api\VerificationController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/my-rentals', [RentalController::class, 'myRentals'])->middleware('role:user');
     Route::post('/rentals', [RentalController::class, 'store'])->middleware('role:user');
+    Route::post('/rentals/{rental}/return', [ReturnController::class, 'submitOnline'])->middleware('role:user');
     Route::post('/verify-account', [VerificationController::class, 'store'])->middleware('role:user');
     Route::post('/payments/sync', PaymentSyncController::class);
 
@@ -45,6 +47,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/rentals/{rental}/complete', [RentalController::class, 'complete']);
         Route::delete('/rentals/{rental}', [RentalController::class, 'destroy']);
         Route::get('/rented', [RentalController::class, 'rented']);
+        Route::get('/returns/online', [ReturnController::class, 'onlineIndex']);
+        Route::patch('/returns/online/{rental}/approve', [ReturnController::class, 'approveOnline']);
         Route::get('/verifications', [VerificationController::class, 'index']);
         Route::patch('/verifications/{user}', [VerificationController::class, 'updateStatus']);
         Route::post('/site-settings/hero-banner', [SiteSettingController::class, 'updateHeroBanner']);
@@ -54,5 +58,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/offline-transactions', [OfflineTransactionController::class, 'index']);
         Route::post('/offline-transactions', [OfflineTransactionController::class, 'store']);
         Route::delete('/offline-transactions/{offlineTransaction}', [OfflineTransactionController::class, 'destroy']);
+        Route::post('/offline-transactions/{offlineTransaction}/return', [OfflineTransactionController::class, 'submitReturn']);
+        Route::patch('/offline-transactions/{offlineTransaction}/return/approve', [OfflineTransactionController::class, 'approveReturn']);
     });
 });

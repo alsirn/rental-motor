@@ -94,6 +94,10 @@ class RentalController extends Controller
 
     public function complete(Request $request, Rental $rental): JsonResponse
     {
+        if ($rental->status_pengembalian !== 'approved') {
+            return response()->json(['message' => 'Sewa hanya dapat diselesaikan setelah bukti pengembalian disetujui.'], 422);
+        }
+
         $rental->update(['status' => 'completed']);
         $rental->motor->update(['status' => true]);
 

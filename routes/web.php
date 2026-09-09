@@ -53,5 +53,6 @@ Route::view('/backend/motor', 'backend.motors');
 Route::view('/backend/brand', 'backend.brands');
 Route::view('/backend/transaksi', 'backend.transactions');
 Route::view('/backend/transaksi-offline', 'backend.offline-transactions');
+Route::view('/backend/pengembalian', 'backend.returns');
 Route::view('/backend/pembayaran', 'backend.payments');
 Route::view('/backend/verifikasi', 'backend.verifications');

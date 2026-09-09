@@ -80,4 +80,42 @@ class OfflineTransactionController extends Controller
 
         return response()->json(['message' => 'Transaksi offline berhasil dihapus.']);
     }
+
+    public function submitReturn(Request $request, OfflineTransaction $offlineTransaction): JsonResponse
+    {
+        if ($offlineTransaction->status_pengembalian === 'approved') {
+            return response()->json(['message' => 'Pengembalian transaksi offline ini sudah disetujui.'], 422);
+        }
+
+        $data = $request->validate([
+            'foto_bukti_pengembalian' => ['required', 'image', 'max:4096'],
+        ]);
+
+        $offlineTransaction->update([
+            'foto_bukti_pengembalian' => $data['foto_bukti_pengembalian']->store('returns/offline', 'public'),
+            'status_pengembalian' => 'pending',
+            'diajukan_kembali_pada' => now(),
+            'disetujui_kembali_pada' => null,
+        ]);
+
+        return response()->json(['message' => 'Bukti pengembalian offline berhasil disimpan. Silakan setujui setelah pemeriksaan.']);
+    }
+
+    public function approveReturn(OfflineTransaction $offlineTransaction): JsonResponse
+    {
+        if ($offlineTransaction->status_pengembalian !== 'pending' || ! $offlineTransaction->foto_bukti_pengembalian) {
+            return response()->json(['message' => 'Belum ada bukti pengembalian offline yang dapat disetujui.'], 422);
+        }
+
+        DB::transaction(function () use ($offlineTransaction) {
+            $offlineTransaction->update([
+                'status_pengembalian' => 'approved',
+                'disetujui_kembali_pada' => now(),
+                'status' => 'completed',
+            ]);
+            $offlineTransaction->motor->update(['status' => true]);
+        });
+
+        return response()->json(['message' => 'Pengembalian offline disetujui. Motor kembali tersedia.']);
+    }
 }

@@ -190,6 +190,7 @@
                             <a href="/backend" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Dashboard</a>
                             <a href="/backend/motor" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Kelola Motor</a>
                             <a href="/backend/transaksi-offline" class="auth-admin hidden w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Transaksi Offline</a>
+                            <a href="/backend/pengembalian" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Pengembalian</a>
                             <a href="/backend/pembayaran" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Pembayaran</a>
                         </nav>
                     </div>

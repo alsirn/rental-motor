@@ -64,7 +64,7 @@
             <div class="max-h-[65vh] overflow-y-auto p-5 sm:p-6">
                 <div class="overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800">
                     <div class="overflow-x-auto">
-                        <table class="w-full min-w-[700px] text-left text-sm">
+                        <table class="w-full min-w-[780px] text-left text-sm">
                             <thead class="bg-zinc-100 text-xs uppercase tracking-wide text-zinc-600 dark:bg-zinc-800/50 dark:text-zinc-400">
                                 <tr><th class="px-4 py-4">Motor</th><th class="px-4 py-4">Tanggal</th><th class="px-4 py-4">Total</th><th class="px-4 py-4">Status</th><th class="px-4 py-4">Aksi</th></tr>
                             </thead>
@@ -195,8 +195,8 @@
                             <td class="px-4 py-4"><p class="font-bold text-zinc-900 dark:text-white">${rental.motor.nama}</p><p class="mt-1 text-xs text-zinc-400">Rental Motor</p></td>
                             <td class="px-4 py-4 text-zinc-600 dark:text-zinc-300">${rental.tanggal_mulai} <span class="mx-1 text-zinc-400">→</span>${rental.tanggal_selesai}</td>
                             <td class="px-4 py-4 font-bold text-zinc-900 dark:text-white">${window.rentalApp.money(rental.total_biaya)}</td>
-                            <td class="px-4 py-4"><span class="inline-flex rounded-full bg-zinc-100 px-3 py-1 text-xs font-bold text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300">${rental.status}</span></td>
-                            <td class="px-4 py-4"> ${ rental.status === 'pending' ? ` <button type="button" class="text-sm font-semibold text-red-700 transition hover:text-red-900 dark:text-red-400 dark:hover:text-red-300" data-sync-payment="${rental.order_id}">Sinkronkan</button>`: '-' }</td>
+                            <td class="px-4 py-4"><span class="inline-flex rounded-full bg-zinc-100 px-3 py-1 text-xs font-bold text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300">${rental.status_pengembalian === 'pending' ? 'Pengembalian diperiksa' : rental.status_pengembalian === 'approved' ? 'Selesai' : rental.status}</span></td>
+                            <td class="px-4 py-4">${rental.status === 'pending' ? `<button type="button" class="text-sm font-semibold text-red-700 transition hover:text-red-900 dark:text-red-400 dark:hover:text-red-300" data-sync-payment="${rental.order_id}">Sinkronkan</button>` : rental.status === 'active' && rental.status_pengembalian !== 'pending' ? `<form class="flex items-center gap-2" data-online-return="${rental.id}"><input class="block w-36 text-xs" type="file" accept="image/*" required><button type="submit" class="text-sm font-semibold text-red-700 transition hover:text-red-900 dark:text-red-400 dark:hover:text-red-300">Kirim bukti</button></form>` : rental.status_pengembalian === 'pending' ? '<span class="text-xs text-amber-700 dark:text-amber-400">Menunggu persetujuan</span>' : '-'}</td>
                         </tr>
                     `).join('');
                 } else {
@@ -244,6 +244,23 @@
                             button.disabled = false;
                             button.textContent = 'Sinkronkan';
                         }
+                    });
+                });
+                document.querySelectorAll('[data-online-return]').forEach((form) => {
+                    form.addEventListener('submit', async (event) => {
+                        event.preventDefault();
+                        const file = form.querySelector('input[type=file]').files[0];
+                        if (!file) return;
+                        const payload = new FormData();
+                        payload.append('foto_bukti_pengembalian', file);
+                        const response = await fetch(`/api/rentals/${form.dataset.onlineReturn}/return`, {
+                            method: 'POST',
+                            headers: { Accept: 'application/json', Authorization: `Bearer ${window.rentalApp.token()}` },
+                            body: payload,
+                        });
+                        const json = await response.json();
+                        window.rentalApp.notifyResponse(response, json, 'Bukti pengembalian berhasil dikirim.');
+                        if (response.ok) window.setTimeout(() => window.location.reload(), 700);
                     });
                 });
             } catch (error) {
