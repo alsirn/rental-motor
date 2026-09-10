@@ -7,16 +7,23 @@
         </div>
         <div class="grid items-start gap-6 lg:grid-cols-[0.8fr_1.2fr]">
             <aside class="panel overflow-hidden">
-                <div class="relative h-48 overflow-hidden bg-gradient-to-br from-zinc-950 via-zinc-800 to-red-800">
-                    @if ($motor->image_motor)
-                        <img src="{{ asset('storage/'.$motor->image_motor) }}" alt="{{ $motor->nama }}" class="absolute inset-0 z-10 mx-auto h-full w-full object-contain px-6 drop-shadow-[0_15px_20px_rgba(0,0,0,0.6)]">
-                        <div class="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-                        <div class="absolute bottom-4 left-6 z-30 text-white">
+                @php
+                    $images = json_decode($motor->image_motor, true);
+                    if (!is_array($images)) {
+                        $images = $motor->image_motor ? [$motor->image_motor] : [];
+                    }
+                    $firstImage = $images[0] ?? null;
+                @endphp
+                <div class="relative h-48 overflow-hidden bg-white dark:bg-zinc-900">
+                    @if($firstImage)
+                        <img src="{{ asset('storage/'.$firstImage) }}" alt="{{ $motor->nama }}" class="h-full w-full object-contain px-6">
+                        <div class="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/70 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6 z-20 text-white">
                             <p class="text-xs font-bold uppercase tracking-wide text-red-200">{{ $motor->brand->nama_brand }}</p>
                             <p class="mt-1 text-2xl font-black">{{ $motor->nama }}</p>
                         </div>
                     @else
-                        <div class="grid h-full place-items-center text-center text-white"><p class="text-sm text-zinc-300">Gambar motor belum tersedia</p></div>
+                        <div class="grid h-full place-items-center text-center text-zinc-400"><p class="text-sm">Gambar motor belum tersedia</p></div>
                     @endif
                 </div>
                 <div class="p-6">
