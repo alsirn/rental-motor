@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\WebpImageService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -20,7 +21,7 @@ class VerificationController extends Controller
         );
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(Request $request, WebpImageService $images): JsonResponse
     {
         $data = $request->validate([
             'foto_ktp' => ['required', 'image', 'max:2048'],
@@ -29,7 +30,7 @@ class VerificationController extends Controller
         ]);
 
         foreach (array_keys($data) as $field) {
-            $data[$field] = $request->file($field)->store('verifications', 'public');
+            $data[$field] = $images->store($request->file($field), 'verifications');
         }
 
         $request->user()->update($data + ['verification_status' => 'pending']);

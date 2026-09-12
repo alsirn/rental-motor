@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Motor;
 use App\Models\OfflineTransaction;
+use App\Services\WebpImageService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,7 @@ class OfflineTransactionController extends Controller
         return response()->json($query->get());
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(Request $request, WebpImageService $images): JsonResponse
     {
         $data = $request->validate([
             'nama_lengkap' => ['required', 'string', 'max:255'],
@@ -57,7 +58,7 @@ class OfflineTransactionController extends Controller
 
             foreach (['foto_ktp', 'foto_kk', 'foto_stnk'] as $field) {
                 if ($request->hasFile($field)) {
-                    $data[$field] = $request->file($field)->store('offline-transactions', 'public');
+                    $data[$field] = $images->store($request->file($field), 'offline-transactions');
                 }
             }
 
@@ -81,7 +82,7 @@ class OfflineTransactionController extends Controller
         return response()->json(['message' => 'Transaksi offline berhasil dihapus.']);
     }
 
-    public function submitReturn(Request $request, OfflineTransaction $offlineTransaction): JsonResponse
+    public function submitReturn(Request $request, OfflineTransaction $offlineTransaction, WebpImageService $images): JsonResponse
     {
         if ($offlineTransaction->status_pengembalian === 'approved') {
             return response()->json(['message' => 'Pengembalian transaksi offline ini sudah disetujui.'], 422);
@@ -92,7 +93,7 @@ class OfflineTransactionController extends Controller
         ]);
 
         $offlineTransaction->update([
-            'foto_bukti_pengembalian' => $data['foto_bukti_pengembalian']->store('returns/offline', 'public'),
+            'foto_bukti_pengembalian' => $images->store($data['foto_bukti_pengembalian'], 'returns/offline'),
             'status_pengembalian' => 'pending',
             'diajukan_kembali_pada' => now(),
             'disetujui_kembali_pada' => null,

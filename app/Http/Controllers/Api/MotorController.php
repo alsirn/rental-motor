@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Motor;
+use App\Services\WebpImageService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -21,7 +22,7 @@ class MotorController extends Controller
         return response()->json($motors);
     }
 
-    public function store(Request $request): JsonResponse
+    public function store(Request $request, WebpImageService $webp): JsonResponse
     {
         $data = $request->validate([
             'brand_id' => ['required', 'integer', 'exists:brands,id'],
@@ -35,7 +36,7 @@ class MotorController extends Controller
             'image_motor_3' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ]);
 
-        $data['image_motor'] = json_encode($this->uploadImages($request));
+        $data['image_motor'] = json_encode($this->uploadImages($request, $webp));
         unset($data['image_motor_1'], $data['image_motor_2'], $data['image_motor_3']);
 
         $motor = Motor::create($data)->load('brand:id,nama_brand');
@@ -43,7 +44,7 @@ class MotorController extends Controller
         return response()->json(['motor' => $this->format($motor)], 201);
     }
 
-    public function update(Request $request, Motor $motor): JsonResponse
+    public function update(Request $request, Motor $motor, WebpImageService $webp): JsonResponse
     {
         $data = $request->validate([
             'brand_id' => ['sometimes', 'required', 'integer', 'exists:brands,id'],
@@ -69,7 +70,7 @@ class MotorController extends Controller
                     Storage::disk('public')->delete($images[$index]);
                 }
 
-                $images[$index] = $request->file($field)->store('motors', 'public');
+                $images[$index] = $webp->store($request->file($field), 'motors');
                 $changed = true;
             }
         }
@@ -114,13 +115,13 @@ class MotorController extends Controller
         return response()->json(['message' => 'Motor berhasil dihapus']);
     }
 
-    private function uploadImages(Request $request): array
+    private function uploadImages(Request $request, WebpImageService $webp): array
     {
         $images = [null, null, null];
 
         foreach ($this->imageFields() as $index => $field) {
             if ($request->hasFile($field)) {
-                $images[$index] = $request->file($field)->store('motors', 'public');
+                $images[$index] = $webp->store($request->file($field), 'motors');
             }
         }
 

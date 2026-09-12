@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Rental;
+use App\Services\WebpImageService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ReturnController extends Controller
 {
-    public function submitOnline(Request $request, Rental $rental): JsonResponse
+    public function submitOnline(Request $request, Rental $rental, WebpImageService $images): JsonResponse
     {
         if ($rental->user_id !== $request->user()->id) {
             return response()->json(['message' => 'Kamu tidak dapat mengajukan pengembalian untuk sewa lain.'], 403);
@@ -33,7 +34,7 @@ class ReturnController extends Controller
         ]);
 
         $rental->update([
-            'foto_bukti_pengembalian' => $data['foto_bukti_pengembalian']->store('returns/online', 'public'),
+            'foto_bukti_pengembalian' => $images->store($data['foto_bukti_pengembalian'], 'returns/online'),
             'status_pengembalian' => 'pending',
             'diajukan_kembali_pada' => now(),
             'disetujui_kembali_pada' => null,
