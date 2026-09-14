@@ -10,15 +10,15 @@
     </div>
     <div class="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         @foreach([
-            ['stat-total','Total Motor','unit','text-zinc-900 dark:text-white'],
-            ['stat-available','Tersedia','aktif','text-emerald-600 dark:text-emerald-400'],
-            ['stat-rented','Disewa','sedang disewa','text-amber-600 dark:text-amber-400'],
-            ['stat-brands','Jumlah Merek','merek','text-red-600 dark:text-red-400']
-        ] as [$id,$title,$suffix,$color])
+            ['stat-total','Total Motor','unit'],
+            ['stat-available','Tersedia','aktif'],
+            ['stat-rented','Disewa','sedang disewa'],
+            ['stat-brands','Jumlah Merek','merek']
+        ] as [$id,$title,$suffix])
             <div class="cursor-pointer rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition duration-150 hover:-translate-y-1 hover:shadow-md active:translate-y-1 active:scale-[0.98] dark:border-zinc-800 dark:bg-zinc-900">
                 <p class="text-xs font-bold uppercase tracking-wider text-zinc-400">{{ $title }}</p>
                 <div class="mt-2 flex items-end justify-between">
-                    <p id="{{ $id }}" class="text-3xl font-black {{ $color }}">0</p>
+                    <p id="{{ $id }}" class="text-3xl font-black text-zinc-900 dark:text-white">0</p>
                     <span class="text-xs font-semibold text-zinc-400">{{ $suffix }}</span>
                 </div>
             </div>

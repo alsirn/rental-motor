@@ -1,33 +1,44 @@
 <x-layouts.app title="Masuk">
-    <section class="mx-auto grid max-w-5xl gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-        <div>
-            <p class="text-sm font-bold uppercase tracking-wide text-red-700">Autentikasi Login</p>
-            <h1 class="mt-2 text-3xl font-black">Masuk ke akun rental motor.</h1>
-            <p class="mt-3 text-sm leading-6 text-zinc-600">Agar dapat melakukan transaksi alangkah baiknya harus login ke akun Anda dengan menggunakan <strong>Gmail dan password</strong>.</p>
+    <section class="min-h-[calc(100vh-80px)] bg-zinc-100 dark:bg-zinc-950">
+        <div class="mx-auto flex min-h-[calc(100vh-80px)] max-w-md items-center px-4 py-10">
+            <div class="w-full rounded-xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+                <div class="border-b border-zinc-200 px-6 py-7 text-center dark:border-zinc-800">
+                    <h1 class="text-2xl font-bold text-zinc-900 dark:text-white">Masuk</h1>
+                    <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400">Masuk ke akun Rental Motor Anda</p>
+                </div>
+                <form id="login-form" class="grid gap-5 p-6">
+                    <div>
+                        <label for="email" class="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-300">Email</label>
+                        <input id="email" name="email" type="email" placeholder="nama@email.com" required class="field w-full">
+                    </div>
+                    <div>
+                        <label for="password" class="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-300">Password</label>
+                        <input id="password" name="password" type="password" placeholder="Masukkan password" required class="field w-full">
+                    </div>
+                    <button type="submit" class="btn-primary w-full transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md active:scale-[.98]">Masuk</button>
+                </form>
+                <div class="border-t border-zinc-200 px-6 py-4 text-center dark:border-zinc-800">
+                    <p class="text-xs text-zinc-400">Gunakan Gmail dan password yang telah terdaftar.</p>
+                </div>
+            </div>
         </div>
-        <form id="login-form" class="panel grid gap-4 p-6">
-            <label class="grid gap-2 text-sm font-semibold">Email <input class="field" name="email" type="email" required></label>
-            <label class="grid gap-2 text-sm font-semibold">Password <input class="field" name="password" type="password" required></label>
-            <button class="btn-primary" type="submit">Masuk</button>
-        </form>
     </section>
     <script>
-        document.getElementById('login-form').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const form = new FormData(event.currentTarget);
+        document.getElementById('login-form').addEventListener('submit', async e => {
+            e.preventDefault();
+            const form = new FormData(e.currentTarget);
             const response = await fetch('/api/login', {
                 method: 'POST',
-                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: form.get('email'), password: form.get('password') }),
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                body: JSON.stringify({email: form.get('email'), password: form.get('password')})
             });
             const json = await response.json();
             if (!response.ok) {
                 window.rentalApp.notifyResponse(response, json, 'Login berhasil.');
+                return;
             }
-            if (response.ok) {
-                window.rentalApp.setSession(json);
-                window.location.href = json.user.role === 'user' ? '/akun' : '/backend';
-            }
+            window.rentalApp.setSession(json);
+            window.location.href = json.user.role === 'user' ? '/akun' : '/backend';
         });
     </script>
 </x-layouts.app>
