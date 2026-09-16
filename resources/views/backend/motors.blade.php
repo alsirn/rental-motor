@@ -2,7 +2,7 @@
 <section class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="mb-8 flex items-start justify-between gap-4">
         <div>
-            <p class="text-sm font-black uppercase tracking-[.18em] text-red-600 dark:text-red-400">Backend</p>
+            <p class="text-sm font-black uppercase tracking-[.18em] text-red-600 dark:text-red-700">Backend</p>
             <h1 class="mt-2 text-3xl font-black tracking-tight text-zinc-900 dark:text-white">Kelola Motor</h1>
             <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400">Kelola data motor, harga, status, dan informasi kendaraan rental.</p>
         </div>
@@ -28,7 +28,7 @@
         <form id="motor-form" enctype="multipart/form-data" class="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
             <div class="mb-6 flex items-start justify-between">
                 <div>
-                    <p class="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-400">Data Motor</p>
+                    <p class="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-700">Data Motor</p>
                     <h2 id="motor-form-title" class="mt-1 text-xl font-black text-zinc-900 dark:text-white">Tambah Motor</h2>
                     <p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Isi data motor yang ingin ditambahkan.</p>
                 </div>
@@ -67,7 +67,7 @@
         </form>
         <section class="min-w-0 overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
             <div class="border-b border-zinc-200 p-6 dark:border-zinc-800">
-                <p class="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-400">Inventaris</p>
+                <p class="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-700">Inventaris</p>
                 <h2 class="mt-1 text-xl font-black text-zinc-900 dark:text-white">Daftar Motor</h2>
                 <p class="mt-1 text-sm text-zinc-500">Kelola seluruh motor yang tersedia.</p>
                 <div class="mt-5 grid gap-3 sm:grid-cols-2">

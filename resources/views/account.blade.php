@@ -1,13 +1,6 @@
 <x-layouts.app title="Akun Saya">
     <section class="relative min-h-[calc(100vh-80px)] overflow-hidden bg-gradient-to-br from-zinc-100 via-zinc-200/50 to-white px-4 py-10 text-zinc-900 transition-colors duration-500 dark:from-zinc-950 dark:via-zinc-900 dark:to-zinc-950 dark:text-white sm:px-6 lg:px-8">
-        <div class="pointer-events-none absolute inset-0 overflow-hidden">
-            <div class="absolute left-8 top-16 grid grid-cols-6 gap-3 opacity-30 dark:opacity-20">@for ($i = 0; $i < 36; $i++)<span class="block h-1.5 w-1.5 rounded-full bg-red-600"></span>@endfor</div>
-            <div class="absolute -left-20 top-36 h-72 w-72 rounded-full bg-red-600/10 blur-3xl dark:bg-red-600/15"></div>
-            <div class="absolute -right-20 -top-24 h-80 w-[450px] rotate-12 rounded-bl-[120px] rounded-tl-[40px] bg-gradient-to-l from-red-600 to-red-700 shadow-2xl shadow-red-950/20 dark:from-red-600 dark:to-red-900"></div>
-            <div class="absolute -top-10 right-10 h-64 w-80 rounded-full bg-red-500/20 blur-3xl dark:bg-red-600/20"></div>
-            <div class="absolute -bottom-20 -right-20 h-72 w-80 rounded-full bg-gradient-to-tl from-red-600/15 to-transparent blur-3xl dark:from-red-600/20"></div>
-        </div>
-        <div class="relative z-10 mx-auto max-w-6xl pt-4">
+        <div class="mx-auto max-w-6xl pt-4">
             <div class="mb-8 max-w-lg">
                 <p class="text-sm font-black uppercase tracking-normal text-red-600 dark:text-red-500">Area Penyewa</p>
                 <h1 class="mt-1 text-3xl font-black tracking-tight text-zinc-900 dark:text-white sm:text-4xl">Akun & Riwayat Sewa</h1>
