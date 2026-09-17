@@ -169,59 +169,57 @@
     </main>
 
     <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
-        <footer class="border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
-            <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-                <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-                    <div class="lg:col-span-1">
-                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Rental Motor</h3>
-                        <p class="mt-5 max-w-sm text-sm leading-6 text-zinc-500 dark:text-zinc-400">Platform rental motor yang membantu kamu menemukan motor pilihan, melakukan booking, dan mengelola perjalanan dengan mudah.</p>
-                    </div>
+        <footer class="border-t border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
+            <div class="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
+                <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
                     <div>
-                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Navigasi</h3>
-                        <nav class="mt-5 grid gap-3">
-                            <a href="/katalog" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Katalog Motor</a>
-                            <a href="/akun" class="auth-user hidden w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Akun Saya</a>
-                            <a href="/verifikasi" class="auth-verification hidden w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Verifikasi</a>
-                        </nav>
-                    </div>
-                    <div class="auth-backend hidden">
-                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Management</h3>
-                        <nav class="mt-5 grid gap-3">
-                            <a href="/backend" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Dashboard</a>
-                            <a href="/backend/motor" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Kelola Motor</a>
-                            <a href="/backend/transaksi-offline" class="auth-admin hidden w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Transaksi Offline</a>
-                            <a href="/backend/pengembalian" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Pengembalian</a>
-                            <a href="/backend/pembayaran" class="w-fit text-sm text-zinc-500 transition hover:translate-x-1 hover:text-red-700 dark:text-zinc-400 dark:hover:text-red-400">Pembayaran</a>
-                        </nav>
-                    </div>
-                    <div>
-                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-900 dark:text-white">Status Akun</h3>
-                        <div class="mt-5 rounded-2xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
-                            <div class="flex items-center gap-3">
-                                <span class="grid size-10 shrink-0 place-items-center rounded-full bg-red-100 text-red-700 dark:bg-red-950/50 dark:text-red-400">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="size-5">
-                                        <path d="M20 21a8 8 0 0 0-16 0"/>
-                                        <circle cx="12" cy="7" r="4"/>
-                                    </svg>
-                                </span>
-                                <div class="min-w-0">
-                                    <p class="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Login sebagai</p>
-                                    <span id="auth-badge" class="mt-1 block truncate text-sm font-black text-zinc-900 dark:text-white">Belum login</span>
-                                </div>
+                        <div class="flex items-center gap-3">
+                            <div>
+                                <h3 class="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Rental Motor</h3>
+                                <p class="text-xs text-zinc-500 dark:text-zinc-400">Sewa cepat, data rapi.</p>
                             </div>
-                            <p class="mt-4 text-xs leading-5 text-zinc-500 dark:text-zinc-400">Status akun dan hak akses sistem kamu akan ditampilkan di sini.</p>
+                        </div>
+                        <p class="mt-5 max-w-xs text-sm leading-6 text-zinc-500 dark:text-zinc-400">Temukan motor pilihanmu dan nikmati proses rental yang mudah, aman, dan nyaman.</p>
+                        <div class="mt-5 flex gap-2">
+                            <a href="#" aria-label="Facebook" class="grid size-9 place-items-center rounded-lg border border-zinc-300 text-sm font-bold text-zinc-500 transition-all duration-300 hover:-translate-y-1 hover:border-red-600 hover:bg-red-600 hover:text-white dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-red-500 dark:hover:bg-red-600 dark:hover:text-white">f</a>
+                            <a href="#" aria-label="TikTok" class="grid size-9 place-items-center rounded-lg border border-zinc-300 text-sm font-bold text-zinc-500 transition-all duration-300 hover:-translate-y-1 hover:border-red-600 hover:bg-red-600 hover:text-white dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-red-500 dark:hover:bg-red-600 dark:hover:text-white">♪</a>
+                            <a href="#" aria-label="Instagram" class="grid size-9 place-items-center rounded-lg border border-zinc-300 text-sm font-bold text-zinc-500 transition-all duration-300 hover:-translate-y-1 hover:border-red-600 hover:bg-red-600 hover:text-white dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-red-500 dark:hover:bg-red-600 dark:hover:text-white">◎</a>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-zinc-900 dark:text-white">Navigasi</h3>
+                        <nav class="mt-5 grid gap-3">
+                            <a href="/" class="w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Beranda</a>
+                            <a href="/katalog" class="w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Katalog Motor</a>
+                            <a href="/about-us" class="w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Tentang Kami</a>
+                            <a href="/akun" class="auth-user hidden w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Akun Saya</a>
+                            <a href="/verifikasi" class="auth-verification hidden w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Verifikasi</a>
+                        </nav>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-zinc-900 dark:text-white">Layanan</h3>
+                        <nav class="mt-5 grid gap-3">
+                            <a href="/katalog" class="w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Sewa Motor</a>
+                            <a href="/about-us" class="w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Lokasi Rental</a>
+                            <a href="/backend" class="auth-backend hidden w-fit text-sm font-semibold text-red-600 transition-all duration-300 hover:translate-x-2 hover:text-red-700 dark:text-red-700 dark:hover:text-red-300">Backend</a>
+                        </nav>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-bold text-zinc-900 dark:text-white">Kontak</h3>
+                        <div class="mt-5 grid gap-4 text-sm">
+                            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="w-fit text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">+62 812 3456 7890</a>
+                            <a href="mailto:rentalmotor@gmail.com" class="w-fit text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">rentalmotor@gmail.com</a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Siliran+Lor+No.24,+Panembahan,+Kecamatan+Kraton,+Kota+Yogyakarta" target="_blank" rel="noopener" class="max-w-xs text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Jl. Siliran Lor No.24, Panembahan, Kraton, Yogyakarta</a>
                         </div>
                     </div>
                 </div>
-                <div class="mt-10 flex flex-col gap-4 pt-6 text-xs text-zinc-400 sm:flex-row sm:items-center sm:justify-between">                    <p>© {{ date('Y') }} Rental Motor. All rights reserved.</p>
-                    <div class="flex flex-wrap items-center gap-3">
-                        <span>Rental Motor System</span>
-                        <span class="size-1 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
-                    </div>
+                <div class="mt-10 flex flex-col gap-2 border-t border-zinc-300 pt-6 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
+                    <p>© {{ date('Y') }} Rental Motor. All rights reserved.</p>
+                    <p>Rental Motor System</p>
                 </div>
             </div>
         </footer>
-
+    </div>
     <script>
         const authUser = window.rentalApp.user();
         const badge = document.getElementById('auth-badge');

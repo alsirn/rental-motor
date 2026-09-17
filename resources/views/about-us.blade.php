@@ -1,193 +1,203 @@
 <x-layouts.app title="Tentang Kami">
 <style>
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes pulse-wa{0%,100%{transform:scale(1);box-shadow:0 8px 25px rgba(34,197,94,.25)}50%{transform:scale(1.08);box-shadow:0 12px 35px rgba(34,197,94,.4)}}
-@keyframes heroText{from{opacity:0;transform:translateX(-25px)}to{opacity:1;transform:translateX(0)}}
-.reveal{opacity:0;transform:translateY(30px);transition:.8s ease}.reveal.show{opacity:1;transform:translateY(0)}
-.hero-text{animation:heroText .8s ease both}.wa-float{animation:pulse-wa 2.5s ease-in-out infinite}
-.about-page{width:100%;max-width:100%;overflow-x:hidden}.about-page img,.about-page iframe{max-width:100%}
-.break-address{overflow-wrap:anywhere;word-break:normal}.map-label{max-width:calc(100% - 2rem)}.responsive-button{max-width:100%;white-space:normal;text-align:center}
-@media(max-width:639px){
-    .hero-slide{min-height:290px!important}.hero-slide h1{font-size:2rem!important;line-height:1.15!important}
-    .hero-slide p{font-size:.875rem!important;line-height:1.6!important}.hero-indicator{height:4px!important}
-    .about-story-image{height:280px!important}.about-contact-map,.about-contact-map iframe{min-height:360px!important}
-    .wa-float{width:56px!important;height:56px!important;right:1rem!important;bottom:1rem!important;border-width:3px!important}
-    .wa-float img{width:30px!important;height:30px!important}
-}
-@media(min-width:640px) and (max-width:1023px){.about-contact-map,.about-contact-map iframe{min-height:420px!important}}
+@keyframes pulseGlow{0%,100%{opacity:.35;transform:scale(1)}50%{opacity:.6;transform:scale(1.08)}}
+@keyframes shine{0%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+@keyframes bounceIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes circleTop{0%,100%{transform:translate(0,0)}50%{transform:translate(10px,-8px)}}
+@keyframes circleBottom{0%,100%{transform:translate(0,0)}50%{transform:translate(-10px,8px)}}
+.pulse-glow{animation:pulseGlow 4s ease-in-out infinite}
+.bounce-icon{animation:bounceIcon 2s ease-in-out infinite}
+.corner-circle{position:absolute;border:2px solid rgba(248,113,113,.55);border-radius:9999px;z-index:20;pointer-events:none}
+.circle-top{width:58px;height:58px;top:14px;left:20px;animation:circleTop 4s ease-in-out infinite}
+.circle-bottom{width:42px;height:42px;right:14px;bottom:14px;background:rgba(239,68,68,.08);animation:circleBottom 5s ease-in-out infinite}
+.shine-card{position:relative;overflow:hidden}
+.shine-card::after{content:"";position:absolute;top:0;left:0;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-120%);pointer-events:none}
+.shine-card:hover::after{animation:shine .8s ease}
 </style>
-<div class="about-page">
-    <section class="relative overflow-hidden border-b border-red-950/50 bg-[#080808]">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_85%_50%,rgba(220,38,38,.28),transparent_35%),radial-gradient(circle_at_10%_100%,rgba(127,29,29,.2),transparent_35%)]"></div>
-        <div class="absolute inset-0 opacity-[.05]" style="background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px);background-size:45px 45px"></div>
-        <div class="absolute -right-20 top-1/2 h-56 w-56 -translate-y-1/2 rounded-full border border-red-500/10"></div>
-        <div class="absolute right-0 top-1/2 h-36 w-36 -translate-y-1/2 rounded-full bg-red-600/10 blur-2xl"></div>
-        <div class="relative mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10">
-            <div id="hero-slider" class="relative min-h-[250px]">
-                <div class="hero-slide hero-text flex min-h-[250px] flex-col justify-center" data-slide="0">
-                    <div class="flex items-center gap-2"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-red-500"></span><span class="text-[10px] font-black uppercase tracking-[.25em] text-red-400">Tentang Kami</span></div>
-                    <h1 class="mt-4 max-w-3xl text-3xl font-black leading-tight tracking-tight text-white sm:text-5xl">Teman perjalananmu,<span class="text-red-500"> di setiap jalan.</span></h1>
-                    <p class="mt-4 max-w-xl text-sm leading-6 text-zinc-400">Mengenal lebih dekat layanan rental motor yang hadir untuk memberikan perjalanan yang mudah, aman, dan nyaman.</p>
-                </div>
-                <div class="hero-slide hidden min-h-[250px] flex-col justify-center" data-slide="1">
-                    <div class="flex items-center gap-2"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-red-500"></span><span class="text-[10px] font-black uppercase tracking-[.25em] text-red-400">Rental Mudah</span></div>
-                    <h1 class="mt-4 max-w-3xl text-3xl font-black leading-tight tracking-tight text-white sm:text-5xl">Rental mudah,<span class="text-red-500"> perjalanan nyaman.</span></h1>
-                    <p class="mt-4 max-w-xl text-sm leading-6 text-zinc-400">Pilih motor sesuai kebutuhanmu, lakukan pemesanan dengan mudah, lalu nikmati perjalanan tanpa proses yang rumit.</p>
-                </div>
-                <div class="hero-slide hidden min-h-[250px] flex-col justify-center" data-slide="2">
-                    <div class="flex items-center gap-2"><span class="h-1.5 w-1.5 shrink-0 rounded-full bg-red-500"></span><span class="text-[10px] font-black uppercase tracking-[.25em] text-red-400">Siap Berangkat</span></div>
-                    <h1 class="mt-4 max-w-3xl text-3xl font-black leading-tight tracking-tight text-white sm:text-5xl">Pilih motor,<span class="text-red-500"> langsung berangkat.</span></h1>
-                    <p class="mt-4 max-w-xl text-sm leading-6 text-zinc-400">Temukan kendaraan yang tepat untuk bekerja, berwisata, maupun menjelajahi berbagai tempat bersama rental motor kami.</p>
-                </div>
-            </div>
-            <div class="flex items-center gap-2">
-                <button type="button" data-indicator="0" aria-label="Slide 1" class="hero-indicator h-1 w-16 rounded-full bg-red-500 shadow-lg shadow-red-500/30 transition-all duration-500"></button>
-                <button type="button" data-indicator="1" aria-label="Slide 2" class="hero-indicator h-1 w-4 rounded-full bg-white/20 transition-all duration-500"></button>
-                <button type="button" data-indicator="2" aria-label="Slide 3" class="hero-indicator h-1 w-4 rounded-full bg-white/20 transition-all duration-500"></button>
-            </div>
-        </div>
-        <div class="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-red-600/60 to-transparent"></div>
-    </section>
-    <section class="bg-zinc-50 py-14 dark:bg-zinc-900 sm:py-20">
-        <div class="reveal mx-auto grid max-w-7xl items-center gap-10 px-5 sm:gap-12 sm:px-8 lg:grid-cols-2 lg:px-10">
-            <div>
-                <p class="text-xs font-black uppercase tracking-[.2em] text-red-600 dark:text-red-500">Cerita Kami</p>
-                <h2 class="mt-3 text-3xl font-black leading-tight text-zinc-950 dark:text-white sm:text-4xl">Lebih dari sekadar <span class="text-red-600 dark:text-red-500">rental motor.</span></h2>
-                <div class="mt-6 space-y-4 text-sm leading-7 text-zinc-500 dark:text-zinc-400">
-                    <p>Kami menyediakan layanan rental motor bagi kamu yang membutuhkan kendaraan praktis untuk bekerja, berwisata, maupun menjelajahi berbagai tempat.</p>
-                    <p>Setiap motor yang kami sediakan diperhatikan kondisinya agar pelanggan dapat berkendara dengan lebih nyaman dan aman.</p>
-                    <p>Kami percaya bahwa proses rental seharusnya sederhana. Karena itu, kami membuat proses pemesanan menjadi lebih mudah dan transparan.</p>
-                </div>
-                <div class="mt-8 flex flex-wrap items-center gap-3"><span class="h-1 w-12 rounded-full bg-red-600"></span><span class="text-xs font-bold uppercase tracking-widest text-zinc-400">Rental Motor Terpercaya</span></div>
-            </div>
-            <div class="group relative overflow-hidden rounded-[2rem] border border-zinc-200 bg-white p-2 shadow-xl dark:border-zinc-800 dark:bg-zinc-950">
-                <img src="{{ asset('images/') }}" alt="Rental Motor" class="about-story-image h-[350px] w-full rounded-[1.5rem] object-cover transition duration-700 group-hover:scale-105">
-                <div class="absolute inset-x-7 bottom-7 rounded-2xl bg-black/70 p-5 backdrop-blur-md">
-                    <p class="text-[10px] font-bold uppercase tracking-[.2em] text-red-400">Rental Motor</p>
-                    <p class="mt-1 text-lg font-black text-white">Siap menemani perjalananmu.</p>
+<section class="relative overflow-hidden border-b border-zinc-800 bg-[radial-gradient(circle_at_75%_50%,#b91c1c_0%,#7f1d1d_35%,#450a0a_65%,#09090b_100%)] px-6 py-8 sm:py-10">
+    <div class="pulse-glow absolute -right-20 -top-20 h-60 w-60 rounded-full bg-red-500/20 blur-3xl"></div>
+    <div class="absolute -bottom-20 -left-20 h-52 w-52 rounded-full bg-red-600/10 blur-3xl"></div>
+    <div class="relative mx-auto grid min-h-[430px] max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div class="scroll-animate flex items-center">
+            <div class="w-full max-w-xl">
+                <div class="inline-flex items-center gap-2 rounded-full border border-red-700/30 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-300"><span class="h-2 w-2 animate-pulse rounded-full bg-red-500"></span>Tentang Kami</div>
+                <h1 class="mt-4 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">Sewa Motor<br> <span class="text-red-500 drop-shadow-[0_0_20px_rgba(239,68,68,0.45)]">Cepat.</span><br> Data <span class="text-red-500 drop-shadow-[0_0_20px_rgba(239,68,68,0.45)]">Rapi.</span></h1>
+                <p class="mt-4 max-w-xl text-base leading-7 text-zinc-300">Rental motor dengan proses penyewaan yang cepat dan pengelolaan data yang rapi untuk memberikan pengalaman rental yang lebih praktis dan terorganisir.</p>
+                <div class="mt-6 flex flex-wrap gap-3">
+                    @foreach([
+                        ['icon'=>'⚡','title'=>'Sewa Cepat','text'=>'Proses lebih praktis'],
+                        ['icon'=>'☷','title'=>'Data Rapi','text'=>'Informasi terorganisir']
+                    ] as $item)
+                        <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur transition duration-300 hover:-translate-y-1 hover:bg-white/10">
+                            <div class="bounce-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-600 text-white">{{ $item['icon'] }}</div>
+                            <div>
+                                <p class="text-sm font-bold text-white">{{ $item['title'] }}</p>
+                                <p class="text-xs text-zinc-400">{{ $item['text'] }}</p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-    </section>
-    <section class="relative overflow-hidden bg-white py-14 dark:bg-zinc-950 sm:py-20">
-        <div class="absolute -left-32 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-red-100/60 blur-3xl dark:bg-red-950/10"></div>
-        <div class="absolute -right-32 -top-20 h-80 w-80 rounded-full bg-red-100/50 blur-3xl dark:bg-red-950/10"></div>
-        <div class="reveal relative mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-            <div class="mb-8 max-w-2xl sm:mb-10">
-                <p class="text-xs font-black uppercase tracking-[.2em] text-red-600 dark:text-red-500">Pelayanan Kami</p>
-                <h2 class="mt-3 text-3xl font-black leading-tight text-zinc-950 dark:text-white sm:text-4xl">Sederhana dalam proses, <span class="text-red-600 dark:text-red-500">nyaman dalam perjalanan.</span></h2>
-                <p class="mt-4 text-sm leading-7 text-zinc-500 dark:text-zinc-400">Kami berusaha memberikan pengalaman rental yang jelas, cepat, dan tetap memperhatikan keamanan pelanggan.</p>
-            </div>
-            <div class="overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-xl shadow-zinc-200/60 dark:border-zinc-800 dark:bg-zinc-900 dark:shadow-black/20">
-                <div class="grid md:grid-cols-3">
-                    <div class="group relative p-6 transition duration-500 hover:bg-red-50/70 dark:hover:bg-red-950/20 sm:p-8">
-                        <div class="absolute right-6 top-6 h-20 w-20 rounded-full bg-red-100/70 blur-2xl dark:bg-red-950/20"></div>
-                        <div class="relative flex items-center gap-5">
-                            <div class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-red-50 text-red-600 transition duration-500 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/40 dark:text-red-400"><span class="text-2xl">✓</span></div>
-                            <div class="min-w-0"><p class="text-3xl font-black text-red-600 dark:text-red-400">100%</p><p class="mt-1 text-sm font-black text-zinc-900 dark:text-white">Proses Transparan</p><p class="mt-1 text-xs leading-5 text-zinc-500 dark:text-zinc-400">Informasi sewa jelas sejak awal.</p></div>
+        <div class="scroll-animate flex items-center justify-center">
+            <div class="relative w-full max-w-md">
+                <div class="relative mx-auto h-60 w-full rounded-[2rem] border border-red-500/40 bg-black/30 p-5 shadow-2xl shadow-red-950/50 backdrop-blur sm:h-64">
+                    <div class="absolute inset-5 rounded-[1.5rem] border border-red-500/20"></div>
+                    <div class="corner-circle circle-top"></div>
+                    <div class="corner-circle circle-bottom"></div>
+                    <div class="relative z-10 flex h-full flex-col items-center justify-center">
+                        <div class="flex h-20 w-20 items-center justify-center rounded-full bg-red-600 shadow-[0_0_40px_rgba(239,68,68,0.35)]">
+                            <span class="text-3xl font-black text-white">RM</span>
                         </div>
-                    </div>
-                    <div class="group relative border-t border-zinc-200 p-6 transition duration-500 hover:bg-red-50/70 dark:border-zinc-800 dark:hover:bg-red-950/20 md:border-l md:border-t-0 sm:p-8">
-                        <div class="absolute right-6 top-6 h-20 w-20 rounded-full bg-red-100/70 blur-2xl dark:bg-red-950/20"></div>
-                        <div class="relative flex items-center gap-5">
-                            <div class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-red-600 text-white shadow-lg shadow-red-600/20 transition duration-500 group-hover:scale-110 group-hover:bg-red-700"><span class="text-2xl">ϟ</span></div>
-                            <div class="min-w-0"><p class="text-3xl font-black text-red-600 dark:text-red-400">Cepat</p><p class="mt-1 text-sm font-black text-zinc-900 dark:text-white">Booking Lebih Mudah</p><p class="mt-1 text-xs leading-5 text-zinc-500 dark:text-zinc-400">Tidak perlu proses berbelit.</p></div>
-                        </div>
-                    </div>
-                    <div class="group relative border-t border-zinc-200 p-6 transition duration-500 hover:bg-red-50/70 dark:border-zinc-800 dark:hover:bg-red-950/20 md:border-l md:border-t-0 sm:p-8">
-                        <div class="absolute right-6 top-6 h-20 w-20 rounded-full bg-red-100/70 blur-2xl dark:bg-red-950/20"></div>
-                        <div class="relative flex items-center gap-5">
-                            <div class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-red-50 text-red-600 transition duration-500 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/40 dark:text-red-400"><span class="text-2xl">◎</span></div>
-                            <div class="min-w-0"><p class="text-3xl font-black text-red-600 dark:text-red-400">Aman</p><p class="mt-1 text-sm font-black text-zinc-900 dark:text-white">Data Terjaga</p><p class="mt-1 text-xs leading-5 text-zinc-500 dark:text-zinc-400">Privasi pelanggan diperhatikan.</p></div>
+                        <h2 class="mt-4 text-xl font-black text-white">Rental Motor</h2>
+                        <div class="mt-2 flex items-center gap-2 text-sm text-zinc-400">
+                            <span class="text-red-500">●</span>Sewa Cepat<span>•</span>Data Rapi
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="bg-zinc-50 py-14 dark:bg-zinc-900 sm:py-20">
-        <div class="reveal mx-auto max-w-7xl px-5 sm:px-8 lg:px-10">
-            <div class="mb-8 max-w-2xl sm:mb-10">
-                <p class="text-xs font-black uppercase tracking-[.2em] text-red-600 dark:text-red-500">Alamat & Kontak</p>
-                <h2 class="mt-3 text-3xl font-black leading-tight text-zinc-950 dark:text-white sm:text-4xl">Kami siap melayani <span class="text-red-600 dark:text-red-500">kebutuhan rental motor kamu.</span></h2>
+    </div>
+</section>
+<section class="bg-white px-4 py-10 dark:bg-zinc-950 sm:px-6">
+    <div class="scroll-animate mx-auto grid max-w-6xl overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-[0_15px_50px_rgba(0,0,0,0.06)] dark:border-zinc-800 dark:bg-zinc-900 md:grid-cols-3">
+        @foreach([
+            ['title'=>'Cepat','text'=>'Proses penyewaan'],
+            ['title'=>'Rapi','text'=>'Pengelolaan data'],
+            ['title'=>'Praktis','text'=>'Pengalaman pelanggan']
+        ] as $item)
+            <div class="group border-b border-zinc-200 p-8 text-center transition duration-300 hover:bg-red-50 dark:border-zinc-800 dark:hover:bg-red-950/20 md:border-b-0 md:border-r last:border-0">
+                <div class="text-3xl font-black text-red-600 transition duration-300 group-hover:scale-110">{{ $item['title'] }}</div>
+                <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400">{{ $item['text'] }}</p>
             </div>
-            <div class="grid gap-6 lg:grid-cols-[.8fr_1.2fr]">
-                <div class="rounded-[2rem] border border-zinc-200 bg-white p-6 shadow-lg transition duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-950 sm:p-9">
-                    <p class="text-xs font-black uppercase tracking-widest text-red-600">Hubungi Kami</p>
-                    <h3 class="mt-2 text-2xl font-black text-zinc-950 dark:text-white">Informasi Rental</h3>
-                    <div class="mt-8 space-y-7">
-                        <div class="group flex gap-4"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-red-50 text-red-600 transition duration-300 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/40">⌖</span><div class="min-w-0"><p class="text-sm font-black text-zinc-900 dark:text-white">Alamat</p><p class="break-address mt-1 text-sm leading-6 text-zinc-500 dark:text-zinc-400">Jl. Siliran Lor No.24, Panembahan, Kecamatan Kraton, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55131</p></div></div>
-                        <div class="group flex gap-4"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-red-50 text-red-600 transition duration-300 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/40">◷</span><div class="min-w-0"><p class="text-sm font-black text-zinc-900 dark:text-white">Jam Operasional</p><p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Senin - Minggu · 08.00 - 21.00</p></div></div>
-                        <div class="group flex gap-4"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-red-50 text-red-600 transition duration-300 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/40">◉</span><div class="min-w-0"><p class="text-sm font-black text-zinc-900 dark:text-white">WhatsApp</p><p class="mt-1 text-sm text-zinc-500 dark:text-zinc-400">+62 812 3456 7890</p></div></div>
-                        <div class="group flex gap-4"><span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-red-50 text-red-600 transition duration-300 group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/40">✉</span><div class="min-w-0"><p class="text-sm font-black text-zinc-900 dark:text-white">Email</p><p class="mt-1 break-all text-sm text-zinc-500 dark:text-zinc-400">rentalmotor@gmail.com</p></div></div>
-                    </div>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Siliran+Lor+No.24,+Panembahan,+Kecamatan+Kraton,+Kota+Yogyakarta,+Daerah+Istimewa+Yogyakarta+55131" target="_blank" rel="noopener" class="responsive-button mt-9 inline-flex w-full items-center justify-center gap-3 rounded-xl bg-red-600 px-5 py-3 text-sm font-black text-white shadow-lg shadow-red-600/20 transition duration-300 hover:-translate-y-1 hover:bg-red-700 hover:shadow-red-600/30 active:scale-95 sm:w-auto">⌖ Lihat di Google Maps</a>
+        @endforeach
+    </div>
+</section>
+<section class="bg-zinc-50 px-6 py-16 dark:bg-zinc-900">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+        <div class="scroll-animate">
+            <span class="rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 dark:bg-red-950/40 dark:text-red-700">Cerita Kami</span>
+            <h2 class="mt-6 text-3xl font-black text-zinc-900 dark:text-white sm:text-4xl">Dibangun Untuk Membuat <span class="text-red-600">Rental Lebih Teratur</span></h2>
+            <p class="mt-5 leading-7 text-zinc-600 dark:text-zinc-400">Rental motor bukan hanya tentang menyediakan kendaraan. Proses penyewaan, informasi kendaraan, pelanggan, transaksi, hingga data rental juga perlu dikelola dengan baik.</p>
+            <p class="mt-4 leading-7 text-zinc-600 dark:text-zinc-400">Karena itu, kami mengusung konsep <strong class="text-red-600">Sewa Cepat • Data Rapi</strong>sebagai dasar dalam memberikan layanan rental motor.</p>
+        </div>
+        <div class="scroll-animate">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="shine-card group rounded-3xl bg-red-600 p-7 text-white shadow-xl transition duration-500 hover:-translate-y-2 hover:rotate-1">
+                    <div class="text-3xl font-black">01</div>
+                    <h3 class="mt-8 font-bold">Sewa Cepat</h3>
+                    <p class="mt-2 text-sm leading-6 text-red-100">Proses dibuat agar pelanggan dapat melakukan rental dengan lebih praktis.</p>
                 </div>
-                <div class="rounded-[2rem] border border-zinc-200 bg-white p-2 shadow-lg dark:border-zinc-800 dark:bg-zinc-950">
-                    <div class="about-contact-map relative h-full min-h-[360px] overflow-hidden rounded-[1.5rem] bg-zinc-200 dark:bg-zinc-800">
-                        <iframe class="h-full min-h-[360px] w-full border-0 sm:min-h-[450px]" src="https://www.google.com/maps?q=Jl.+Siliran+Lor+No.24,+Panembahan,+Kecamatan+Kraton,+Kota+Yogyakarta,+Daerah+Istimewa+Yogyakarta+55131&output=embed" loading="lazy" allowfullscreen></iframe>
-                        <div class="map-label pointer-events-none absolute left-4 top-4 rounded-xl bg-white/95 px-4 py-3 shadow-lg dark:bg-zinc-900/95 sm:left-5 sm:top-5"><p class="text-[10px] font-black uppercase tracking-widest text-red-600">Lokasi Kami</p><p class="mt-1 text-xs font-black leading-5 text-zinc-900 dark:text-white sm:text-sm">Jl. Siliran Lor No.24, Panembahan, Kecamatan Kraton, Kota Yogyakarta</p></div>
-                    </div>
+                <div class="shine-card mt-8 rounded-3xl border border-zinc-200 bg-white p-7 shadow-sm transition duration-500 hover:-translate-y-2 hover:-rotate-1 dark:border-zinc-800 dark:bg-zinc-950">
+                    <div class="text-3xl font-black text-red-600">02</div>
+                    <h3 class="mt-8 font-bold text-zinc-900 dark:text-white">Data Rapi</h3>
+                    <p class="mt-2 text-sm leading-6 text-zinc-500 dark:text-zinc-400">Data kendaraan dan transaksi tersusun lebih terorganisir.</p>
                 </div>
             </div>
         </div>
-    </section>
-    <section class="relative mx-4 mb-20 mt-10 overflow-hidden rounded-[2rem] bg-zinc-950 shadow-2xl sm:mx-8 sm:mb-28 sm:mt-14 lg:mx-auto lg:max-w-7xl">
-        <div class="absolute inset-0 bg-gradient-to-r from-black via-red-950 to-red-700"></div>
-        <div class="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-red-500/30 blur-3xl"></div>
-        <div class="absolute -bottom-20 -left-20 h-60 w-60 rounded-full bg-red-600/20 blur-3xl"></div>
-        <div class="relative flex flex-col gap-8 px-6 py-10 sm:px-10 sm:py-12 md:flex-row md:items-center md:justify-between lg:px-14 lg:py-14">
-            <div class="text-white">
-                <p class="text-xs font-black uppercase tracking-[.2em] text-red-400">Siap Berangkat?</p>
-                <h2 class="mt-2 text-2xl font-black leading-tight sm:text-3xl lg:text-4xl">Pilih motor dan mulai perjalananmu.</h2>
-                <p class="mt-3 max-w-xl text-sm leading-6 text-zinc-300">Temukan motor yang sesuai kebutuhanmu dan nikmati proses rental yang mudah.</p>
-            </div>
-            <a href="/katalog" class="group inline-flex w-full shrink-0 items-center justify-center gap-3 rounded-xl bg-white px-7 py-3.5 text-sm font-black text-red-700 shadow-xl transition duration-300 hover:-translate-y-1 hover:bg-red-50 hover:shadow-2xl active:scale-95 sm:w-auto">Lihat Katalog</a>
+    </div>
+</section>
+<section class="bg-white px-6 py-16 dark:bg-zinc-950">
+    <div class="mx-auto max-w-6xl">
+        <div class="scroll-animate text-center">
+            <span class="rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 dark:bg-red-950/40 dark:text-red-700">Keunggulan Kami</span>
+            <h2 class="mt-6 text-3xl font-black text-zinc-900 dark:text-white sm:text-4xl">Rental Yang <span class="text-red-600">Lebih Terorganisir</span></h2>
+            <p class="mx-auto mt-4 max-w-2xl text-zinc-500 dark:text-zinc-400">Setiap bagian dirancang untuk membuat proses rental menjadi lebih sederhana dan teratur.</p>
         </div>
-    </section>
-    <a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20menanyakan%20rental%20motor" target="_blank" rel="noopener noreferrer" aria-label="Chat WhatsApp" class="wa-float fixed bottom-6 right-6 z-[999] flex h-16 w-16 items-center justify-center rounded-full border-4 border-white bg-[#25D366] shadow-2xl transition duration-300 hover:scale-110 hover:bg-[#20bd5a] dark:border-zinc-900 sm:bottom-8 sm:right-8">
-        <img src="{{ asset('storage/motors/wa.png') }}" alt="WhatsApp" class="h-9 w-9 object-contain">
-        <span class="absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/30"></span>
-    </a>
-</div>
+        <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            @foreach([
+                ['icon'=>'⚡','title'=>'Sewa Cepat','text'=>'Proses rental yang praktis dan tidak berbelit.'],
+                ['icon'=>'☷','title'=>'Data Rapi','text'=>'Informasi rental tersusun dan mudah dikelola.'],
+                ['icon'=>'✓','title'=>'Informasi Jelas','text'=>'Detail kendaraan dan rental ditampilkan dengan jelas.'],
+                ['icon'=>'♡','title'=>'Nyaman','text'=>'Mengutamakan pengalaman pelanggan dalam setiap proses.']
+            ] as $item)
+                <div class="shine-card rental-card scroll-animate group rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm transition duration-500 hover:-translate-y-3 hover:border-red-200 hover:shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-red-900">
+                    <div class="bounce-icon flex h-12 w-12 items-center justify-center rounded-2xl bg-red-100 text-xl text-red-600 transition duration-300 group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/50">{{ $item['icon'] }}</div>
+                    <h3 class="mt-5 font-bold text-zinc-900 dark:text-white">{{ $item['title'] }}</h3>
+                    <p class="mt-2 text-sm leading-6 text-zinc-500 dark:text-zinc-400">{{ $item['text'] }}</p>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+<section class="bg-zinc-50 px-6 py-16 dark:bg-zinc-900">
+    <div class="mx-auto max-w-6xl">
+        <div class="scroll-animate text-center">
+            <span class="rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 dark:bg-red-950/40 dark:text-red-700">Cara Kami Bekerja</span>
+            <h2 class="mt-6 text-3xl font-black text-zinc-900 dark:text-white sm:text-4xl">Cepat Dalam Proses, <span class="text-red-600">Rapi Dalam Data</span></h2>
+        </div>
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+            @foreach([
+                ['no'=>'01','title'=>'Pilih Motor','text'=>'Pilih kendaraan yang sesuai dengan kebutuhan perjalananmu.'],
+                ['no'=>'02','title'=>'Data Tercatat','text'=>'Informasi rental dan pelanggan dicatat secara teratur.'],
+                ['no'=>'03','title'=>'Siap Digunakan','text'=>'Setelah proses selesai, motor siap menemani perjalananmu.']
+            ] as $item)
+                <div class="scroll-animate group rounded-3xl border border-zinc-200 bg-white p-7 shadow-sm transition duration-500 hover:-translate-y-3 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-950">
+                    <div class="flex items-center justify-between">
+                        <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-600 font-black text-white transition duration-300 group-hover:scale-110 group-hover:rotate-6">{{ $item['no'] }}</div>
+                        <span class="text-3xl font-black text-zinc-100 dark:text-zinc-800">→</span>
+                    </div>
+                    <h3 class="mt-6 text-lg font-bold text-zinc-900 dark:text-white">{{ $item['title'] }}</h3>
+                    <p class="mt-2 text-sm leading-6 text-zinc-500 dark:text-zinc-400">{{ $item['text'] }}</p>
+                </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+<section class="bg-white px-6 py-16 dark:bg-zinc-950">
+    <div class="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2">
+        <div class="scroll-animate">
+            <span class="rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 dark:bg-red-950/40 dark:text-red-700">Hubungi Kami</span>
+            <h2 class="mt-6 text-3xl font-black text-zinc-900 dark:text-white sm:text-4xl">Butuh Informasi <span class="text-red-600">Rental?</span></h2>
+            <div class="mt-8 space-y-5">
+                @foreach([
+                    ['icon'=>'☎','title'=>'Telepon','text'=>'+62 812 3456 7890'],
+                    ['icon'=>'@','title'=>'Email','text'=>'rentalmotor@gmail.com'],
+                    ['icon'=>'⌖','title'=>'Alamat','text'=>'Jl. Siliran Lor No.24, Panembahan, Kraton, Yogyakarta']
+                ] as $item)
+                    <div class="group flex gap-4 transition duration-300 hover:translate-x-2">
+                        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-100 text-red-600 transition group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/50">{{ $item['icon'] }}</div>
+                        <div>
+                            <p class="font-bold text-zinc-900 dark:text-white">{{ $item['title'] }}</p>
+                            <p class="mt-1 text-sm leading-6 text-zinc-500 dark:text-zinc-400">{{ $item['text'] }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <div class="scroll-animate overflow-hidden rounded-3xl border border-zinc-200 shadow-xl dark:border-zinc-800"><iframe src="https://www.google.com/maps?q=Jl.+Siliran+Lor+No.24,+Panembahan,+Kecamatan+Kraton,+Kota+Yogyakarta&output=embed" class="h-[350px] w-full border-0" loading="lazy"></iframe></div>
+    </div>
+</section>
+<a href="https://wa.me/6281234567890?text=Halo%20saya%20ingin%20menanyakan%20rental%20motor" target="_blank" rel="noopener noreferrer" aria-label="Chat WhatsApp" class="wa-float fixed bottom-6 right-6 z-[999] flex h-16 w-16 items-center justify-center rounded-full border-4 border-white bg-[#25D366] shadow-2xl transition duration-300 hover:scale-110 hover:bg-[#20bd5a] dark:border-zinc-900 sm:bottom-8 sm:right-8">
+    <img src="{{ asset('storage/motors/wa.png') }}" alt="WhatsApp" class="h-9 w-9 object-contain">
+    <span class="absolute inset-0 -z-10 animate-ping rounded-full bg-[#25D366]/30"></span>
+</a>
+
 <script>
-document.addEventListener('DOMContentLoaded',()=>{
-    const slides=document.querySelectorAll('.hero-slide'),indicators=document.querySelectorAll('.hero-indicator');
-    let currentSlide=0,sliderInterval;
-    function showSlide(index){
-        if(!slides.length)return;
-        slides.forEach((slide,i)=>{
-            slide.classList.toggle('hidden',i!==index);
-            slide.classList.toggle('hero-text',i===index);
-        });
-        indicators.forEach((indicator,i)=>{
-            indicator.classList.toggle('w-16',i===index);
-            indicator.classList.toggle('w-4',i!==index);
-            indicator.classList.toggle('bg-red-500',i===index);
-            indicator.classList.toggle('bg-white/20',i!==index);
-        });
-        currentSlide=index;
-    }
-    function startSlider(){
-        clearInterval(sliderInterval);
-        sliderInterval=setInterval(()=>showSlide((currentSlide+1)%slides.length),4000);
-    }
-    indicators.forEach((indicator,index)=>{
-        indicator.addEventListener('click',()=>{showSlide(index);startSlider()});
-    });
-    showSlide(0);startSlider();
-    const revealItems=document.querySelectorAll('.reveal');
-    if('IntersectionObserver' in window){
-        const observer=new IntersectionObserver(entries=>{
+    function initAboutAnimations(){
+        const elements=document.querySelectorAll('.scroll-animate');
+        if(!elements.length)return;
+        const observer=new IntersectionObserver((entries,observer)=>{
             entries.forEach(entry=>{
-                if(entry.isIntersecting){
-                    entry.target.classList.add('show');
-                    observer.unobserve(entry.target);
-                }
+                if(!entry.isIntersecting)return;
+                entry.target.classList.remove('opacity-0','translate-y-12');
+                entry.target.classList.add('opacity-100','translate-y-0');
+                observer.unobserve(entry.target);
             });
-        },{threshold:.12});
-        revealItems.forEach(item=>observer.observe(item));
-    }else revealItems.forEach(item=>item.classList.add('show'));
-});
+        },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+        elements.forEach((element,index)=>{
+            element.classList.add('opacity-0','translate-y-12','transition-all','duration-700','ease-out');
+            element.style.transitionDelay=`${Math.min(index*80,400)}ms`;
+            observer.observe(element);
+        });
+        document.querySelectorAll('.rental-card').forEach(card=>{
+            card.addEventListener('click',function(){
+                this.classList.add('scale-[0.97]','ring-2','ring-red-500/30');
+                setTimeout(()=>this.classList.remove('scale-[0.97]','ring-2','ring-red-500/30'),180);
+            });
+        });
+    }
+    document.addEventListener('DOMContentLoaded',initAboutAnimations);
+    document.addEventListener('livewire:navigated',initAboutAnimations);
 </script>
 </x-layouts.app>
