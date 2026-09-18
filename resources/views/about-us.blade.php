@@ -14,45 +14,52 @@
 .shine-card::after{content:"";position:absolute;top:0;left:0;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-120%);pointer-events:none}
 .shine-card:hover::after{animation:shine .8s ease}
 </style>
-<section class="relative overflow-hidden border-b border-zinc-800 bg-[radial-gradient(circle_at_75%_50%,#b91c1c_0%,#7f1d1d_35%,#450a0a_65%,#09090b_100%)] px-6 py-8 sm:py-10">
-    <div class="pulse-glow absolute -right-20 -top-20 h-60 w-60 rounded-full bg-red-500/20 blur-3xl"></div>
-    <div class="absolute -bottom-20 -left-20 h-52 w-52 rounded-full bg-red-600/10 blur-3xl"></div>
-    <div class="relative mx-auto grid min-h-[430px] max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
-        <div class="scroll-animate flex items-center">
-            <div class="w-full max-w-xl">
-                <div class="inline-flex items-center gap-2 rounded-full border border-red-700/30 bg-red-500/10 px-4 py-2 text-sm font-semibold text-red-300"><span class="h-2 w-2 animate-pulse rounded-full bg-red-500"></span>Tentang Kami</div>
-                <h1 class="mt-4 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">Sewa Motor<br> <span class="text-red-500 drop-shadow-[0_0_20px_rgba(239,68,68,0.45)]">Cepat.</span><br> Data <span class="text-red-500 drop-shadow-[0_0_20px_rgba(239,68,68,0.45)]">Rapi.</span></h1>
-                <p class="mt-4 max-w-xl text-base leading-7 text-zinc-300">Rental motor dengan proses penyewaan yang cepat dan pengelolaan data yang rapi untuk memberikan pengalaman rental yang lebih praktis dan terorganisir.</p>
-                <div class="mt-6 flex flex-wrap gap-3">
-                    @foreach([
-                        ['icon'=>'⚡','title'=>'Sewa Cepat','text'=>'Proses lebih praktis'],
-                        ['icon'=>'☷','title'=>'Data Rapi','text'=>'Informasi terorganisir']
-                    ] as $item)
-                        <div class="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 backdrop-blur transition duration-300 hover:-translate-y-1 hover:bg-white/10">
-                            <div class="bounce-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-red-600 text-white">{{ $item['icon'] }}</div>
-                            <div>
-                                <p class="text-sm font-bold text-white">{{ $item['title'] }}</p>
-                                <p class="text-xs text-zinc-400">{{ $item['text'] }}</p>
-                            </div>
-                        </div>
-                    @endforeach
+<section class="relative overflow-hidden border-b border-red-900/50 bg-[#1c1214] px-6 py-14 sm:py-16">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_50%,rgba(220,38,38,.42),transparent_42%)]"></div>
+    <div class="absolute -right-32 -top-32 h-80 w-80 rounded-full bg-red-700/15 blur-3xl"></div>
+    <div class="absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-red-800/10 blur-3xl"></div>
+    <div class="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2">
+        <div class="scroll-animate">
+            <span class="inline-block rounded-md border border-red-400/40 bg-red-600/20 px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-widest text-red-200">Tentang Kami</span>
+            <h1 class="mt-5 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">Rental Motor <br> <span class="text-red-500">Mudah & Terpercaya</span>
+            </h1>
+            <p class="mt-5 max-w-xl text-base leading-7 text-red-100/65">Kami menyediakan layanan rental motor dengan proses yang sederhana, informasi yang jelas, dan pengelolaan data yang teratur.</p>
+            <div class="mt-7 flex flex-wrap gap-3">
+                <div class="flex items-center gap-3 rounded-xl border border-red-900/50 bg-[#29191b] px-4 py-3 transition duration-300 hover:border-red-700 hover:bg-red-950/60">
+                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white shadow-lg shadow-red-900/30">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-white">Proses Cepat</p>
+                        <p class="text-xs text-red-100/50">Praktis dan sederhana</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 rounded-xl border border-red-900/50 bg-[#29191b] px-4 py-3 transition duration-300 hover:border-red-700 hover:bg-red-950/60">
+                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white shadow-lg shadow-red-900/30">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-white">Data Teratur</p>
+                        <p class="text-xs text-red-100/50">Informasi lebih rapi</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="scroll-animate flex items-center justify-center">
+        <div class="scroll-animate flex justify-center lg:justify-end">
             <div class="relative w-full max-w-md">
-                <div class="relative mx-auto h-60 w-full rounded-[2rem] border border-red-500/40 bg-black/30 p-5 shadow-2xl shadow-red-950/50 backdrop-blur sm:h-64">
-                    <div class="absolute inset-5 rounded-[1.5rem] border border-red-500/20"></div>
-                    <div class="corner-circle circle-top"></div>
-                    <div class="corner-circle circle-bottom"></div>
-                    <div class="relative z-10 flex h-full flex-col items-center justify-center">
-                        <div class="flex h-20 w-20 items-center justify-center rounded-full bg-red-600 shadow-[0_0_40px_rgba(239,68,68,0.35)]">
-                            <span class="text-3xl font-black text-white">RM</span>
-                        </div>
-                        <h2 class="mt-4 text-xl font-black text-white">Rental Motor</h2>
-                        <div class="mt-2 flex items-center gap-2 text-sm text-zinc-400">
-                            <span class="text-red-500">●</span>Sewa Cepat<span>•</span>Data Rapi
-                        </div>
+                <div class="absolute -inset-5 rounded-[2rem] bg-red-600/20 blur-2xl"></div>
+                <div class="relative overflow-hidden rounded-[2rem] border border-red-900/50 bg-[#241719] p-8 shadow-2xl shadow-red-950/30">
+                    <div class="absolute right-0 top-0 h-32 w-32 rounded-full bg-red-600/15 blur-2xl"></div>
+                    <div class="relative flex min-h-[280px] flex-col items-center justify-center">
+                        <div class="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-red-500 to-red-700 shadow-xl shadow-red-950/50"><span class="text-4xl font-black text-white">RM</span></div>
+                        <h2 class="mt-6 text-2xl font-black text-white">Rental Motor</h2>
+                        <p class="mt-2 text-sm text-red-100/50">Sewa Cepat • Data Rapi</p>
+                        <div class="mt-7 h-px w-24 bg-red-500/60"></div>
+                        <p class="mt-5 text-center text-sm leading-6 text-red-100/60">Solusi rental motor yang praktis untuk kebutuhan perjalananmu.</p>
                     </div>
                 </div>
             </div>
@@ -79,7 +86,7 @@
             <span class="rounded-full bg-red-50 px-4 py-2 text-sm font-semibold text-red-600 dark:bg-red-950/40 dark:text-red-700">Cerita Kami</span>
             <h2 class="mt-6 text-3xl font-black text-zinc-900 dark:text-white sm:text-4xl">Dibangun Untuk Membuat <span class="text-red-600">Rental Lebih Teratur</span></h2>
             <p class="mt-5 leading-7 text-zinc-600 dark:text-zinc-400">Rental motor bukan hanya tentang menyediakan kendaraan. Proses penyewaan, informasi kendaraan, pelanggan, transaksi, hingga data rental juga perlu dikelola dengan baik.</p>
-            <p class="mt-4 leading-7 text-zinc-600 dark:text-zinc-400">Karena itu, kami mengusung konsep <strong class="text-red-600">Sewa Cepat • Data Rapi</strong>sebagai dasar dalam memberikan layanan rental motor.</p>
+            <p class="mt-4 leading-7 text-zinc-600 dark:text-zinc-400">Karena itu, kami mengusung konsep <strong class="text-red-600">Sewa Cepat • Data Rapi</strong> sebagai dasar dalam memberikan layanan rental motor.</p>
         </div>
         <div class="scroll-animate">
             <div class="grid grid-cols-2 gap-4">
@@ -105,14 +112,14 @@
             <p class="mx-auto mt-4 max-w-2xl text-zinc-500 dark:text-zinc-400">Setiap bagian dirancang untuk membuat proses rental menjadi lebih sederhana dan teratur.</p>
         </div>
         <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            @foreach([
-                ['icon'=>'⚡','title'=>'Sewa Cepat','text'=>'Proses rental yang praktis dan tidak berbelit.'],
-                ['icon'=>'☷','title'=>'Data Rapi','text'=>'Informasi rental tersusun dan mudah dikelola.'],
-                ['icon'=>'✓','title'=>'Informasi Jelas','text'=>'Detail kendaraan dan rental ditampilkan dengan jelas.'],
-                ['icon'=>'♡','title'=>'Nyaman','text'=>'Mengutamakan pengalaman pelanggan dalam setiap proses.']
+           @foreach([
+                ['icon'=>'<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg>','title'=>'Sewa Cepat','text'=>'Proses rental yang praktis dan tidak berbelit.'],
+                ['icon'=>'<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>','title'=>'Data Rapi','text'=>'Informasi rental tersusun dan mudah dikelola.'],
+                ['icon'=>'<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m8 12 2.5 2.5L16 9"/></svg>','title'=>'Informasi Jelas','text'=>'Detail kendaraan dan rental ditampilkan dengan jelas.'],
+                ['icon'=>'<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20.8 8.8c0 5.4-8.8 10.2-8.8 10.2S3.2 14.2 3.2 8.8A4.8 4.8 0 0 1 12 6a4.8 4.8 0 0 1 8.8 2.8Z"/></svg>','title'=>'Nyaman','text'=>'Mengutamakan pengalaman pelanggan dalam setiap proses.']
             ] as $item)
                 <div class="shine-card rental-card scroll-animate group rounded-3xl border border-zinc-200 bg-white p-6 shadow-sm transition duration-500 hover:-translate-y-3 hover:border-red-200 hover:shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-red-900">
-                    <div class="bounce-icon flex h-12 w-12 items-center justify-center rounded-2xl bg-red-100 text-xl text-red-600 transition duration-300 group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/50">{{ $item['icon'] }}</div>
+                    <div class="bounce-icon flex h-12 w-12 items-center justify-center rounded-2xl bg-red-100 text-red-600 transition duration-300 group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/50">{!! $item['icon'] !!}</div>
                     <h3 class="mt-5 font-bold text-zinc-900 dark:text-white">{{ $item['title'] }}</h3>
                     <p class="mt-2 text-sm leading-6 text-zinc-500 dark:text-zinc-400">{{ $item['text'] }}</p>
                 </div>
@@ -151,12 +158,12 @@
             <h2 class="mt-6 text-3xl font-black text-zinc-900 dark:text-white sm:text-4xl">Butuh Informasi <span class="text-red-600">Rental?</span></h2>
             <div class="mt-8 space-y-5">
                 @foreach([
-                    ['icon'=>'☎','title'=>'Telepon','text'=>'+62 812 3456 7890'],
-                    ['icon'=>'@','title'=>'Email','text'=>'rentalmotor@gmail.com'],
-                    ['icon'=>'⌖','title'=>'Alamat','text'=>'Jl. Siliran Lor No.24, Panembahan, Kraton, Yogyakarta']
+                    ['icon'=>'<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M2.5 5.5A2 2 0 0 1 4.5 3.5h2A1.5 1.5 0 0 1 8 4.7l1 2.4a1.5 1.5 0 0 1-.3 1.6l-1.1 1.1a12 12 0 0 0 5.6 5.6l1.1-1.1a1.5 1.5 0 0 1 1.6-.3l2.4 1a1.5 1.5 0 0 1 1.2 1.5v2a2 2 0 0 1-2 2C9.8 20.5 3.5 14.2 3.5 6.5"/></svg>','title'=>'Telepon','text'=>'+62 812 3456 7890'],
+                    ['icon'=>'<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect width="18" height="14" x="3" y="5" rx="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="m3 7 9 6 9-6"/></svg>','title'=>'Email','text'=>'rentalmotor@gmail.com'],
+                    ['icon'=>'<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>','title'=>'Alamat','text'=>'Jl. Siliran Lor No.24, Panembahan, Kraton, Yogyakarta']
                 ] as $item)
                     <div class="group flex gap-4 transition duration-300 hover:translate-x-2">
-                        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-100 text-red-600 transition group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/50">{{ $item['icon'] }}</div>
+                        <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-red-100 text-red-600 transition group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/50">{!! $item['icon'] !!}</div>
                         <div>
                             <p class="font-bold text-zinc-900 dark:text-white">{{ $item['title'] }}</p>
                             <p class="mt-1 text-sm leading-6 text-zinc-500 dark:text-zinc-400">{{ $item['text'] }}</p>

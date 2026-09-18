@@ -76,24 +76,21 @@
     </style>
 </head>
 <body class="flex min-h-screen flex-col text-zinc-950 antialiased">
-    <header class="sticky top-0 z-30 border-b border-zinc-200/80 bg-white/95 backdrop-blur">
-        <nav class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
-            <a href="/" class="flex items-center gap-3">
-                <span class="grid size-10 place-items-center rounded bg-red-700 text-lg font-black text-white">RM</span>
-                <span>
-                    <span class="block text-sm font-semibold uppercase tracking-wide text-red-700">Rental Motor</span>
-                    <span class="block text-xs text-zinc-500">Sewa cepat, data rapi</span>
-                </span>
+    <header class="sticky top-0 z-30 border-b border-zinc-200/70 bg-white/90 backdrop-blur-xl dark:border-zinc-800/70 dark:bg-zinc-950/90">
+        <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-10">
+            <a href="/" class="group flex items-center gap-3">
+                <span class="grid size-10 place-items-center rounded-xl bg-red-700 text-sm font-black text-white transition-transform group-hover:scale-105">RM</span>
+                <span><span class="block text-sm font-extrabold uppercase tracking-wide text-red-700">Rental Motor</span><span class="block text-[11px] text-zinc-500 dark:text-zinc-400">Sewa cepat, data rapi</span></span>
             </a>
-            <div class="flex flex-wrap items-center gap-2 text-sm font-medium">
-                <a href="/katalog" class="rounded px-3 py-2 transition-colors duration-200 {{ request()->is('katalog') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Katalog</a>
-                <a href="/about-us" class="rounded px-3 py-2 transition-colors duration-200 {{ request()->is('about-us') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Tentang Kami</a>
-                <a href="/akun" class="auth-user hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('akun') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Akun</a>
-                <a href="/verifikasi" class="auth-verification hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('verifikasi') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Verifikasi</a>
-                <a href="/backend" class="auth-backend hidden rounded px-3 py-2 transition-colors duration-200 {{ request()->is('backend') ? 'font-bold text-red-700' : 'text-zinc-600 hover:text-red-700' }}">Backend</a>
-                <a class="auth-guest btn-muted" href="/login">Masuk</a>
-                <button id="logout-button" class="auth-user hidden rounded bg-zinc-950 px-3 py-2 text-white hover:bg-zinc-800" type="button">Keluar</button>
-                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Ganti tema"><span id="theme-label">Dark</span></button>
+            <div class="flex items-center gap-1 text-sm font-semibold">
+                <a href="/katalog" class="rounded-lg px-3 py-2 transition {{ request()->is('katalog') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Katalog</a>
+                <a href="/about-us" class="rounded-lg px-3 py-2 transition {{ request()->is('about-us') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Tentang Kami</a>
+                <a href="/akun" class="auth-user hidden rounded-lg px-3 py-2 transition {{ request()->is('akun') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Akun</a>
+                <a href="/verifikasi" class="auth-verification hidden rounded-lg px-3 py-2 transition {{ request()->is('verifikasi') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Verifikasi</a>
+                <a href="/backend" class="auth-backend hidden rounded-lg px-3 py-2 transition {{ request()->is('backend') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Backend</a>
+                <a href="/login" class="auth-guest ml-2 rounded-lg bg-red-700 px-4 py-2 font-bold text-white transition hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-lg">Masuk</a>
+                <button id="logout-button" class="auth-user hidden ml-2 rounded-lg bg-zinc-950 px-4 py-2 font-bold text-white transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200" type="button">Keluar</button>
+                <button id="theme-toggle" class="theme-toggle ml-2" type="button" aria-label="Ganti tema"><span id="theme-label">Dark</span></button>
             </div>
         </nav>
     </header>
@@ -169,53 +166,75 @@
     </main>
 
     <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
-        <footer class="border-t border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900">
-            <div class="mx-auto max-w-7xl px-5 py-12 sm:px-8 lg:px-10">
-                <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <footer class="mt-16 border-t border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+            <div class="mx-auto max-w-7xl px-5 py-14 sm:px-8 lg:px-10">
+                <div class="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
                     <div>
-                        <div class="flex items-center gap-3">
-                            <div>
-                                <h3 class="text-sm font-black uppercase tracking-wide text-zinc-900 dark:text-white">Rental Motor</h3>
-                                <p class="text-xs text-zinc-500 dark:text-zinc-400">Sewa cepat, data rapi.</p>
-                            </div>
-                        </div>
-                        <p class="mt-5 max-w-xs text-sm leading-6 text-zinc-500 dark:text-zinc-400">Temukan motor pilihanmu dan nikmati proses rental yang mudah, aman, dan nyaman.</p>
-                        <div class="mt-5 flex gap-2">
-                            <a href="#" aria-label="Facebook" class="grid size-9 place-items-center rounded-lg border border-zinc-300 text-sm font-bold text-zinc-500 transition-all duration-300 hover:-translate-y-1 hover:border-red-600 hover:bg-red-600 hover:text-white dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-red-500 dark:hover:bg-red-600 dark:hover:text-white">f</a>
-                            <a href="#" aria-label="TikTok" class="grid size-9 place-items-center rounded-lg border border-zinc-300 text-sm font-bold text-zinc-500 transition-all duration-300 hover:-translate-y-1 hover:border-red-600 hover:bg-red-600 hover:text-white dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-red-500 dark:hover:bg-red-600 dark:hover:text-white">♪</a>
-                            <a href="#" aria-label="Instagram" class="grid size-9 place-items-center rounded-lg border border-zinc-300 text-sm font-bold text-zinc-500 transition-all duration-300 hover:-translate-y-1 hover:border-red-600 hover:bg-red-600 hover:text-white dark:border-zinc-700 dark:text-zinc-400 dark:hover:border-red-500 dark:hover:bg-red-600 dark:hover:text-white">◎</a>
+                        <a href="/" class="inline-flex items-center gap-3">                            
+                            <span>
+                                <span class="block text-sm font-extrabold uppercase tracking-wide text-red-700">Rental Motor</span>
+                                <span class="block text-xs text-zinc-500 dark:text-zinc-400">Sewa cepat, data rapi.</span>
+                            </span>
+                        </a>
+                        <p class="mt-5 max-w-sm text-sm leading-7 text-zinc-500 dark:text-zinc-400">Temukan motor pilihanmu dan nikmati proses rental yang mudah, aman, dan nyaman untuk perjalananmu.</p>
+                        <div class="mt-6 flex items-center gap-2">
+                            <a href="#" aria-label="Facebook" class="grid size-10 place-items-center rounded-lg border border-zinc-200 text-sm font-black text-zinc-600 transition-all duration-200 hover:-translate-y-1 hover:border-red-600 hover:bg-red-600 hover:text-white dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-red-600 dark:hover:bg-red-600 dark:hover:text-white">f</a>
+                            <a href="#" aria-label="TikTok" class="grid size-10 place-items-center rounded-lg border border-zinc-200 text-sm font-black text-zinc-600 transition-all duration-200 hover:-translate-y-1 hover:border-red-600 hover:bg-red-600 hover:text-white dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-red-600 dark:hover:bg-red-600 dark:hover:text-white">♪</a>
+                            <a href="#" aria-label="Instagram" class="grid size-10 place-items-center rounded-lg border border-zinc-200 text-sm font-black text-zinc-600 transition-all duration-200 hover:-translate-y-1 hover:border-red-600 hover:bg-red-600 hover:text-white dark:border-zinc-800 dark:text-zinc-400 dark:hover:border-red-600 dark:hover:bg-red-600 dark:hover:text-white">◎</a>
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-sm font-bold text-zinc-900 dark:text-white">Navigasi</h3>
+                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-950 dark:text-white">Navigasi</h3>
                         <nav class="mt-5 grid gap-3">
-                            <a href="/" class="w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Beranda</a>
-                            <a href="/katalog" class="w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Katalog Motor</a>
-                            <a href="/about-us" class="w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Tentang Kami</a>
-                            <a href="/akun" class="auth-user hidden w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Akun Saya</a>
-                            <a href="/verifikasi" class="auth-verification hidden w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Verifikasi</a>
+                            <a href="/" class="w-fit text-sm text-zinc-500 transition-all duration-200 hover:translate-x-1 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-500">Beranda</a>
+                            <a href="/katalog" class="w-fit text-sm text-zinc-500 transition-all duration-200 hover:translate-x-1 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-500">Katalog Motor</a>
+                            <a href="/about-us" class="w-fit text-sm text-zinc-500 transition-all duration-200 hover:translate-x-1 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-500">Tentang Kami</a>
+                            <a href="/akun" class="auth-user hidden w-fit text-sm text-zinc-500 transition-all duration-200 hover:translate-x-1 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-500">Akun Saya</a>
+                            <a href="/verifikasi" class="auth-verification hidden w-fit text-sm text-zinc-500 transition-all duration-200 hover:translate-x-1 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-500">Verifikasi</a>
                         </nav>
                     </div>
                     <div>
-                        <h3 class="text-sm font-bold text-zinc-900 dark:text-white">Layanan</h3>
+                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-950 dark:text-white">Layanan</h3>
                         <nav class="mt-5 grid gap-3">
-                            <a href="/katalog" class="w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Sewa Motor</a>
-                            <a href="/about-us" class="w-fit text-sm text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Lokasi Rental</a>
-                            <a href="/backend" class="auth-backend hidden w-fit text-sm font-semibold text-red-600 transition-all duration-300 hover:translate-x-2 hover:text-red-700 dark:text-red-700 dark:hover:text-red-300">Backend</a>
+                            <a href="/katalog" class="w-fit text-sm text-zinc-500 transition-all duration-200 hover:translate-x-1 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-500">Sewa Motor</a>
+                            <a href="/about-us" class="w-fit text-sm text-zinc-500 transition-all duration-200 hover:translate-x-1 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-500">Lokasi Rental</a>
+                            <a href="/backend" class="auth-backend hidden w-fit text-sm text-zinc-500 transition-all duration-200 hover:translate-x-1 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-500">Backend</a>
                         </nav>
                     </div>
                     <div>
-                        <h3 class="text-sm font-bold text-zinc-900 dark:text-white">Kontak</h3>
-                        <div class="mt-5 grid gap-4 text-sm">
-                            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="w-fit text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">+62 812 3456 7890</a>
-                            <a href="mailto:rentalmotor@gmail.com" class="w-fit text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">rentalmotor@gmail.com</a>
-                            <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Siliran+Lor+No.24,+Panembahan,+Kecamatan+Kraton,+Kota+Yogyakarta" target="_blank" rel="noopener" class="max-w-xs text-zinc-500 transition-all duration-300 hover:translate-x-2 hover:text-red-600 dark:text-zinc-400 dark:hover:text-red-700">Jl. Siliran Lor No.24, Panembahan, Kraton, Yogyakarta</a>
+                        <h3 class="text-sm font-black uppercase tracking-wider text-zinc-950 dark:text-white">Hubungi Kami</h3>
+                        <div class="mt-5 grid gap-4">
+                            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener" class="group flex items-start gap-3">
+                                <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-red-50 text-red-700 transition-colors group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/40 dark:text-red-400 dark:group-hover:bg-red-600 dark:group-hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="size-4.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75A2.25 2.25 0 0 1 4.5 4.5h1.386a2.25 2.25 0 0 1 2.045 1.316l.99 2.227a2.25 2.25 0 0 1-.491 2.486l-.913.913a12.04 12.04 0 0 0 5.041 5.041l.913-.913a2.25 2.25 0 0 1 2.486-.491l2.227.99a2.25 2.25 0 0 1 1.316 2.045V19.5a2.25 2.25 0 0 1-2.25 2.25C10.44 21.75 2.25 13.56 2.25 3.75v3Z"/>
+                                    </svg>
+                                </span>
+                                <span class="pt-1 text-sm leading-5 text-zinc-500 transition-colors group-hover:text-red-600 dark:text-zinc-400 dark:group-hover:text-red-500">+62 812 3456 7890</span>
+                            </a>
+                            <a href="mailto:rentalmotor@gmail.com" class="group flex items-start gap-3">
+                                <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-red-50 text-red-700 transition-colors group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/40 dark:text-red-400 dark:group-hover:bg-red-600 dark:group-hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="size-4.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5A2.25 2.25 0 0 1 19.5 19.5h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0-8.69 5.43a2.25 2.25 0 0 1-2.38 0L2.25 6.75"/>
+                                    </svg>
+                                </span>
+                                <span class="pt-1 text-sm leading-5 text-zinc-500 transition-colors group-hover:text-red-600 dark:text-zinc-400 dark:group-hover:text-red-500">rentalmotor@gmail.com</span>
+                            </a>
+                            <a href="https://www.google.com/maps/search/?api=1&query=Jl.+Siliran+Lor+No.24,+Panembahan,+Kecamatan+Kraton,+Kota+Yogyakarta" target="_blank" rel="noopener" class="group flex items-start gap-3">
+                                <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-red-50 text-red-700 transition-colors group-hover:bg-red-600 group-hover:text-white dark:bg-red-950/40 dark:text-red-400 dark:group-hover:bg-red-600 dark:group-hover:text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="size-4.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/>
+                                    </svg>
+                                </span>
+                                <span class="pt-1 text-sm leading-5 text-zinc-500 transition-colors group-hover:text-red-600 dark:text-zinc-400 dark:group-hover:text-red-500">Jl. Siliran Lor No.24, Panembahan, Kraton, Yogyakarta</span>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="mt-10 flex flex-col gap-2 border-t border-zinc-300 pt-6 text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
-                    <p>© {{ date('Y') }} Rental Motor. All rights reserved.</p>
-                    <p>Rental Motor System</p>
+                <div class="mt-12 flex flex-col gap-4 border-t border-zinc-200 pt-6 dark:border-zinc-800 sm:flex-row sm:items-center sm:justify-between">
+                    <p class="text-xs text-zinc-500 dark:text-zinc-500">© {{ date('Y') }} Rental Motor. All rights reserved.</p>
+                    <div class="flex items-center gap-2 text-xs text-zinc-400 dark:text-zinc-600"><span class="size-1.5 rounded-full bg-red-600"></span><span>Rental Motor System</span></div>
                 </div>
             </div>
         </footer>
