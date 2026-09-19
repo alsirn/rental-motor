@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/rmotor-favicon.png') }}">
     <title>{{ $title ?? 'Rental Motor' }}</title>
     <script>
         (() => {
@@ -79,7 +80,9 @@
     <header class="sticky top-0 z-30 border-b border-zinc-200/70 bg-white/90 backdrop-blur-xl dark:border-zinc-800/70 dark:bg-zinc-950/90">
         <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-10">
             <a href="/" class="group flex items-center gap-3">
-                <span class="grid size-10 place-items-center rounded-xl bg-red-700 text-sm font-black text-white transition-transform group-hover:scale-105">RM</span>
+                <span class="grid shrink-0 place-items-center overflow-hidden rounded-lg border border-zinc-200 bg-white p-0.5 shadow-sm transition-transform group-hover:scale-105 dark:border-zinc-700 dark:bg-white" style="width: 2.75rem; height: 2.75rem;">
+                    <img src="{{ asset('images/rmotor-logo.webp') }}" alt="Logo Rmotor Rental Motor" class="object-contain" style="width: 100%; height: 100%;">
+                </span>
                 <span><span class="block text-sm font-extrabold uppercase tracking-wide text-red-700">Rental Motor</span><span class="block text-[11px] text-zinc-500 dark:text-zinc-400">Sewa cepat, data rapi</span></span>
             </a>
             <div class="flex items-center gap-1 text-sm font-semibold">
