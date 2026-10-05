@@ -13,56 +13,73 @@
 .shine-card{position:relative;overflow:hidden}
 .shine-card::after{content:"";position:absolute;top:0;left:0;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transform:translateX(-120%);pointer-events:none}
 .shine-card:hover::after{animation:shine .8s ease}
+.about-hero-slide{animation:heroFade .6s ease}
+@keyframes heroFade{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 </style>
 <section class="relative overflow-hidden border-b border-red-900/50 bg-[#1c1214] px-6 py-14 sm:py-16">
     <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_50%,rgba(220,38,38,.42),transparent_42%)]"></div>
     <div class="absolute -right-32 -top-32 h-80 w-80 rounded-full bg-red-700/15 blur-3xl"></div>
     <div class="absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-red-800/10 blur-3xl"></div>
-    <div class="relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2">
-        <div class="scroll-animate">
+    <div class="relative mx-auto max-w-6xl">
+        <div class="about-hero-slide min-h-[280px]">
             <span class="inline-block rounded-md border border-red-400/40 bg-red-600/20 px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-widest text-red-200">Tentang Kami</span>
-            <h1 class="mt-5 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">Rental Motor <br> <span class="text-red-500">Mudah & Terpercaya</span>
-            </h1>
+            <h1 class="mt-5 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">Rental Motor <br> <span class="text-red-500">Mudah & Terpercaya</span></h1>
             <p class="mt-5 max-w-xl text-base leading-7 text-red-100/65">Kami menyediakan layanan rental motor dengan proses yang sederhana, informasi yang jelas, dan pengelolaan data yang teratur.</p>
             <div class="mt-7 flex flex-wrap gap-3">
                 <div class="flex items-center gap-3 rounded-xl border border-red-900/50 bg-[#29191b] px-4 py-3 transition duration-300 hover:border-red-700 hover:bg-red-950/60">
-                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white shadow-lg shadow-red-900/30">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
+                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
                     <div>
-                        <p class="text-sm font-bold text-white">Proses Cepat</p>
-                        <p class="text-xs text-red-100/50">Praktis dan sederhana</p>
+                        <p class="text-sm font-bold text-white">Sewa Cepat</p>
+                        <p class="text-xs text-red-100/50">Proses lebih praktis</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-3 rounded-xl border border-red-900/50 bg-[#29191b] px-4 py-3 transition duration-300 hover:border-red-700 hover:bg-red-950/60">
-                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white shadow-lg shadow-red-900/30">
+                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-white">Data Rapi</p>
+                        <p class="text-xs text-red-100/50">Informasi terorganisir</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about-hero-slide hidden min-h-[280px]">
+            <span class="inline-block rounded-md border border-red-400/40 bg-red-600/20 px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-widest text-red-200">Tentang Kami</span>
+            <h1 class="mt-5 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">Pilihan Motor <br> <span class="text-red-500">Untuk Perjalananmu</span></h1>
+            <p class="mt-5 max-w-xl text-base leading-7 text-red-100/65">Kami menyediakan pilihan kendaraan untuk membantu memenuhi kebutuhan perjalananmu dengan proses yang praktis.</p>
+            <div class="mt-7 flex flex-wrap gap-3">
+                <div class="flex items-center gap-3 rounded-xl border border-red-900/50 bg-[#29191b] px-4 py-3">
+                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/> </svg>
+                    </div>
+                    <div>
+                        <p class="text-sm font-bold text-white">Sewa Cepat</p>
+                        <p class="text-xs text-red-100/50">Proses lebih praktis</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-3 rounded-xl border border-red-900/50 bg-[#29191b] px-4 py-3">
+                    <div class="flex h-9 w-9 items-center justify-center rounded-lg bg-red-600 text-white">
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                         </svg>
                     </div>
                     <div>
-                        <p class="text-sm font-bold text-white">Data Teratur</p>
-                        <p class="text-xs text-red-100/50">Informasi lebih rapi</p>
+                        <p class="text-sm font-bold text-white">Data Rapi</p>
+                        <p class="text-xs text-red-100/50">Informasi terorganisir</p>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="scroll-animate flex justify-center lg:justify-end">
-            <div class="relative w-full max-w-md">
-                <div class="absolute -inset-5 rounded-[2rem] bg-red-600/20 blur-2xl"></div>
-                <div class="relative overflow-hidden rounded-[2rem] border border-red-900/50 bg-[#241719] p-8 shadow-2xl shadow-red-950/30">
-                    <div class="absolute right-0 top-0 h-32 w-32 rounded-full bg-red-600/15 blur-2xl"></div>
-                    <div class="relative flex min-h-[280px] flex-col items-center justify-center">
-                        <div class="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-red-500 to-red-700 shadow-xl shadow-red-950/50"><span class="text-4xl font-black text-white">RM</span></div>
-                        <h2 class="mt-6 text-2xl font-black text-white">Rental Motor</h2>
-                        <p class="mt-2 text-sm text-red-100/50">Sewa Cepat • Data Rapi</p>
-                        <div class="mt-7 h-px w-24 bg-red-500/60"></div>
-                        <p class="mt-5 text-center text-sm leading-6 text-red-100/60">Solusi rental motor yang praktis untuk kebutuhan perjalananmu.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="about-hero-slide hidden min-h-[280px]">
+            <span class="inline-block rounded-md border border-red-400/40 bg-red-600/20 px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-widest text-red-200">Tentang Kami</span>
+            <h1 class="mt-5 text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl">Sewa Motor <br> <span class="text-red-500">Lebih Praktis</span></h1>
+            <p class="mt-5 max-w-xl text-base leading-7 text-red-100/65">Mulai dari pemilihan kendaraan hingga proses penyewaan, semuanya dibuat agar lebih mudah dan teratur.</p>
+            <a href="/katalog" class="mt-7 inline-flex rounded-xl bg-red-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-red-700">Lihat Katalog</a>
         </div>
     </div>
 </section>
@@ -206,5 +223,15 @@
     }
     document.addEventListener('DOMContentLoaded',initAboutAnimations);
     document.addEventListener('livewire:navigated',initAboutAnimations);
+    let aboutHeroIndex=0;
+    const aboutHeroSlides=document.querySelectorAll('.about-hero-slide');
+    function aboutHeroSlider(){
+        aboutHeroSlides.forEach((slide,i)=>{
+            slide.classList.toggle('hidden',i!==aboutHeroIndex);
+        });
+        aboutHeroIndex=(aboutHeroIndex+1)%aboutHeroSlides.length;
+    }
+    aboutHeroSlider();
+    setInterval(aboutHeroSlider,5000);
 </script>
 </x-layouts.app>

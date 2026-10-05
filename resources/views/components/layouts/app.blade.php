@@ -73,31 +73,48 @@
         @keyframes page-rise { from { opacity: .86; transform: translateY(.35rem); } to { opacity: 1; transform: translateY(0); } }
         @keyframes reveal-up { from { opacity: 0; transform: translateY(1rem); filter: blur(6px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
         @media (prefers-reduced-motion: reduce) { *, main, .reveal-up, .toast { animation: none !important; transition-duration: 1ms !important; } }
-        .hidden { display: none !important; }
+        /* .hidden { display: none !important; } */
     </style>
 </head>
 <body class="flex min-h-screen flex-col text-zinc-950 antialiased">
     <header class="sticky top-0 z-30 border-b border-zinc-200/70 bg-white/90 backdrop-blur-xl dark:border-zinc-800/70 dark:bg-zinc-950/90">
-        <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-10">
-            <a href="/" class="group flex items-center gap-3">
-                <span class="grid shrink-0 place-items-center overflow-hidden rounded-lg border border-zinc-200 bg-white p-0.5 shadow-sm transition-transform group-hover:scale-105 dark:border-zinc-700 dark:bg-white" style="width: 2.75rem; height: 2.75rem;">
-                    <img src="{{ asset('images/rmotor-logo.webp') }}" alt="Logo Rmotor Rental Motor" class="object-contain" style="width: 100%; height: 100%;">
-                </span>
-                <span><span class="block text-sm font-extrabold uppercase tracking-wide text-red-700">Rental Motor</span><span class="block text-[11px] text-zinc-500 dark:text-zinc-400">Sewa cepat, data rapi</span></span>
-            </a>
-            <div class="flex items-center gap-1 text-sm font-semibold">
-                <a href="/katalog" class="rounded-lg px-3 py-2 transition {{ request()->is('katalog') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Katalog</a>
-                <a href="/about-us" class="rounded-lg px-3 py-2 transition {{ request()->is('about-us') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Tentang Kami</a>
-                <a href="/akun" class="auth-user hidden rounded-lg px-3 py-2 transition {{ request()->is('akun') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Akun</a>
-                <a href="/verifikasi" class="auth-verification hidden rounded-lg px-3 py-2 transition {{ request()->is('verifikasi') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Verifikasi</a>
-                <a href="/backend" class="auth-backend hidden rounded-lg px-3 py-2 transition {{ request()->is('backend') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Backend</a>
-                <a href="/login" class="auth-guest ml-2 rounded-lg bg-red-700 px-4 py-2 font-bold text-white transition hover:-translate-y-0.5 hover:bg-red-800 hover:shadow-lg">Masuk</a>
-                <button id="logout-button" class="auth-user hidden ml-2 rounded-lg bg-zinc-950 px-4 py-2 font-bold text-white transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200" type="button">Keluar</button>
-                <button id="theme-toggle" class="theme-toggle ml-2" type="button" aria-label="Ganti tema"><span id="theme-label">Dark</span></button>
+        <nav class="mx-auto max-w-7xl px-5 py-3 sm:px-8 lg:px-10">
+            <div class="flex items-center justify-between">
+                <a href="/" class="group flex items-center gap-3">
+                    <span class="grid shrink-0 place-items-center overflow-hidden rounded-lg border border-zinc-200 bg-white p-0.5 shadow-sm dark:border-zinc-700 dark:bg-white" style="width:2.75rem;height:2.75rem;">
+                        <img src="{{ asset('images/rmotor-logo.webp') }}" alt="Logo Rmotor Rental Motor" class="h-full w-full object-contain">
+                    </span>
+                    <span>
+                        <span class="block text-sm font-extrabold uppercase tracking-wide text-red-700">Rental Motor</span>
+                        <span class="block text-[11px] text-zinc-500 dark:text-zinc-400">Sewa cepat, data rapi</span>
+                    </span>
+                </a>
+                <div class="hidden items-center gap-1 text-sm font-semibold md:flex">
+                    <a href="/katalog" class="rounded-lg px-3 py-2 transition {{ request()->is('katalog') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Katalog</a>
+                    <a href="/about-us" class="rounded-lg px-3 py-2 transition {{ request()->is('about-us') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Tentang Kami</a>
+                    <a href="/akun" class="auth-user hidden rounded-lg px-3 py-2 transition {{ request()->is('akun') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Akun</a>
+                    <a href="/verifikasi" class="auth-verification hidden rounded-lg px-3 py-2 transition {{ request()->is('verifikasi') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Verifikasi</a>
+                    <a href="/backend" class="auth-backend hidden rounded-lg px-3 py-2 transition {{ request()->is('backend') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 hover:bg-zinc-100 hover:text-red-700 dark:text-zinc-300 dark:hover:bg-zinc-900 dark:hover:text-red-400' }}">Backend</a>
+                    <a href="/login" class="auth-guest ml-2 rounded-lg bg-red-700 px-4 py-2 font-bold text-white transition hover:bg-red-800">Masuk</a>
+                    <button id="logout-button" class="auth-user ml-2 hidden rounded-lg bg-zinc-950 px-4 py-2 font-bold text-white dark:bg-white dark:text-zinc-950" type="button">Keluar</button>
+                    <button id="theme-toggle" class="theme-toggle ml-2" type="button" aria-label="Ganti tema"><span id="theme-label">Dark</span></button>
+                </div>
+                <button id="mobile-menu-button" type="button" class="grid size-10 place-items-center rounded-lg border border-zinc-200 text-zinc-700 dark:border-zinc-700 dark:text-zinc-200 md:hidden" aria-label="Buka menu" aria-expanded="false"><svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+            </div>
+            <div id="mobile-menu" class="hidden border-t border-zinc-200 pt-3 dark:border-zinc-800 md:hidden">
+                <div class="grid gap-1 text-sm font-semibold">
+                    <a href="/katalog" class="rounded-lg px-3 py-3 {{ request()->is('katalog') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 dark:text-zinc-300' }}">Katalog</a>
+                    <a href="/about-us" class="rounded-lg px-3 py-3 {{ request()->is('about-us') ? 'bg-red-50 text-red-700 dark:bg-red-950/40 dark:text-red-400' : 'text-zinc-600 dark:text-zinc-300' }}">Tentang Kami</a>
+                    <a href="/akun" class="auth-user hidden rounded-lg px-3 py-3 text-zinc-600 dark:text-zinc-300">Akun</a>
+                    <a href="/verifikasi" class="auth-verification hidden rounded-lg px-3 py-3 text-zinc-600 dark:text-zinc-300">Verifikasi</a>
+                    <a href="/backend" class="auth-backend hidden rounded-lg px-3 py-3 text-zinc-600 dark:text-zinc-300">Backend</a>
+                    <a href="/login" class="auth-guest rounded-lg bg-red-700 px-3 py-3 text-center font-bold text-white">Masuk</a>
+                    <button id="mobile-logout-button" class="auth-user hidden rounded-lg bg-zinc-950 px-3 py-3 text-center font-bold text-white dark:bg-white dark:text-zinc-950" type="button">Keluar</button>
+                    <button id="mobile-theme-toggle" class="rounded-lg border border-zinc-200 px-3 py-3 text-left font-bold text-zinc-700 dark:border-zinc-700 dark:text-zinc-200" type="button"><span id="mobile-theme-label">Dark</span></button>
+                </div>
             </div>
         </nav>
     </header>
-
     <script>
         window.rentalApp = {
             token: () => localStorage.getItem('api_token') || '',
@@ -303,6 +320,54 @@
                 }
             });
         }
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton?.addEventListener('click', () => {
+            const open = !mobileMenu.classList.contains('hidden');
+
+            mobileMenu.classList.toggle('hidden');
+            mobileMenuButton.setAttribute('aria-expanded', String(!open));
+        });
+
+        const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+        const mobileThemeLabel = document.getElementById('mobile-theme-label');
+
+        const syncMobileTheme = () => {
+            if (mobileThemeLabel) {
+                mobileThemeLabel.textContent =
+                    document.documentElement.classList.contains('dark')
+                        ? 'Light'
+                        : 'Dark';
+            }
+        };
+
+        syncMobileTheme();
+
+        mobileThemeToggle?.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark');
+
+            document.documentElement.classList.toggle('dark', isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+
+            syncThemeButton();
+            syncMobileTheme();
+        });
+
+        const mobileLogout = document.getElementById('mobile-logout-button');
+
+        mobileLogout?.addEventListener('click', async () => {
+            try {
+                await fetch('/api/logout', {
+                    method: 'POST',
+                    headers: window.rentalApp.authHeaders()
+                });
+            } finally {
+                window.rentalApp.clearSession();
+                window.location.href = '/login';
+            }
+        });
 
         if (window.location.pathname.startsWith('/backend') && !isBackendUser) {
             window.location.href = '/login';
